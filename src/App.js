@@ -24,14 +24,26 @@ class App extends Component {
 
   render() {
     const appBody = this.state.currentUser ?
-      (<p>You are signed in as {this.state.currentUser.displayName}.</p>) :
-      (<Button bsStyle="primary" onClick={this.signIn.bind(this)}>Sign In</Button>);
+      (<p>signed in</p>) :
+      (<Button bsStyle="primary" onClick={this.signIn.bind(this)}>Sign In</Button>),
+      
+      slideMenu = this.state.currentUser ? 
+        (<SlideMenu>
+          <div>
+            <div className="user-bar">
+              <span>{this.state.currentUser.displayName}</span>
+              <img src={this.state.currentUser.photoURL} 
+                alt={`profile picture for ${this.state.currentUser.displayName}`} 
+                className="profile-picture" />
+            </div>
+            <Button bsStyle="primary" onClick={this.signOut.bind(this)}>Sign Out</Button>
+          </div>
+        </SlideMenu>) :
+        (null);
 
     return (
       <div>
-        <SlideMenu>
-          <p>Side content</p>
-        </SlideMenu>
+        {slideMenu}
         <main className="App">
           <PageHeader>Camelot</PageHeader>
           {appBody}
@@ -42,6 +54,10 @@ class App extends Component {
 
   signIn() {
     this.auth.signInWithRedirect(this.provider);
+  }
+
+  signOut() {
+    this.auth.signOut();
   }
 }
 
