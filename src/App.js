@@ -23,7 +23,7 @@ class App extends Component {
 
   render() {
     const appBody = this.state.currentUser ?
-      (<p>You are signed in</p>) :
+      (<p>You are signed in as {this.state.currentUser.displayName}.</p>) :
       (<Button bsStyle="primary" onClick={this.signIn.bind(this)}>Sign In</Button>);
 
     return (
