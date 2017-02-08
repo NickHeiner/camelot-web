@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { PageHeader, Button } from 'react-bootstrap';
 import './App.less';
 import firebase from 'firebase';
+import { slide as SlideMenu } from 'react-burger-menu'
 
 class App extends Component {
   constructor() {
@@ -27,9 +28,14 @@ class App extends Component {
       (<Button bsStyle="primary" onClick={this.signIn.bind(this)}>Sign In</Button>);
 
     return (
-      <div className="App">
-        <PageHeader>Camelot</PageHeader>
-        {appBody}
+      <div>
+        <SlideMenu>
+          <p>Side content</p>
+        </SlideMenu>
+        <main className="App">
+          <PageHeader>Camelot</PageHeader>
+          {appBody}
+        </main>
       </div>
     );
   }
