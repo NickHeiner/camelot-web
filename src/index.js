@@ -13,22 +13,12 @@ firebase.initializeApp({
 });
 
 import App from './App';
-import NoMatch from './pages/NoMatch'
-import SignIn from './pages/SignIn'
+import NoMatch from './pages/NoMatch';
 
 ReactDOM.render(
   <Router history={browserHistory}>
-    <Route path="/" getIndexRoute={getIndexRoute} />
+    <Route path="/" component={App} />
     <Route path="*" component={NoMatch} />
   </Router>,
   document.getElementById('root')
 );
-
-function getIndexRoute(partialNextState, cb) {
-  new firebase.auth().onAuthStateChanged(currentUser => {
-    cb(null, currentUser ? 
-      <Route component={App} currentUser={currentUser} /> :
-      <Route component={SignIn} />
-    )
-  }, cb);
-}

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Button } from 'react-bootstrap';
-import autobind from 'autobind-decorator'
+import autobind from 'autobind-decorator';
 import firebase from 'firebase';
 
 class SignIn extends PureComponent {
@@ -11,7 +11,7 @@ class SignIn extends PureComponent {
     }
 
     render() {
-        return <Button bsStyle="primary" onClick={this.signIn}>Sign In</Button>
+        return <Button bsStyle="primary" onClick={this.signIn}>Sign In</Button>;
     }
 
     @autobind
