@@ -11,19 +11,33 @@ class GamePlay extends PureComponent {
         this.state = {
             game: undefined
         };
+        this.unmountFunctions = [];
     }
     componentWillMount() {
         this.gameRef = firebase.database().ref(`games/${this.props.params.id}`);
         this.gameRef.on('value', this.onGameUpdate);
+        this.unmountFunctions.push(() => this.gameRef.off('value', this.onGameUpdate));
     }
     
     componentWillUnmount() {
-        this.gameRef.off('value', this.onGameUpdate);
+        this.unmountFunctions.forEach(fn => fn());
+        this.unmountFunctions = [];
     }
 
     @autobind
     onGameUpdate(snapshot) {
         const val = snapshot.val();
+
+        if (val) {
+            const hostListener = firebase.database().ref(`users/${val.host}`).on('value', snapshot => {
+                this.setState({host: snapshot.val()});
+            });
+            const opponentListener = firebase.database().ref(`users/${val.opponent}`).on('value', snapshot => {
+                this.setState({opponent: snapshot.val()});
+            });
+            this.unmountFunctions.push(hostListener, opponentListener);
+        }
+
         this.setState({game: val});
     }
     
@@ -57,9 +71,9 @@ class GamePlay extends PureComponent {
                         {findOpponentMessage}
                     </div>
                     <div className="control-bar">
-                        <Avatar currentUser={this.props.params.currentUser} />
+                        <Avatar currentUser={this.state.host} />
                         <p>vs.</p>
-                        <Avatar />
+                        <Avatar currentUser={this.state.opponent} />
                     </div>
                 </div>
             );

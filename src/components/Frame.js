@@ -3,6 +3,7 @@ import SignIn from '../pages/SignIn';
 import Sidebar from './Sidebar';
 import {PageHeader} from 'react-bootstrap';
 import firebase from 'firebase';
+import _ from 'lodash';
 
 class Frame extends Component {
   constructor() {
@@ -13,7 +14,15 @@ class Frame extends Component {
 
   componentWillMount() {
     // TODO handle auth error
-    this.unsubscribeFirebaseAuthWatcher = this.auth.onAuthStateChanged(currentUser => this.setState({currentUser}));
+    this.unsubscribeFirebaseAuthWatcher = this.auth.onAuthStateChanged(currentUser => {
+      // TODO Is this the best place to do this?
+      if (currentUser) {
+        firebase.database()
+          .ref(`users/${currentUser.uid}`)
+          .set(_.pick(currentUser, 'displayName', 'uid', 'photoURL'));
+      }
+      this.setState({currentUser});
+    });
   }
 
   componentWillUnmount() {
