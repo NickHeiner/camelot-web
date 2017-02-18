@@ -4,6 +4,7 @@ import './App.less';
 import firebase from 'firebase';
 import { slide as SlideMenu } from 'react-burger-menu'
 import autobind from 'autobind-decorator'
+import { browserHistory } from 'react-router';
 
 class App extends PureComponent {
   static propTypes = {
@@ -40,7 +41,7 @@ class App extends PureComponent {
 
   @autobind
   signOut() {
-    this.auth.signOut();
+    this.auth.signOut().then(() => browserHistory.push('/'));
   }
 }
 
