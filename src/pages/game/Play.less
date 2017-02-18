@@ -1,5 +1,5 @@
-@spacing: 10px;
 .control-bar {
+    @spacing: 10px;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -8,4 +8,22 @@
     margin-bottom: @spacing;
     padding-left: @spacing;
     padding-right: @spacing;
+}
+
+.board {
+    display: flex;
+    flex-wrap: wrap;
+
+    .board-space {
+        @boardDimension: 50px;
+        width: @boardDimension;
+        height: @boardDimension;
+        background-color: #ccc;
+        border: 1px #666 solid;
+
+        &.actual {
+            background-color: lightgreen;
+            border: 1px darkgreen solid;
+        }
+    }
 }

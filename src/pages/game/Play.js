@@ -4,6 +4,8 @@ import autobind from 'autobind-decorator';
 import Avatar from '../../components/Avatar';
 import './Play.less';
 import {Button} from 'react-bootstrap';
+import _ from 'lodash';
+import camelotEngine from 'camelot-engine';
 
 class GamePlay extends PureComponent {
     constructor() {
@@ -70,10 +72,34 @@ class GamePlay extends PureComponent {
                 }
             }
 
+            const {boardSpaces} = _.get(this.state, ['game', 'gameState']),
+                camelotConstants = camelotEngine().constants();
+
             gameDisplay = (
                 <div>
-                    <div className="board-wrapper">
-                        <h1>the board</h1>
+                    <div>
+                        <div className="board">
+                            {
+                                _(camelotConstants.BOARD_HEIGHT)
+                                    .range()
+                                    .map(row => 
+                                        _(camelotConstants.BOARD_WIDTH)
+                                            .range()
+                                            .map(col => {
+                                                const boardSpace = _.find(boardSpaces, {row, col});
+                                                return (
+                                                    <div 
+                                                        key={`${row}-${col}`} 
+                                                        className={`board-space ${boardSpace ? 'actual' : ''}`}>
+                                                        row: {row}, col: {col}
+                                                    </div>
+                                                );    
+                                            })
+                                    )
+                                    .flatten()
+                                    .value()
+                            }
+                        </div>
                         {findOpponentMessage}
                     </div>
                     <div className="control-bar">
