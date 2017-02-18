@@ -25,9 +25,17 @@
         .board-space {
             /* We could be fancy and set the number of columns in JS
                 since there's a BOARD_WIDTH constant available there. */
-            @boardSpaceDimension: 100% / 12;
+            @boardSpaceDimension: unit((100 - @boardPadding * 2)/12, vw);
             width: @boardSpaceDimension;
-            padding-top: @boardSpaceDimension;
+            height: @boardSpaceDimension;
+
+            @minBoardSpaceDimension: 23.75px;
+            min-width: @minBoardSpaceDimension;
+            min-height: @minBoardSpaceDimension;
+
+            @maxBoardSpaceDimension: 35px;
+            max-width: @maxBoardSpaceDimension;
+            max-height: @maxBoardSpaceDimension;
 
             background-color: #ccc;
             border: 1px #666 solid;
@@ -37,6 +45,10 @@
                 border: 1px darkgreen solid;
 
                 &.piece {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
                     &.host {
                         color: white;
                     }
