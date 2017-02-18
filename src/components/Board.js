@@ -17,7 +17,7 @@ class Board extends Component {
     }
     render() {
         const camelotConstants = camelotEngine().constants(),
-            getBoardSpace = camelotEngine().query().getBoardSpace,
+            {getBoardSpace, isValidMove} = camelotEngine().query(),
             boardPieces = _(camelotConstants.BOARD_HEIGHT)
                 .range()
                 .map(row => 
@@ -43,6 +43,14 @@ class Board extends Component {
                                     if (_.isEqual(this.state.activeBoardSpace, {row, col})) {
                                         classNames.push('possibly-moving-piece');
                                     }
+                                }
+
+                                if (isValidMove(
+                                        this.props.gameState, 
+                                        [this.state.activeBoardSpace, {row, col}], 
+                                        this.props.currentUserPlayer)
+                                ) {
+                                    classNames.push('possible-valid-move');
                                 }
                             }
 
