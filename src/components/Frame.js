@@ -25,6 +25,8 @@ class Frame extends Component {
     
     let body;
     if (currentUser) {
+      // TODO is this heinous?
+      this.props.children.props.params.currentUser = currentUser;
       body = this.props.children;
     } else if (currentUser === null) {
       body = <SignIn />;
