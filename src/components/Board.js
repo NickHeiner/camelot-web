@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Glyphicon } from 'react-bootstrap';
 import camelotEngine from 'camelot-engine';
 import _ from 'lodash';
+import './Board.less';
 
 class Board extends Component {
     render() {
