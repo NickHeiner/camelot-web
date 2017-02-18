@@ -74,14 +74,17 @@ class GamePlay extends PureComponent {
 
             const gameState = _.get(this.state, ['game', 'gameState']);
             let activeUser = null;
+            let isCurrentUserActive = false;
             if (gameState) {
                 activeUser = gameState.turnCount % 2 === 0 ? 'host' : 'opponent';
+
+                isCurrentUserActive = this.props.params.currentUser.uid === this.state[activeUser].uid;
             }
 
             gameDisplay = (
                 <div>
                     <div className="board-wrapper">
-                        <Board gameState={gameState} />
+                        <Board gameState={gameState} isCurrentUserActive={isCurrentUserActive} />
                         {findOpponentMessage}
                     </div>
                     <div className="control-bar">
