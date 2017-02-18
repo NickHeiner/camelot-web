@@ -3,6 +3,7 @@ import firebase from 'firebase';
 import autobind from 'autobind-decorator';
 import Avatar from '../../components/Avatar';
 import './Play.less';
+import {Button} from 'react-bootstrap';
 
 class GamePlay extends PureComponent {
     constructor() {
@@ -17,7 +18,7 @@ class GamePlay extends PureComponent {
     }
     
     componentWillUnmount() {
-        this.gamesRef.off('value', this.onGameUpdate);
+        this.gameRef.off('value', this.onGameUpdate);
     }
 
     @autobind
@@ -33,10 +34,27 @@ class GamePlay extends PureComponent {
         } else if (this.state.game === null) {
             gameDisplay = <p>This link is not valid. Did someone share it with you incorrectly?</p>;
         } else {
+            const currentUserIsHost = this.props.params.currentUser.uid === this.state.game.host;
+
+            let findOpponentMessage;
+            if (!this.state.game.opponent) {
+                if (currentUserIsHost) {
+                    findOpponentMessage = <p>Find someone to play with you by sharing this link with them.</p>;
+                } else {
+                    findOpponentMessage = (
+                        <div>
+                            <p>This game is currently looking for an opponent.</p>
+                            <Button bsStyle="primary" onClick={this.joinGame}>Join</Button>
+                        </div>
+                    );
+                }
+            }
+
             gameDisplay = (
                 <div>
                     <div className="board-wrapper">
                         <h1>the board</h1>
+                        {findOpponentMessage}
                     </div>
                     <div className="control-bar">
                         <Avatar currentUser={this.props.params.currentUser} />
@@ -48,6 +66,11 @@ class GamePlay extends PureComponent {
         }
 
         return gameDisplay;
+    }
+
+    @autobind
+    joinGame() {
+        this.gameRef.update({opponent: this.props.params.currentUser.uid});
     }
 }
 
