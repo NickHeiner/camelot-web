@@ -4,6 +4,8 @@ import autobind from 'autobind-decorator';
 import firebase from 'firebase';
 import _ from 'lodash';
 import { Link } from 'react-router';
+import camelotEngine from 'camelot-engine';
+
 
 class GameList extends PureComponent {
     constructor() {
@@ -42,7 +44,8 @@ class GameList extends PureComponent {
     @autobind
     createNewGame() {
         this.gamesRef.push({
-            host: this.props.params.currentUser.uid
+            host: this.props.params.currentUser.uid,
+            gameState: camelotEngine().createEmptyGame()
         });
     }
 }
