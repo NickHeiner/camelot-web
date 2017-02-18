@@ -73,6 +73,10 @@ class GamePlay extends PureComponent {
             }
 
             const gameState = _.get(this.state, ['game', 'gameState']);
+            let activeUser = null;
+            if (gameState) {
+                activeUser = gameState.turnCount % 2 === 0 ? 'host' : 'opponent';
+            }
 
             gameDisplay = (
                 <div>
@@ -81,9 +85,9 @@ class GamePlay extends PureComponent {
                         {findOpponentMessage}
                     </div>
                     <div className="control-bar">
-                        <Avatar currentUser={this.state.host} />
+                        <Avatar currentUser={this.state.host} isActive={activeUser === 'host'}/>
                         <p>vs.</p>
-                        <Avatar currentUser={this.state.opponent} />
+                        <Avatar currentUser={this.state.opponent} isActive={activeUser === 'opponent'} />
                     </div>
                 </div>
             );
