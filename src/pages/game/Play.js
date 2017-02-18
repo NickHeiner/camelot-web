@@ -59,7 +59,7 @@ class GamePlay extends PureComponent {
                     <div className="control-bar">
                         <Avatar currentUser={this.props.params.currentUser} />
                         <p>vs.</p>
-                        <Avatar currentUser={this.props.params.currentUser} />
+                        <Avatar />
                     </div>
                 </div>
             );
