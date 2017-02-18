@@ -16,7 +16,7 @@ class Sidebar extends PureComponent {
     }
 
     render() {
-        const currentUser = this.props.params.currentUser;
+        const currentUser = this.props.currentUser;
         return (
             <SlideMenu>
                 <div className="user-bar">

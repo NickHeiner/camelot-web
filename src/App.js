@@ -8,11 +8,11 @@ import GamePlay from './pages/game/Play';
 class App extends PureComponent {
   
 
-  constructor() {
-      super();
-      this.auth = new firebase.auth();
-      this.state = {};
-  }
+    constructor() {
+        super();
+        this.auth = new firebase.auth();
+        this.state = {};
+    }
 
   componentWillMount() {
     // TODO handle auth error

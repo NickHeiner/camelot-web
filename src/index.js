@@ -7,7 +7,7 @@ import {PageHeader} from 'react-bootstrap';
 import Sidebar from './components/Sidebar';
 import SignIn from './pages/SignIn';
 import GameList from './pages/game/List';
-// import GamePlay from './pages/game/Play';
+import GamePlay from './pages/game/Play';
 
 firebase.initializeApp({
   apiKey: 'AIzaSyC0mhGKUKIERUXlB8Amh2kq9S6gjbiqg9A',
@@ -20,13 +20,39 @@ firebase.initializeApp({
 import NoMatch from './pages/NoMatch';
 
 class Frame extends React.Component {
+  constructor() {
+    super();
+    this.auth = new firebase.auth();
+    this.state = {};
+  }
+
+  componentWillMount() {
+    // TODO handle auth error
+    this.unsubscribeFirebaseAuthWatcher = this.auth.onAuthStateChanged(currentUser => this.setState({currentUser}));
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFirebaseAuthWatcher();
+  }
+
   render() {
+    const currentUser = this.state.currentUser;
+    
+    let body;
+    if (currentUser) {
+      body = this.props.children;
+    } else if (currentUser === null) {
+      body = <SignIn />;
+    } else {
+      body = <p>Loading...</p>;
+    }
+
     return (
       <div>
-        {this.props.sidebar}
+        {currentUser && <Sidebar currentUser={currentUser} />}
         <main className="App">
           <PageHeader>Camelot</PageHeader>
-          {this.props.main}
+          {body}
         </main>
       </div>
     );
@@ -36,21 +62,10 @@ class Frame extends React.Component {
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={Frame}>
-      <IndexRoute getComponents={getComponents}>
-        {/*<Route path="play/:id" component={GamePlay} />*/}
-      </IndexRoute>
+      <IndexRoute component={GameList} />
+      <Route path="play/:id" component={GamePlay} />
     </Route>
     <Route path="*" component={NoMatch} />
   </Router>,
   document.getElementById('root')
 );
-
-function getComponents(nextState, cb) {
-  new firebase.auth().onAuthStateChanged(currentUser => {
-    nextState.params.currentUser = currentUser;
-    cb(null, currentUser ? 
-      {sidebar: Sidebar, main: GameList} :
-      {sidebar: null, main: SignIn}
-    );
-  }, cb);
-}
