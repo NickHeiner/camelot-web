@@ -2,37 +2,47 @@ import React, {PureComponent} from 'react';
 import { Button } from 'react-bootstrap';
 import autobind from 'autobind-decorator';
 import firebase from 'firebase';
+import _ from 'lodash';
+import { Link } from 'react-router';
 
 class GameList extends PureComponent {
     constructor() {
         super();
         this.state = {count: null};
     }
-    componentWillMount() {
-        this.database = firebase.database();
 
-        this.database.ref('widgets').on('value', snapshot => {
-            const val = snapshot.val();
-            if (val) {
-                this.setState(val);
-            }
-        });
+    componentWillMount() {
+        this.gamesRef = firebase.database().ref('games');
+        this.gamesRef.on('value', this.onGamesUpdate);
+    }
+    
+    componentWillUnmount() {
+        this.gamesRef.off('value', this.onGamesUpdate);
+    }
+
+    @autobind
+    onGamesUpdate(snapshot) {
+        const val = snapshot.val();
+        if (val) {
+            this.setState({games: val});
+        }
     }
 
     render() {
         return <div>
-            <h1>Game List</h1>
-            <p>Count: {this.state.count}</p>
+            <ul>
+                {
+                    _.map(this.state.games, ((game, key) => <li key={key}><Link to={`play/${key}`}>{game.host}</Link></li>))
+                }
+            </ul>
             <Button bsStyle="primary" onClick={this.createNewGame}>New</Button>
         </div>;
     }
 
     @autobind
     createNewGame() {
-        this.database.ref('widgets').set({count: this.state.count + 1}).then(() => {
-            debugger;
-        }, () => {
-            debugger;
+        this.gamesRef.push({
+            host: this.props.params.currentUser.uid
         });
     }
 }
