@@ -77,7 +77,7 @@ class GamePlay extends PureComponent {
 
             gameDisplay = (
                 <div>
-                    <div>
+                    <div className="board-wrapper">
                         <div className="board">
                             {
                                 _(camelotConstants.BOARD_HEIGHT)
@@ -90,9 +90,7 @@ class GamePlay extends PureComponent {
                                                 return (
                                                     <div 
                                                         key={`${row}-${col}`} 
-                                                        className={`board-space ${boardSpace ? 'actual' : ''}`}>
-                                                        row: {row}, col: {col}
-                                                    </div>
+                                                        className={`board-space ${boardSpace ? 'actual' : ''}`} />
                                                 );    
                                             })
                                     )

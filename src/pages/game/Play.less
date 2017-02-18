@@ -10,29 +10,32 @@
     padding-right: @spacing;
 }
 
-@boardSpaceDimension: 50px;
+@boardSpaceDimension: @boardWidth / 12;
 /* We could be fancy and set the number of columns in JS
     since there's a BOARD_WIDTH constant available there. */
-@boardWidth: @boardSpaceDimension * 12;
+@boardWidth: 100%;
 
-.board {
-    display: flex;
-    flex-wrap: wrap;
+.board-wrapper {
+    @boardPadding: 15%;
+    padding-left: @boardPadding;
+    padding-right: @boardPadding;
 
+    .board {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: auto;
+        margin-right: auto;
 
-    width: @boardWidth;
-    margin-left: auto;
-    margin-right: auto;
+        .board-space {
+            width: @boardSpaceDimension;
+            padding-top: @boardSpaceDimension;
+            background-color: #ccc;
+            border: 1px #666 solid;
 
-    .board-space {
-        width: @boardSpaceDimension;
-        height: @boardSpaceDimension;
-        background-color: #ccc;
-        border: 1px #666 solid;
-
-        &.actual {
-            background-color: lightgreen;
-            border: 1px darkgreen solid;
+            &.actual {
+                background-color: lightgreen;
+                border: 1px darkgreen solid;
+            }
         }
     }
 }
