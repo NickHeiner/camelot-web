@@ -10,14 +10,23 @@
     padding-right: @spacing;
 }
 
+@boardSpaceDimension: 50px;
+/* We could be fancy and set the number of columns in JS
+    since there's a BOARD_WIDTH constant available there. */
+@boardWidth: @boardSpaceDimension * 12;
+
 .board {
     display: flex;
     flex-wrap: wrap;
 
+
+    width: @boardWidth;
+    margin-left: auto;
+    margin-right: auto;
+
     .board-space {
-        @boardDimension: 50px;
-        width: @boardDimension;
-        height: @boardDimension;
+        width: @boardSpaceDimension;
+        height: @boardSpaceDimension;
         background-color: #ccc;
         border: 1px #666 solid;
 
