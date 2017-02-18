@@ -29,13 +29,18 @@ class GamePlay extends PureComponent {
         const val = snapshot.val();
 
         if (val) {
-            const hostListener = firebase.database().ref(`users/${val.host}`).on('value', snapshot => {
-                this.setState({host: snapshot.val()});
-            });
-            const opponentListener = firebase.database().ref(`users/${val.opponent}`).on('value', snapshot => {
-                this.setState({opponent: snapshot.val()});
-            });
-            this.unmountFunctions.push(hostListener, opponentListener);
+            const hostRef = firebase.database().ref(`users/${val.host}`),
+                hostListener = hostRef.on('value', snapshot => {
+                    this.setState({host: snapshot.val()});
+                }),
+                opponentRef = firebase.database().ref(`users/${val.opponent}`),
+                opponentListener = opponentRef.on('value', snapshot => {
+                    this.setState({opponent: snapshot.val()});
+                });
+            this.unmountFunctions.push(
+                () => hostRef.off('value', hostListener), 
+                () => opponentRef.off('value', opponentListener),
+            );
         }
 
         this.setState({game: val});
