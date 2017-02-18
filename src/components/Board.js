@@ -17,13 +17,14 @@ class Board extends Component {
     }
     render() {
         const camelotConstants = camelotEngine().constants(),
+            getBoardSpace = camelotEngine().query().getBoardSpace,
             boardPieces = _(camelotConstants.BOARD_HEIGHT)
                 .range()
                 .map(row => 
                     _(camelotConstants.BOARD_WIDTH)
                         .range()
                         .map(col => {
-                            const boardSpace = _.find(this.props.gameState.boardSpaces, {row, col}),
+                            const boardSpace = getBoardSpace(this.props.gameState, {row, col}),
                                 classNames = ['board-space'];
 
                             let glyph;
