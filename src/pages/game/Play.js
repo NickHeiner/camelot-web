@@ -37,6 +37,7 @@ class GamePlay extends PureComponent {
                 opponentListener = opponentRef.on('value', snapshot => {
                     this.setState({opponent: snapshot.val()});
                 });
+                
             this.unmountFunctions.push(
                 () => hostRef.off('value', hostListener), 
                 () => opponentRef.off('value', opponentListener),
