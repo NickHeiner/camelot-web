@@ -3,7 +3,9 @@ import firebase from 'firebase';
 import autobind from 'autobind-decorator';
 import Avatar from '../../components/Avatar';
 import './Play.less';
-import {Button} from 'react-bootstrap';
+import {Button, Glyphicon} from 'react-bootstrap';
+import _ from 'lodash';
+import camelotEngine from 'camelot-engine';
 
 class GamePlay extends PureComponent {
     constructor() {
@@ -70,10 +72,51 @@ class GamePlay extends PureComponent {
                 }
             }
 
+            const {boardSpaces} = _.get(this.state, ['game', 'gameState']),
+                camelotConstants = camelotEngine().constants();
+
             gameDisplay = (
                 <div>
                     <div className="board-wrapper">
-                        <h1>the board</h1>
+                        <div className="board">
+                            {
+                                _(camelotConstants.BOARD_HEIGHT)
+                                    .range()
+                                    .map(row => 
+                                        _(camelotConstants.BOARD_WIDTH)
+                                            .range()
+                                            .map(col => {
+                                                const boardSpace = _.find(boardSpaces, {row, col}),
+                                                    classNames = ['board-space'];
+
+                                                let glyph;
+
+                                                if (boardSpace) {
+                                                    classNames.push('actual');
+
+                                                    if (boardSpace.piece) {
+                                                        classNames.push(
+                                                            'piece', 
+                                                            boardSpace.piece.type,
+                                                            boardSpace.piece.player === 'playerA' ? 'host' : 'opponent'
+                                                        );
+                                                        glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
+                                                    }
+                                                }
+
+                                                return (
+                                                    <div 
+                                                        key={`${row}-${col}`} 
+                                                        className={classNames.join(' ')}>
+                                                        {glyph && <Glyphicon glyph={glyph} />}
+                                                    </div>
+                                                );    
+                                            })
+                                    )
+                                    .flatten()
+                                    .value()
+                            }
+                        </div>
                         {findOpponentMessage}
                     </div>
                     <div className="control-bar">
