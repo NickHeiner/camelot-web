@@ -4,8 +4,10 @@ import './App.less';
 import firebase from 'firebase';
 import { slide as SlideMenu } from 'react-burger-menu';
 import autobind from 'autobind-decorator';
-import { browserHistory } from 'react-router';
+import {Router, Route, browserHistory} from 'react-router';
 import SignIn from './pages/SignIn';
+import GameList from './pages/game/List';
+import GamePlay from './pages/game/Play';
 
 class App extends PureComponent {
   static propTypes = {
@@ -31,7 +33,10 @@ class App extends PureComponent {
     const currentUser = this.state.currentUser;
     let body;
     if (currentUser) {
-      body = <p>Signed In</p>;
+      body = <Router history={browserHistory}>
+          <Route path="/" component={GameList} />
+          <Route path="/game/:id" component={GamePlay} />
+        </Router>;
     } else if (currentUser === null) {
       body = <SignIn />;
     } else {
