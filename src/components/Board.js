@@ -3,8 +3,18 @@ import { Glyphicon } from 'react-bootstrap';
 import camelotEngine from 'camelot-engine';
 import _ from 'lodash';
 import './Board.less';
+import autobind from 'autobind-decorator';
 
 class Board extends Component {
+    constructor() {
+        super();
+        this.state = {
+            activeBoardSpace: {
+                row: null,
+                col: null
+            }
+        };
+    }
     render() {
         const camelotConstants = camelotEngine().constants(),
             boardPieces = _(camelotConstants.BOARD_HEIGHT)
@@ -28,12 +38,17 @@ class Board extends Component {
                                         boardSpace.piece.player === 'playerA' ? 'host' : 'opponent'
                                     );
                                     glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
+
+                                    if (_.isEqual(this.state.activeBoardSpace, {row, col})) {
+                                        classNames.push('possibly-moving-piece');
+                                    }
                                 }
                             }
 
                             return (
                                 <div 
                                     key={`${row}-${col}`} 
+                                    onClick={() => this.onBoardSpaceClick(boardSpace)}
                                     className={classNames.join(' ')}>
                                     {glyph && <Glyphicon glyph={glyph} />}
                                 </div>
@@ -49,9 +64,17 @@ class Board extends Component {
             </div>
         );
     }
+
+    @autobind
+    onBoardSpaceClick(boardSpace) {
+        if (!this.props.isCurrentUserActive || 
+                this.props.currentUserPlayer !== _.get(this.props, ['boardSpace', 'piece', 'player'])) {
+
+            return;
+        }
+
+        this.setState({activeBoardSpace: _.pick(boardSpace, ['row', 'col'])});
+    }
 }
 
 export default Board;
-
-
-
