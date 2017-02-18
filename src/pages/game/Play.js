@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import autobind from 'autobind-decorator';
 import Avatar from '../../components/Avatar';
 import './Play.less';
-import {Button} from 'react-bootstrap';
+import {Button, Glyphicon} from 'react-bootstrap';
 import _ from 'lodash';
 import camelotEngine from 'camelot-engine';
 
@@ -86,11 +86,30 @@ class GamePlay extends PureComponent {
                                         _(camelotConstants.BOARD_WIDTH)
                                             .range()
                                             .map(col => {
-                                                const boardSpace = _.find(boardSpaces, {row, col});
+                                                const boardSpace = _.find(boardSpaces, {row, col}),
+                                                    classNames = ['board-space'];
+
+                                                let glyph;
+
+                                                if (boardSpace) {
+                                                    classNames.push('actual');
+
+                                                    if (boardSpace.piece) {
+                                                        classNames.push(
+                                                            'piece', 
+                                                            boardSpace.piece.type,
+                                                            boardSpace.piece.player === 'playerA' ? 'host' : 'opponent'
+                                                        );
+                                                        glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
+                                                    }
+                                                }
+
                                                 return (
                                                     <div 
                                                         key={`${row}-${col}`} 
-                                                        className={`board-space ${boardSpace ? 'actual' : ''}`} />
+                                                        className={classNames.join(' ')}>
+                                                        {glyph && <Glyphicon glyph={glyph} />}
+                                                    </div>
                                                 );    
                                             })
                                     )
