@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap';
 import firebase from 'firebase';
 import {browserHistory} from 'react-router';
 import { slide as SlideMenu } from 'react-burger-menu';
+import Avatar from './Avatar';
 
 class Sidebar extends PureComponent {
     static propTypes = {
@@ -21,9 +22,7 @@ class Sidebar extends PureComponent {
             <SlideMenu>
                 <div className="user-bar">
                     <span>{currentUser.displayName}</span>
-                    <img src={currentUser.photoURL} 
-                        alt={`avatar for ${currentUser.displayName}`} 
-                        className="profile-picture" />
+                    <Avatar currentUser={currentUser} />
                 </div>
                 <Button bsStyle="primary" onClick={this.signOut}>Sign Out</Button>
             </SlideMenu>

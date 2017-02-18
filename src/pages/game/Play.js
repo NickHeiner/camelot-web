@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import firebase from 'firebase';
 import autobind from 'autobind-decorator';
+import Avatar from '../../components/Avatar';
 
 class GamePlay extends PureComponent {
     constructor() {
@@ -31,7 +32,16 @@ class GamePlay extends PureComponent {
         } else if (this.state.game === null) {
             gameDisplay = <p>This link is not valid. Did someone share it with you incorrectly?</p>;
         } else {
-            gameDisplay = <p>Host: {this.props.params.currentUser.displayName}</p>;
+            gameDisplay = (
+                <div>
+                    <div className="board-wrapper">
+                        <h1>the board</h1>
+                    </div>
+                    <div className="control-bar">
+                        <Avatar currentUser={this.props.params.currentUser} />
+                    </div>
+                </div>
+            );
         }
 
         return gameDisplay;
