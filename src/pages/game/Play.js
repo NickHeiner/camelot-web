@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import firebase from 'firebase';
 import autobind from 'autobind-decorator';
 import Avatar from '../../components/Avatar';
+import './Play.less';
 
 class GamePlay extends PureComponent {
     constructor() {
@@ -38,6 +39,8 @@ class GamePlay extends PureComponent {
                         <h1>the board</h1>
                     </div>
                     <div className="control-bar">
+                        <Avatar currentUser={this.props.params.currentUser} />
+                        <p>vs.</p>
                         <Avatar currentUser={this.props.params.currentUser} />
                     </div>
                 </div>
