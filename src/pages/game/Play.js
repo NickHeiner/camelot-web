@@ -55,12 +55,13 @@ class GamePlay extends PureComponent {
     
     render() {
         let gameDisplay;
-        if (this.state.game === undefined) {
+        if (this.state.game === undefined || this.state.host === undefined || this.state.opponent === undefined) {
             gameDisplay = <p>Loading...</p>;
         } else if (this.state.game === null) {
             gameDisplay = <p>This link is not valid. Did someone share it with you incorrectly?</p>;
         } else {
-            const currentUserIsHost = this.props.params.currentUser.uid === this.state.game.host;
+            const currentUserUid = _.get(this.props.params.currentUser, 'uid'),
+                currentUserIsHost = currentUserUid === this.state.game.host;
 
             let findOpponentMessage;
             if (!this.state.game.opponent) {
@@ -84,10 +85,10 @@ class GamePlay extends PureComponent {
             if (gameState) {
                 activeUser = gameState.turnCount % 2 === 0 ? 'host' : 'opponent';
 
-                isCurrentUserActive = this.props.params.currentUser.uid === this.state[activeUser].uid;
+                isCurrentUserActive = currentUserUid === this.state[activeUser].uid;
 
-                currentUserPlayer = this.props.params.currentUser.uid === this.state.host.uid ? 'playerA' : 
-                    this.props.params.currentUser.uid === this.state.opponent.uid ? 'playerB' : null;
+                currentUserPlayer = currentUserUid === this.state.host.uid ? 'playerA' : 
+                    currentUserUid === this.state.opponent.uid ? 'playerB' : null;
 
                 userHasValidMove = isValidMove(gameState, this.state.possibleMove, currentUserPlayer);
             }
