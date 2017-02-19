@@ -11,7 +11,8 @@ class GamePlay extends PureComponent {
     constructor() {
         super();
         this.state = {
-            game: undefined
+            game: undefined,
+            userHasValidMove: false
         };
         this.unmountFunctions = [];
     }
@@ -89,13 +90,19 @@ class GamePlay extends PureComponent {
                 <div>
                     <div className="board-wrapper">
                         <Board gameState={gameState} 
-                            isCurrentUserActive={isCurrentUserActive} 
+                            isCurrentUserActive={isCurrentUserActive}
+                            onValidMoveStart={() => this.setState({userHasValidMove: true})}
+                            onValidMoveEnd={() => this.setState({userHasValidMove: false})}
                             currentUserPlayer={currentUserPlayer} />
                         {findOpponentMessage}
                     </div>
                     <div className="control-bar">
                         <Avatar currentUser={this.state.host} isActive={activeUser === 'host'}/>
-                        <p>vs.</p>
+                        {
+                            isCurrentUserActive ?
+                                <Button bsStyle="primary" disabled={!this.state.userHasValidMove}>Make Move</Button> :
+                                <p>Other player's turn</p>
+                        }
                         <Avatar currentUser={this.state.opponent} isActive={activeUser === 'opponent'} />
                     </div>
                 </div>

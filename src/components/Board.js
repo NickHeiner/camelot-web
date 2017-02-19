@@ -5,6 +5,8 @@ import _ from 'lodash';
 import './Board.less';
 import autobind from 'autobind-decorator';
 
+const {getBoardSpace, isValidMove} = camelotEngine().query();
+
 class Board extends Component {
     constructor() {
         super();
@@ -12,9 +14,9 @@ class Board extends Component {
             possibleMove: []
         };
     }
+
     render() {
         const camelotConstants = camelotEngine().constants(),
-            {getBoardSpace, isValidMove} = camelotEngine().query(),
             boardPieces = _(camelotConstants.BOARD_HEIGHT)
                 .range()
                 .map(row => 
@@ -38,7 +40,7 @@ class Board extends Component {
                                     glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
 
                                 }
-                                
+
                                 if (_.find(this.state.possibleMove, {row, col})) {
                                     classNames.push('possibly-moving-space');
                                 }
@@ -81,12 +83,23 @@ class Board extends Component {
 
         const possibleMoveAddition = _.pick(boardSpace, ['row', 'col']);
         if (!boardSpace.piece && this.state.possibleMove.length) {
-            this.setState({possibleMove: this.state.possibleMove.concat(possibleMoveAddition)});
-            return;
+            this.setState({possibleMove: this.state.possibleMove.concat(possibleMoveAddition)}, afterStateSet);
+        } else if (this.props.currentUserPlayer === _.get(boardSpace, ['piece', 'player'])) {
+            this.setState({possibleMove: [possibleMoveAddition]}, afterStateSet);
         }
-        
-        if (this.props.currentUserPlayer === _.get(boardSpace, ['piece', 'player'])) {
-            this.setState({possibleMove: [possibleMoveAddition]});
+
+        function afterStateSet() {
+            const currentMoveIsValid = isValidMove(
+                this.props.gameState, 
+                this.state.possibleMove, 
+                this.props.currentUserPlayer
+            );
+
+            if (this.state.possibleMove.length > 1 && currentMoveIsValid) {
+                this.props.onValidMoveStart();
+            } else {
+                this.props.onValidMoveEnd();
+            }
         }
     }
 }
