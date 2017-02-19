@@ -81,8 +81,14 @@ class Board extends Component {
             return;
         }
 
-        const possibleMoveAddition = _.pick(boardSpace, ['row', 'col']);
-        if (!boardSpace.piece && this.state.possibleMove.length) {
+        const possibleMoveAddition = _.pick(boardSpace, ['row', 'col']),
+            moveIsValidWithAddition = isValidMove(
+                this.props.gameState,
+                this.state.possibleMove.concat(possibleMoveAddition),
+                this.props.currentUserPlayer
+            );
+
+        if (!boardSpace.piece && this.state.possibleMove.length && moveIsValidWithAddition) {
             this.setState({possibleMove: this.state.possibleMove.concat(possibleMoveAddition)}, afterStateSet);
         } else if (this.props.currentUserPlayer === _.get(boardSpace, ['piece', 'player'])) {
             this.setState({possibleMove: [possibleMoveAddition]}, afterStateSet);
