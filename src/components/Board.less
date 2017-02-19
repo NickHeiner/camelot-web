@@ -43,12 +43,15 @@
                     background-color: #ffa;
                 }
 
-                &.piece {
+                .piece-icon() {
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     font-size: 24px;
+                }
 
+                &.piece {
+                    .piece-icon;
                     &.current-player:hover {
                         .moveable;
                     }
@@ -60,8 +63,18 @@
 
                 &.possible-valid-move {
                     background-color: #aa3;
-                }
 
+                    .glyphicon {
+                        visibility: hidden;
+                    }
+
+                    &.possible-valid-move:hover {
+                        .piece-icon;
+                        .glyphicon {
+                            visibility: visible;
+                        }
+                    }
+                }
             }
         }
     }

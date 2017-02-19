@@ -33,6 +33,7 @@ class Board extends Component {
                                 );
 
                             if (boardSpace) {
+                                let glyph;
                                 if (boardSpace.piece) {
                                     _.merge(classNames, {
                                         piece: true,
@@ -43,7 +44,16 @@ class Board extends Component {
                                             this.props.currentUserPlayer === boardSpace.piece.player
                                     });
 
-                                    const glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
+                                    glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
+                                } else if (possibleValidMove) {
+                                    const originalBoardSpace = getBoardSpace(this.props.gameState, this.props.possibleMove[0]);
+                                    glyph = originalBoardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
+                                    _.merge(classNames, {
+                                        host: this.props.currentUserPlayer === 'playerA',
+                                        opponent: this.props.currentUserPlayer === 'playerB'
+                                    });
+                                }
+                                if (glyph) {
                                     pieceIcon = <Glyphicon glyph={glyph} />;
                                 }
 
