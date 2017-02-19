@@ -4,7 +4,7 @@ import autobind from 'autobind-decorator';
 import Avatar from '../../components/Avatar';
 import Board from '../../components/Board';
 import './Play.less';
-import {Button} from 'react-bootstrap';
+import {Button, Glyphicon} from 'react-bootstrap';
 import _ from 'lodash';
 
 import camelotEngine from 'camelot-engine';
@@ -103,7 +103,8 @@ class GamePlay extends PureComponent {
                         {findOpponentMessage}
                     </div>
                     <div className="control-bar">
-                        <Avatar currentUser={this.state.host} isActive={activeUser === 'host'}/>
+                        <Avatar currentUser={this.state.host} isActive={activeUser === 'host'} />
+                        <CapturedPieces whosePiecesWereCaptured="opponent" gameState={gameState} />
                         {
                             isCurrentUserActive ?
                                 <Button bsStyle="primary" 
@@ -111,6 +112,7 @@ class GamePlay extends PureComponent {
                                     onClick={this.makeMove}>Make Move</Button> :
                                 <p>Other player's turn</p>
                         }
+                        <CapturedPieces whosePiecesWereCaptured="host" gameState={gameState} />
                         <Avatar currentUser={this.state.opponent} isActive={activeUser === 'opponent'} />
                     </div>
                 </div>
@@ -129,6 +131,26 @@ class GamePlay extends PureComponent {
     makeMove() {
         const newGameState = camelotEngine().update().applyMoves(this.state.game.gameState, this.state.possibleMove);
         this.gameRef.update({gameState: newGameState}).then(() => this.setState({possibleMove: []}));
+    }
+}
+
+class CapturedPieces extends PureComponent {
+    render() {
+        if (!this.props.gameState) {
+            return;
+        }
+
+        const whichPlayer = this.props.whosePiecesWereCaptured === 'host' ? 'playerA' : 'playerB';
+        return <div className="captured">
+            <div>
+                <Glyphicon glyph="tower" className={this.props.whosePiecesWereCaptured} /> 
+                {this.props.gameState.capturedPieces[whichPlayer].knight}
+            </div>
+            <div>
+                <Glyphicon glyph="pawn" className={this.props.whosePiecesWereCaptured} /> 
+                {this.props.gameState.capturedPieces[whichPlayer].pawn}
+            </div>
+        </div>;
     }
 }
 
