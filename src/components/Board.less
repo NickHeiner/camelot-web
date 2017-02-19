@@ -39,37 +39,23 @@
                     background-color: cyan;
                 }
 
-                .moveable() {
-                    background-color: #ffa;
-                }
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 24px;
 
-                .piece-icon() {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 24px;
-                }
-
-                &.piece {
-                    .piece-icon;
-                    &.current-player:hover {
-                        .moveable;
-                    }
-                }
-
-                &.possibly-moving-space {
-                    .moveable;
+                &.current-player:hover, &.possibly-moving-space {
+                    background-color: #cc5;
                 }
 
                 &.possible-valid-move {
-                    background-color: #aa3;
+                    background-color: #991;
 
                     .glyphicon {
                         visibility: hidden;
                     }
 
                     &.possible-valid-move:hover {
-                        .piece-icon;
                         .glyphicon {
                             visibility: visible;
                         }

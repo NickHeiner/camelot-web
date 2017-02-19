@@ -34,9 +34,9 @@ class Board extends Component {
 
                             if (boardSpace) {
                                 let glyph;
+                                const originalMoveBoardSpace = getBoardSpace(this.props.gameState, this.props.possibleMove[0]);
                                 if (boardSpace.piece) {
                                     _.merge(classNames, {
-                                        piece: true,
                                         [boardSpace.piece.type]: true,
                                         host: boardSpace.piece.player === 'playerA',
                                         opponent: boardSpace.piece.player === 'playerB',
@@ -44,15 +44,20 @@ class Board extends Component {
                                             this.props.currentUserPlayer === boardSpace.piece.player
                                     });
 
-                                    glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
-                                } else if (possibleValidMove) {
-                                    const originalBoardSpace = getBoardSpace(this.props.gameState, this.props.possibleMove[0]);
-                                    glyph = originalBoardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
-                                    _.merge(classNames, {
-                                        host: this.props.currentUserPlayer === 'playerA',
-                                        opponent: this.props.currentUserPlayer === 'playerB'
-                                    });
+                                    if (!(_.isEqual(originalMoveBoardSpace, boardSpace) && this.props.possibleMove.length > 1)) {
+                                        glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
+                                    }
+                                } else {
+                                    const lastMoveBoardSpace = getBoardSpace(this.props.gameState, _.last(this.props.possibleMove));
+                                    if (possibleValidMove || _.isEqual(lastMoveBoardSpace, boardSpace)) {
+                                        glyph = originalMoveBoardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
+                                        _.merge(classNames, {
+                                            host: this.props.currentUserPlayer === 'playerA',
+                                            opponent: this.props.currentUserPlayer === 'playerB'
+                                        });
+                                    }
                                 }
+
                                 if (glyph) {
                                     pieceIcon = <Glyphicon glyph={glyph} />;
                                 }
