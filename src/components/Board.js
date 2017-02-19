@@ -5,7 +5,7 @@ import _ from 'lodash';
 import './Board.less';
 import autobind from 'autobind-decorator';
 
-const {getBoardSpace, isValidMove} = camelotEngine().query();
+const {getBoardSpace, isValidMove, isGoal} = camelotEngine().query();
 
 class Board extends Component {
     render() {
@@ -39,6 +39,10 @@ class Board extends Component {
 
                                 if (_.find(this.props.possibleMove, {row, col})) {
                                     classNames.push('possibly-moving-space');
+                                }
+
+                                if (isGoal(this.props.gameState, boardSpace.row, boardSpace.col)) {
+                                    classNames.push('goal');
                                 }
 
                                 if (this.props.possibleMove.length && isValidMove(
