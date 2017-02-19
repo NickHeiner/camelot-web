@@ -20,7 +20,8 @@ class Board extends Component {
                             const boardSpace = getBoardSpace(this.props.gameState, {row, col}),
                                 classNames = {
                                     'board-space': true,
-                                    actual: boardSpace
+                                    actual: boardSpace,
+                                    highlight: (row + col) % 2 === 1
                                 };
 
                             let pieceIcon;
@@ -58,13 +59,18 @@ class Board extends Component {
                                     }
                                 }
 
+                                const isGoalSpace = isGoal(this.props.gameState, boardSpace.row, boardSpace.col);
+                                if (isGoalSpace && !glyph) {
+                                    glyph = 'star';
+                                }
+
                                 if (glyph) {
                                     pieceIcon = <Glyphicon glyph={glyph} />;
                                 }
 
                                 _.merge(classNames, {
                                     'possibly-moving-space': _.find(this.props.possibleMove, {row, col}),
-                                    goal: isGoal(this.props.gameState, boardSpace.row, boardSpace.col),
+                                    goal: isGoalSpace,
                                     'possible-valid-move': possibleValidMove
                                 });
                             }

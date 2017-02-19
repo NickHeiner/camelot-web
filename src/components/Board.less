@@ -27,16 +27,17 @@
             max-width: @maxBoardSpaceDimension;
             max-height: @maxBoardSpaceDimension;
 
-            background-color: #ccc;
-            border: 1px #666 solid;
-
-
             &.actual {
                 background-color: lightgreen;
                 border: 1px darkgreen solid;
 
+                &.highlight {
+                    background-color: darken(lightgreen, 20%);
+                }
+
                 &.goal {
                     background-color: cyan;
+                    color: #faf73c;
                 }
 
                 display: flex;
