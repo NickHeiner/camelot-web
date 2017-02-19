@@ -4,7 +4,7 @@ import autobind from 'autobind-decorator';
 import Avatar from '../../components/Avatar';
 import Board from '../../components/Board';
 import './Play.less';
-import {Button} from 'react-bootstrap';
+import {Button, Glyphicon} from 'react-bootstrap';
 import _ from 'lodash';
 
 import camelotEngine from 'camelot-engine';
@@ -55,12 +55,13 @@ class GamePlay extends PureComponent {
     
     render() {
         let gameDisplay;
-        if (this.state.game === undefined) {
+        if (this.state.game === undefined || this.state.host === undefined || this.state.opponent === undefined) {
             gameDisplay = <p>Loading...</p>;
         } else if (this.state.game === null) {
             gameDisplay = <p>This link is not valid. Did someone share it with you incorrectly?</p>;
         } else {
-            const currentUserIsHost = this.props.params.currentUser.uid === this.state.game.host;
+            const currentUserUid = _.get(this.props.params.currentUser, 'uid'),
+                currentUserIsHost = currentUserUid === this.state.game.host;
 
             let findOpponentMessage;
             if (!this.state.game.opponent) {
@@ -84,10 +85,10 @@ class GamePlay extends PureComponent {
             if (gameState) {
                 activeUser = gameState.turnCount % 2 === 0 ? 'host' : 'opponent';
 
-                isCurrentUserActive = this.props.params.currentUser.uid === this.state[activeUser].uid;
+                isCurrentUserActive = currentUserUid === this.state[activeUser].uid;
 
-                currentUserPlayer = this.props.params.currentUser.uid === this.state.host.uid ? 'playerA' : 
-                    this.props.params.currentUser.uid === this.state.opponent.uid ? 'playerB' : null;
+                currentUserPlayer = currentUserUid === this.state.host.uid ? 'playerA' : 
+                    currentUserUid === this.state.opponent.uid ? 'playerB' : null;
 
                 userHasValidMove = isValidMove(gameState, this.state.possibleMove, currentUserPlayer);
             }
@@ -103,7 +104,8 @@ class GamePlay extends PureComponent {
                         {findOpponentMessage}
                     </div>
                     <div className="control-bar">
-                        <Avatar currentUser={this.state.host} isActive={activeUser === 'host'}/>
+                        <Avatar currentUser={this.state.host} isActive={activeUser === 'host'} />
+                        <CapturedPieces whosePiecesWereCaptured="opponent" gameState={gameState} />
                         {
                             isCurrentUserActive ?
                                 <Button bsStyle="primary" 
@@ -111,6 +113,7 @@ class GamePlay extends PureComponent {
                                     onClick={this.makeMove}>Make Move</Button> :
                                 <p>Other player's turn</p>
                         }
+                        <CapturedPieces whosePiecesWereCaptured="host" gameState={gameState} />
                         <Avatar currentUser={this.state.opponent} isActive={activeUser === 'opponent'} />
                     </div>
                 </div>
@@ -129,6 +132,26 @@ class GamePlay extends PureComponent {
     makeMove() {
         const newGameState = camelotEngine().update().applyMoves(this.state.game.gameState, this.state.possibleMove);
         this.gameRef.update({gameState: newGameState}).then(() => this.setState({possibleMove: []}));
+    }
+}
+
+class CapturedPieces extends PureComponent {
+    render() {
+        if (!this.props.gameState) {
+            return;
+        }
+
+        const whichPlayer = this.props.whosePiecesWereCaptured === 'host' ? 'playerA' : 'playerB';
+        return <div className="captured">
+            <div>
+                <Glyphicon glyph="tower" className={this.props.whosePiecesWereCaptured} /> 
+                {this.props.gameState.capturedPieces[whichPlayer].knight}
+            </div>
+            <div>
+                <Glyphicon glyph="pawn" className={this.props.whosePiecesWereCaptured} /> 
+                {this.props.gameState.capturedPieces[whichPlayer].pawn}
+            </div>
+        </div>;
     }
 }
 
