@@ -7,12 +7,15 @@ import './Play.less';
 import {Button} from 'react-bootstrap';
 import _ from 'lodash';
 
+import camelotEngine from 'camelot-engine';
+const {isValidMove} = camelotEngine().query();
+
 class GamePlay extends PureComponent {
     constructor() {
         super();
         this.state = {
             game: undefined,
-            userHasValidMove: false
+            possibleMove: []
         };
         this.unmountFunctions = [];
     }
@@ -77,6 +80,7 @@ class GamePlay extends PureComponent {
             let activeUser = null;
             let isCurrentUserActive = false;
             let currentUserPlayer = null;
+            let userHasValidMove = false;
             if (gameState) {
                 activeUser = gameState.turnCount % 2 === 0 ? 'host' : 'opponent';
 
@@ -84,6 +88,8 @@ class GamePlay extends PureComponent {
 
                 currentUserPlayer = this.props.params.currentUser.uid === this.state.host.uid ? 'playerA' : 
                     this.props.params.currentUser.uid === this.state.opponent.uid ? 'playerB' : null;
+
+                userHasValidMove = isValidMove(gameState, this.state.possibleMove, currentUserPlayer);
             }
 
             gameDisplay = (
@@ -91,8 +97,8 @@ class GamePlay extends PureComponent {
                     <div className="board-wrapper">
                         <Board gameState={gameState} 
                             isCurrentUserActive={isCurrentUserActive}
-                            onValidMoveStart={() => this.setState({userHasValidMove: true})}
-                            onValidMoveEnd={() => this.setState({userHasValidMove: false})}
+                            possibleMove={this.state.possibleMove}
+                            setPossibleMove={possibleMove => this.setState({possibleMove})}
                             currentUserPlayer={currentUserPlayer} />
                         {findOpponentMessage}
                     </div>
@@ -100,7 +106,9 @@ class GamePlay extends PureComponent {
                         <Avatar currentUser={this.state.host} isActive={activeUser === 'host'}/>
                         {
                             isCurrentUserActive ?
-                                <Button bsStyle="primary" disabled={!this.state.userHasValidMove}>Make Move</Button> :
+                                <Button bsStyle="primary" 
+                                    disabled={!userHasValidMove} 
+                                    onClick={this.makeMove}>Make Move</Button> :
                                 <p>Other player's turn</p>
                         }
                         <Avatar currentUser={this.state.opponent} isActive={activeUser === 'opponent'} />
@@ -115,6 +123,12 @@ class GamePlay extends PureComponent {
     @autobind
     joinGame() {
         this.gameRef.update({opponent: this.props.params.currentUser.uid});
+    }
+
+    @autobind
+    makeMove() {
+        const newGameState = camelotEngine().update().applyMoves(this.state.game.gameState, this.state.possibleMove);
+        this.gameRef.update({gameState: newGameState});
     }
 }
 

@@ -8,13 +8,6 @@ import autobind from 'autobind-decorator';
 const {getBoardSpace, isValidMove} = camelotEngine().query();
 
 class Board extends Component {
-    constructor() {
-        super();
-        this.state = {
-            possibleMove: []
-        };
-    }
-
     render() {
         const camelotConstants = camelotEngine().constants(),
             boardPieces = _(camelotConstants.BOARD_HEIGHT)
@@ -41,13 +34,13 @@ class Board extends Component {
 
                                 }
 
-                                if (_.find(this.state.possibleMove, {row, col})) {
+                                if (_.find(this.props.possibleMove, {row, col})) {
                                     classNames.push('possibly-moving-space');
                                 }
 
-                                if (this.state.possibleMove.length && isValidMove(
+                                if (this.props.possibleMove.length && isValidMove(
                                         this.props.gameState, 
-                                        this.state.possibleMove.concat({row, col}), 
+                                        this.props.possibleMove.concat({row, col}), 
                                         this.props.currentUserPlayer
                                     )
                                 ) {
@@ -84,28 +77,14 @@ class Board extends Component {
         const possibleMoveAddition = _.pick(boardSpace, ['row', 'col']),
             moveIsValidWithAddition = isValidMove(
                 this.props.gameState,
-                this.state.possibleMove.concat(possibleMoveAddition),
+                this.props.possibleMove.concat(possibleMoveAddition),
                 this.props.currentUserPlayer
             );
 
-        if (!boardSpace.piece && this.state.possibleMove.length && moveIsValidWithAddition) {
-            this.setState({possibleMove: this.state.possibleMove.concat(possibleMoveAddition)}, afterStateSet);
+        if (!boardSpace.piece && this.props.possibleMove.length && moveIsValidWithAddition) {
+            this.props.setPossibleMove(this.props.possibleMove.concat(possibleMoveAddition));
         } else if (this.props.currentUserPlayer === _.get(boardSpace, ['piece', 'player'])) {
-            this.setState({possibleMove: [possibleMoveAddition]}, afterStateSet);
-        }
-
-        function afterStateSet() {
-            const currentMoveIsValid = isValidMove(
-                this.props.gameState, 
-                this.state.possibleMove, 
-                this.props.currentUserPlayer
-            );
-
-            if (this.state.possibleMove.length > 1 && currentMoveIsValid) {
-                this.props.onValidMoveStart();
-            } else {
-                this.props.onValidMoveEnd();
-            }
+            this.props.setPossibleMove([possibleMoveAddition]);
         }
     }
 }
