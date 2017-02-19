@@ -25,6 +25,13 @@ class Board extends Component {
 
                             let pieceIcon;
 
+                            const possibleValidMove = this.props.possibleMove.length && 
+                                isValidMove(
+                                    this.props.gameState, 
+                                    this.props.possibleMove.concat({row, col}), 
+                                    this.props.currentUserPlayer
+                                );
+
                             if (boardSpace) {
                                 if (boardSpace.piece) {
                                     _.merge(classNames, {
@@ -43,18 +50,14 @@ class Board extends Component {
                                 _.merge(classNames, {
                                     'possibly-moving-space': _.find(this.props.possibleMove, {row, col}),
                                     goal: isGoal(this.props.gameState, boardSpace.row, boardSpace.col),
-                                    'possible-valid-move': this.props.possibleMove.length && isValidMove(
-                                        this.props.gameState, 
-                                        this.props.possibleMove.concat({row, col}), 
-                                        this.props.currentUserPlayer
-                                    )
+                                    'possible-valid-move': possibleValidMove
                                 });
                             }
 
                             return (
                                 <div 
                                     key={`${row}-${col}`} 
-                                    onClick={() => this.onBoardSpaceClick(boardSpace)}
+                                    onClick={() => this.onBoardSpaceClick(boardSpace, possibleValidMove)}
                                     className={classnames(classNames)}>
                                     {pieceIcon}
                                 </div>
@@ -72,19 +75,14 @@ class Board extends Component {
     }
 
     @autobind
-    onBoardSpaceClick(boardSpace) {
+    onBoardSpaceClick(boardSpace, possibleValidMove) {
         if (!this.props.isCurrentUserActive) {
             return;
         }
 
-        const possibleMoveAddition = _.pick(boardSpace, ['row', 'col']),
-            moveIsValidWithAddition = isValidMove(
-                this.props.gameState,
-                this.props.possibleMove.concat(possibleMoveAddition),
-                this.props.currentUserPlayer
-            );
+        const possibleMoveAddition = _.pick(boardSpace, ['row', 'col']);
 
-        if (!boardSpace.piece && this.props.possibleMove.length && moveIsValidWithAddition) {
+        if (!boardSpace.piece && possibleValidMove) {
             this.props.setPossibleMove(this.props.possibleMove.concat(possibleMoveAddition));
         } else if (this.props.currentUserPlayer === _.get(boardSpace, ['piece', 'player'])) {
             this.props.setPossibleMove([possibleMoveAddition]);
