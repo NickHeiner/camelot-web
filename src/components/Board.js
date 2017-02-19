@@ -9,10 +9,7 @@ class Board extends Component {
     constructor() {
         super();
         this.state = {
-            activeBoardSpace: {
-                row: null,
-                col: null
-            }
+            possibleMove: []
         };
     }
     render() {
@@ -40,15 +37,17 @@ class Board extends Component {
                                     );
                                     glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
 
-                                    if (_.isEqual(this.state.activeBoardSpace, {row, col})) {
-                                        classNames.push('possibly-moving-piece');
-                                    }
+                                }
+                                
+                                if (_.find(this.state.possibleMove, {row, col})) {
+                                    classNames.push('possibly-moving-space');
                                 }
 
-                                if (isValidMove(
+                                if (this.state.possibleMove.length && isValidMove(
                                         this.props.gameState, 
-                                        [this.state.activeBoardSpace, {row, col}], 
-                                        this.props.currentUserPlayer)
+                                        this.state.possibleMove.concat({row, col}), 
+                                        this.props.currentUserPlayer
+                                    )
                                 ) {
                                     classNames.push('possible-valid-move');
                                 }
@@ -76,13 +75,19 @@ class Board extends Component {
 
     @autobind
     onBoardSpaceClick(boardSpace) {
-        if (!this.props.isCurrentUserActive || 
-                this.props.currentUserPlayer !== _.get(this.props, ['boardSpace', 'piece', 'player'])) {
-
+        if (!this.props.isCurrentUserActive) {
             return;
         }
 
-        this.setState({activeBoardSpace: _.pick(boardSpace, ['row', 'col'])});
+        const possibleMoveAddition = _.pick(boardSpace, ['row', 'col']);
+        if (!boardSpace.piece && this.state.possibleMove.length) {
+            this.setState({possibleMove: this.state.possibleMove.concat(possibleMoveAddition)});
+            return;
+        }
+        
+        if (this.props.currentUserPlayer === _.get(boardSpace, ['piece', 'player'])) {
+            this.setState({possibleMove: [possibleMoveAddition]});
+        }
     }
 }
 
