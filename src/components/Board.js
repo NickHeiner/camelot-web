@@ -17,11 +17,20 @@ class Board extends Component {
                     _(camelotConstants.BOARD_WIDTH)
                         .range()
                         .map(col => {
-                            const boardSpace = getBoardSpace(this.props.gameState, {row, col}),
-                                classNames = {
+                            const findBoardSpace = _.partial(getBoardSpace, this.props.gameState),
+                                boardSpace = findBoardSpace({row, col}),
+                                noTopBoardSpace = !findBoardSpace({row: row - 1, col}),
+                                noBottomBoardSpace = !findBoardSpace({row: row + 1, col}),
+                                noLeftBoardSpace = !findBoardSpace({row, col: col - 1}),
+                                noRightBoardSpace = !findBoardSpace({row, col: col + 1}),
+                                spaceClassNames = {
                                     'board-space': true,
                                     actual: boardSpace,
-                                    highlight: (row + col) % 2 === 1
+                                    highlight: (row + col) % 2 === 1,
+                                    'first-row': row === 0 || noTopBoardSpace,
+                                    'last-row': row === camelotConstants.BOARD_HEIGHT - 1 || noBottomBoardSpace,
+                                    'first-col': col === 0 || noLeftBoardSpace,
+                                    'last-col': col === camelotConstants.BOARD_WIDTH - 1 || noRightBoardSpace
                                 };
 
                             let pieceIcon;
@@ -37,7 +46,7 @@ class Board extends Component {
                                 let glyph;
                                 const originalMoveBoardSpace = getBoardSpace(this.props.gameState, this.props.possibleMove[0]);
                                 if (boardSpace.piece) {
-                                    _.merge(classNames, {
+                                    _.merge(spaceClassNames, {
                                         [boardSpace.piece.type]: true,
                                         host: boardSpace.piece.player === 'playerA',
                                         opponent: boardSpace.piece.player === 'playerB',
@@ -52,7 +61,7 @@ class Board extends Component {
                                     const lastMoveBoardSpace = getBoardSpace(this.props.gameState, _.last(this.props.possibleMove));
                                     if (possibleValidMove || _.isEqual(lastMoveBoardSpace, boardSpace)) {
                                         glyph = originalMoveBoardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
-                                        _.merge(classNames, {
+                                        _.merge(spaceClassNames, {
                                             host: this.props.currentUserPlayer === 'playerA',
                                             opponent: this.props.currentUserPlayer === 'playerB'
                                         });
@@ -68,7 +77,7 @@ class Board extends Component {
                                     pieceIcon = <Glyphicon glyph={glyph} />;
                                 }
 
-                                _.merge(classNames, {
+                                _.merge(spaceClassNames, {
                                     'possibly-moving-space': _.find(this.props.possibleMove, {row, col}),
                                     goal: isGoalSpace,
                                     'possible-valid-move': possibleValidMove
@@ -79,7 +88,7 @@ class Board extends Component {
                                 <div 
                                     key={`${row}-${col}`} 
                                     onClick={() => this.onBoardSpaceClick(boardSpace, possibleValidMove)}
-                                    className={classnames(classNames)}>
+                                    className={classnames(spaceClassNames)}>
                                     {pieceIcon}
                                 </div>
                             );    
@@ -97,7 +106,7 @@ class Board extends Component {
 
     @autobind
     onBoardSpaceClick(boardSpace, possibleValidMove) {
-        if (!this.props.isCurrentUserActive) {
+        if (!this.props.isCurrentUserActive || !boardSpace) {
             return;
         }
 
