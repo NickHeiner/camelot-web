@@ -4,6 +4,7 @@ import camelotEngine from 'camelot-engine';
 import _ from 'lodash';
 import './Board.less';
 import autobind from 'autobind-decorator';
+import classnames from 'classnames';
 
 const {getBoardSpace, isValidMove, isGoal} = camelotEngine().query();
 
@@ -17,50 +18,45 @@ class Board extends Component {
                         .range()
                         .map(col => {
                             const boardSpace = getBoardSpace(this.props.gameState, {row, col}),
-                                classNames = ['board-space'];
+                                classNames = {
+                                    'board-space': true,
+                                    actual: boardSpace
+                                };
 
-                            let glyph;
+                            let pieceIcon;
 
                             if (boardSpace) {
-                                classNames.push('actual');
-
                                 if (boardSpace.piece) {
-                                    classNames.push(
-                                        'piece', 
-                                        boardSpace.piece.type,
-                                        boardSpace.piece.player === 'playerA' ? 'host' : 'opponent'
-                                    );
-                                    glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
+                                    _.merge(classNames, {
+                                        piece: true,
+                                        [boardSpace.piece.type]: true,
+                                        host: boardSpace.piece.player === 'playerA',
+                                        opponent: boardSpace.piece.player === 'playerB',
+                                        'current-player': this.props.isCurrentUserActive && 
+                                            this.props.currentUserPlayer === boardSpace.piece.player
+                                    });
 
-                                    if (this.props.isCurrentUserActive && this.props.currentUserPlayer === boardSpace.piece.player) {
-                                        classNames.push('current-player');
-                                    }
+                                    const glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
+                                    pieceIcon = <Glyphicon glyph={glyph} />;
                                 }
 
-                                if (_.find(this.props.possibleMove, {row, col})) {
-                                    classNames.push('possibly-moving-space');
-                                }
-
-                                if (isGoal(this.props.gameState, boardSpace.row, boardSpace.col)) {
-                                    classNames.push('goal');
-                                }
-
-                                if (this.props.possibleMove.length && isValidMove(
+                                _.merge(classNames, {
+                                    'possibly-moving-space': _.find(this.props.possibleMove, {row, col}),
+                                    goal: isGoal(this.props.gameState, boardSpace.row, boardSpace.col),
+                                    'possible-valid-move': this.props.possibleMove.length && isValidMove(
                                         this.props.gameState, 
                                         this.props.possibleMove.concat({row, col}), 
                                         this.props.currentUserPlayer
                                     )
-                                ) {
-                                    classNames.push('possible-valid-move');
-                                }
+                                });
                             }
 
                             return (
                                 <div 
                                     key={`${row}-${col}`} 
                                     onClick={() => this.onBoardSpaceClick(boardSpace)}
-                                    className={classNames.join(' ')}>
-                                    {glyph && <Glyphicon glyph={glyph} />}
+                                    className={classnames(classNames)}>
+                                    {pieceIcon}
                                 </div>
                             );    
                         })
