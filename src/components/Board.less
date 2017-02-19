@@ -34,6 +34,10 @@
                 background-color: lightgreen;
                 border: 1px darkgreen solid;
 
+                .moveable() {
+                    background-color: #ffa;
+                }
+
                 &.piece {
                     display: flex;
                     justify-content: center;
@@ -46,10 +50,14 @@
                     &.opponent {
                         color: black;
                     }
+
+                    &.current-player:hover {
+                        .moveable;
+                    }
                 }
 
                 &.possibly-moving-space {
-                    background-color: #ffa;
+                    .moveable;
                 }
 
                 &.possible-valid-move {

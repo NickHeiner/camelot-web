@@ -32,6 +32,9 @@ class Board extends Component {
                                     );
                                     glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
 
+                                    if (this.props.isCurrentUserActive && this.props.currentUserPlayer === boardSpace.piece.player) {
+                                        classNames.push('current-player');
+                                    }
                                 }
 
                                 if (_.find(this.props.possibleMove, {row, col})) {
