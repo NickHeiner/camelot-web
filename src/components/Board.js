@@ -7,6 +7,7 @@ import autobind from 'autobind-decorator';
 import classnames from 'classnames';
 
 const {getBoardSpace, isValidMove, isGoal} = camelotEngine().query();
+const {applyMoves} = camelotEngine().update();
 
 class Board extends Component {
     render() {
@@ -54,7 +55,17 @@ class Board extends Component {
                                             this.props.currentUserPlayer === boardSpace.piece.player
                                     });
 
-                                    if (!(_.isEqual(originalMoveBoardSpace, boardSpace) && this.props.possibleMove.length > 1)) {
+                                    const multiplePossibleMovesExist = this.props.possibleMove.length > 1;
+                                    if (multiplePossibleMovesExist) {
+                                        const gameStateIfPossibleMoveIsMade = 
+                                                applyMoves(this.props.gameState, this.props.possibleMove),
+                                            nextGameStateBoardSpace = 
+                                                getBoardSpace(gameStateIfPossibleMoveIsMade, {row, col});
+
+                                        spaceClassNames['will-be-captured'] = !nextGameStateBoardSpace.piece;
+                                    }
+
+                                    if (!(_.isEqual(originalMoveBoardSpace, boardSpace) && multiplePossibleMovesExist)) {
                                         glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
                                     }
                                 } else {
