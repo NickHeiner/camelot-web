@@ -27,36 +27,61 @@
             max-width: @maxBoardSpaceDimension;
             max-height: @maxBoardSpaceDimension;
 
-            background-color: #ccc;
-            border: 1px #666 solid;
-
             &.actual {
                 background-color: lightgreen;
                 border: 1px darkgreen solid;
 
-                .moveable() {
-                    background-color: #ffa;
+                &.first-row {
+                    border-top-width: 2px;
                 }
 
-                &.piece {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 24px;
-
-                    &.current-player:hover {
-                        .moveable;
-                    }
+                &.last-row {
+                    border-bottom-width: 2px;
                 }
 
-                &.possibly-moving-space {
-                    .moveable;
+                &.first-col {
+                    border-left-width: 2px;
+                }
+
+                &.last-col {
+                    border-right-width: 2px;
+                }
+
+                &.highlight {
+                    background-color: darken(lightgreen, 20%);
+                }
+
+                &.goal {
+                    background-color: cyan;
+                    color: #faf73c;
+                }
+
+                &.will-be-captured {
+                    color: red;
+                }
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 24px;
+
+                &.current-player:hover, &.possibly-moving-space {
+                    background-color: #cc5;
                 }
 
                 &.possible-valid-move {
-                    background-color: #aa3;
-                }
+                    background-color: #991;
 
+                    .glyphicon {
+                        visibility: hidden;
+                    }
+
+                    &.possible-valid-move:hover {
+                        .glyphicon {
+                            visibility: visible;
+                        }
+                    }
+                }
             }
         }
     }
