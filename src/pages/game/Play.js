@@ -2,16 +2,20 @@ import React, {PureComponent} from 'react';
 import firebase from 'firebase';
 import autobind from 'autobind-decorator';
 import Avatar from '../../components/Avatar';
+import Board from '../../components/Board';
 import './Play.less';
-import {Button, Glyphicon} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import _ from 'lodash';
+
 import camelotEngine from 'camelot-engine';
+const {isValidMove} = camelotEngine().query();
 
 class GamePlay extends PureComponent {
     constructor() {
         super();
         this.state = {
-            game: undefined
+            game: undefined,
+            possibleMove: []
         };
         this.unmountFunctions = [];
     }
@@ -72,57 +76,42 @@ class GamePlay extends PureComponent {
                 }
             }
 
-            const {boardSpaces} = _.get(this.state, ['game', 'gameState']),
-                camelotConstants = camelotEngine().constants();
+            const gameState = _.get(this.state, ['game', 'gameState']);
+            let activeUser = null;
+            let isCurrentUserActive = false;
+            let currentUserPlayer = null;
+            let userHasValidMove = false;
+            if (gameState) {
+                activeUser = gameState.turnCount % 2 === 0 ? 'host' : 'opponent';
+
+                isCurrentUserActive = this.props.params.currentUser.uid === this.state[activeUser].uid;
+
+                currentUserPlayer = this.props.params.currentUser.uid === this.state.host.uid ? 'playerA' : 
+                    this.props.params.currentUser.uid === this.state.opponent.uid ? 'playerB' : null;
+
+                userHasValidMove = isValidMove(gameState, this.state.possibleMove, currentUserPlayer);
+            }
 
             gameDisplay = (
                 <div>
                     <div className="board-wrapper">
-                        <div className="board">
-                            {
-                                _(camelotConstants.BOARD_HEIGHT)
-                                    .range()
-                                    .map(row => 
-                                        _(camelotConstants.BOARD_WIDTH)
-                                            .range()
-                                            .map(col => {
-                                                const boardSpace = _.find(boardSpaces, {row, col}),
-                                                    classNames = ['board-space'];
-
-                                                let glyph;
-
-                                                if (boardSpace) {
-                                                    classNames.push('actual');
-
-                                                    if (boardSpace.piece) {
-                                                        classNames.push(
-                                                            'piece', 
-                                                            boardSpace.piece.type,
-                                                            boardSpace.piece.player === 'playerA' ? 'host' : 'opponent'
-                                                        );
-                                                        glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
-                                                    }
-                                                }
-
-                                                return (
-                                                    <div 
-                                                        key={`${row}-${col}`} 
-                                                        className={classNames.join(' ')}>
-                                                        {glyph && <Glyphicon glyph={glyph} />}
-                                                    </div>
-                                                );    
-                                            })
-                                    )
-                                    .flatten()
-                                    .value()
-                            }
-                        </div>
+                        <Board gameState={gameState} 
+                            isCurrentUserActive={isCurrentUserActive}
+                            possibleMove={this.state.possibleMove}
+                            setPossibleMove={possibleMove => this.setState({possibleMove})}
+                            currentUserPlayer={currentUserPlayer} />
                         {findOpponentMessage}
                     </div>
                     <div className="control-bar">
-                        <Avatar currentUser={this.state.host} />
-                        <p>vs.</p>
-                        <Avatar currentUser={this.state.opponent} />
+                        <Avatar currentUser={this.state.host} isActive={activeUser === 'host'}/>
+                        {
+                            isCurrentUserActive ?
+                                <Button bsStyle="primary" 
+                                    disabled={!userHasValidMove} 
+                                    onClick={this.makeMove}>Make Move</Button> :
+                                <p>Other player's turn</p>
+                        }
+                        <Avatar currentUser={this.state.opponent} isActive={activeUser === 'opponent'} />
                     </div>
                 </div>
             );
@@ -134,6 +123,12 @@ class GamePlay extends PureComponent {
     @autobind
     joinGame() {
         this.gameRef.update({opponent: this.props.params.currentUser.uid});
+    }
+
+    @autobind
+    makeMove() {
+        const newGameState = camelotEngine().update().applyMoves(this.state.game.gameState, this.state.possibleMove);
+        this.gameRef.update({gameState: newGameState}).then(() => this.setState({possibleMove: []}));
     }
 }
 
