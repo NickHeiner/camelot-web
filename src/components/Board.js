@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Glyphicon } from 'react-bootstrap';
+import {Glyphicon, Modal} from 'react-bootstrap';
 import camelotEngine from 'camelot-engine';
 import _ from 'lodash';
 import './Board.less';
@@ -111,8 +111,21 @@ class Board extends Component {
                 .value();
         
         return (
-            <div className="board">
-                {boardPieces}
+            <div className="board-wrapper modal-container">
+                <div className="board">
+                    {this.props.message &&  
+                        <Modal
+                            show={true}
+                            container={this}
+                            className="status-modal"
+                            aria-label="Game status message">
+                            <Modal.Body>
+                                {this.props.message}
+                            </Modal.Body>
+                        </Modal>
+                    }
+                    {boardPieces}
+                </div>
             </div>
         );
     }

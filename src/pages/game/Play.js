@@ -4,11 +4,11 @@ import autobind from 'autobind-decorator';
 import Avatar from '../../components/Avatar';
 import Board from '../../components/Board';
 import './Play.less';
-import {Button, Glyphicon} from 'react-bootstrap';
+import {Button, Glyphicon, Badge} from 'react-bootstrap';
 import _ from 'lodash';
 
 import camelotEngine from 'camelot-engine';
-const {isValidMove} = camelotEngine().query();
+const {isValidMove, getGameWinner} = camelotEngine().query();
 
 class GamePlay extends PureComponent {
     constructor() {
@@ -82,27 +82,28 @@ class GamePlay extends PureComponent {
             let isCurrentUserActive = false;
             let currentUserPlayer = null;
             let userHasValidMove = false;
+            let gameWinner = null;
             if (gameState) {
                 activeUser = gameState.turnCount % 2 === 0 ? 'host' : 'opponent';
 
                 isCurrentUserActive = currentUserUid === this.state[activeUser].uid;
 
                 currentUserPlayer = currentUserUid === this.state.host.uid ? 'playerA' : 
-                    currentUserUid === this.state.opponent.uid ? 'playerB' : null;
+                    currentUserUid === _.get(this.state.opponent, 'uid') ? 'playerB' : null;
 
                 userHasValidMove = isValidMove(gameState, this.state.possibleMove, currentUserPlayer);
+
+                gameWinner = getGameWinner(gameState);
             }
 
             gameDisplay = (
                 <div>
-                    <div className="board-wrapper">
-                        <Board gameState={gameState} 
-                            isCurrentUserActive={isCurrentUserActive}
-                            possibleMove={this.state.possibleMove}
-                            setPossibleMove={possibleMove => this.setState({possibleMove})}
-                            currentUserPlayer={currentUserPlayer} />
-                        {findOpponentMessage}
-                    </div>
+                    <Board gameState={gameState} 
+                        isCurrentUserActive={isCurrentUserActive}
+                        possibleMove={this.state.possibleMove}
+                        setPossibleMove={possibleMove => this.setState({possibleMove})}
+                        message={findOpponentMessage || this.getWinMessage(gameWinner)}
+                        currentUserPlayer={currentUserPlayer} />
                     <div className="control-bar">
                         <Avatar currentUser={this.state.host} isActive={activeUser === 'host'} />
                         <CapturedPieces whosePiecesWereCaptured="opponent" gameState={gameState} />
@@ -133,6 +134,15 @@ class GamePlay extends PureComponent {
         const newGameState = camelotEngine().update().applyMoves(this.state.game.gameState, this.state.possibleMove);
         this.setState({possibleMove: []}, () => this.gameRef.update({gameState: newGameState}));
     }
+
+    @autobind
+    getWinMessage(gameWinner) {
+        if (!gameWinner) {
+            return;
+        }
+        const {displayName} = gameWinner === 'playerA' ? this.state.host : this.state.opponent;
+        return `${displayName} wins!`;
+    }
 }
 
 class CapturedPieces extends PureComponent {
@@ -143,13 +153,13 @@ class CapturedPieces extends PureComponent {
 
         const whichPlayer = this.props.whosePiecesWereCaptured === 'host' ? 'playerA' : 'playerB';
         return <div className="captured">
-            <div>
+            <div className="piece-count-pair">
                 <Glyphicon glyph="tower" className={this.props.whosePiecesWereCaptured} /> 
-                {this.props.gameState.capturedPieces[whichPlayer].knight}
+                <Badge>{this.props.gameState.capturedPieces[whichPlayer].knight}</Badge> 
             </div>
-            <div>
+            <div className="piece-count-pair">
                 <Glyphicon glyph="pawn" className={this.props.whosePiecesWereCaptured} /> 
-                {this.props.gameState.capturedPieces[whichPlayer].pawn}
+                <Badge>{this.props.gameState.capturedPieces[whichPlayer].pawn}</Badge>
             </div>
         </div>;
     }

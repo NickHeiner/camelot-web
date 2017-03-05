@@ -3,6 +3,15 @@
     padding-left: @boardPadding;
     padding-right: @boardPadding;
 
+    .status-modal {
+        top: 50%;
+    }
+
+    /* This allows the side panel to sit on top of the game status message */
+    .modal-backdrop, .modal {
+        z-index: 1;
+    }
+
     .board {
         display: flex;
         flex-wrap: wrap;
@@ -85,4 +94,11 @@
             }
         }
     }
+}
+
+.modal-container {
+    position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+    position: absolute;
 }
