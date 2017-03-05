@@ -5,12 +5,22 @@ import _ from 'lodash';
 import './Board.less';
 import autobind from 'autobind-decorator';
 import classnames from 'classnames';
+// This is a bit hacky but w/e.
+import pairwise from 'camelot-engine/lib/util/pairwise';
 
-const {getBoardSpace, isValidMove, isGoal} = camelotEngine().query();
-const {applyMoves} = camelotEngine().update();
+const {getBoardSpace, isValidMove, isGoal, getCoordsBetween} = camelotEngine().query();
 
 class Board extends Component {
     render() {
+
+        let spacesBetweenMoves = [];
+        const multiplePossibleMovesExist = this.props.possibleMove.length > 1;
+        if (multiplePossibleMovesExist) {
+            const movePairs = pairwise(this.props.possibleMove);
+
+            spacesBetweenMoves = movePairs.map(movePair => getCoordsBetween(...movePair));
+        }
+
         const camelotConstants = camelotEngine().constants(),
             boardPieces = _(camelotConstants.BOARD_HEIGHT)
                 .range()
@@ -55,15 +65,7 @@ class Board extends Component {
                                             this.props.currentUserPlayer === boardSpace.piece.player
                                     });
 
-                                    const multiplePossibleMovesExist = this.props.possibleMove.length > 1;
-                                    if (multiplePossibleMovesExist) {
-                                        const gameStateIfPossibleMoveIsMade = 
-                                                applyMoves(this.props.gameState, this.props.possibleMove),
-                                            nextGameStateBoardSpace = 
-                                                getBoardSpace(gameStateIfPossibleMoveIsMade, {row, col});
-
-                                        spaceClassNames['will-be-captured'] = !nextGameStateBoardSpace.piece;
-                                    }
+                                    spaceClassNames['space-between-moves'] = _.some(spacesBetweenMoves, {row, col});
 
                                     if (!(_.isEqual(originalMoveBoardSpace, boardSpace) && multiplePossibleMovesExist)) {
                                         glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';

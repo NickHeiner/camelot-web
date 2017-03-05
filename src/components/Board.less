@@ -56,7 +56,7 @@
                     color: #faf73c;
                 }
 
-                &.will-be-captured {
+                &.space-between-moves:not(.current-player) {
                     color: red;
                 }
 
@@ -65,7 +65,7 @@
                 align-items: center;
                 font-size: 24px;
 
-                &.current-player:hover, &.possibly-moving-space {
+                &.current-player:hover, &.possibly-moving-space, &.space-between-moves {
                     background-color: #cc5;
                 }
 
