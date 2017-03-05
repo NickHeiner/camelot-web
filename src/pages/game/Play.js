@@ -8,7 +8,7 @@ import {Button, Glyphicon} from 'react-bootstrap';
 import _ from 'lodash';
 
 import camelotEngine from 'camelot-engine';
-const {isValidMove} = camelotEngine().query();
+const {isValidMove, getGameWinner} = camelotEngine().query();
 
 class GamePlay extends PureComponent {
     constructor() {
@@ -82,6 +82,7 @@ class GamePlay extends PureComponent {
             let isCurrentUserActive = false;
             let currentUserPlayer = null;
             let userHasValidMove = false;
+            let gameWinner = null;
             if (gameState) {
                 activeUser = gameState.turnCount % 2 === 0 ? 'host' : 'opponent';
 
@@ -91,11 +92,14 @@ class GamePlay extends PureComponent {
                     currentUserUid === this.state.opponent.uid ? 'playerB' : null;
 
                 userHasValidMove = isValidMove(gameState, this.state.possibleMove, currentUserPlayer);
+
+                gameWinner = getGameWinner(gameState);
             }
 
             gameDisplay = (
                 <div>
                     <div className="board-wrapper">
+                        <p>{this.getWinMessage(gameWinner)}</p>
                         <Board gameState={gameState} 
                             isCurrentUserActive={isCurrentUserActive}
                             possibleMove={this.state.possibleMove}
@@ -132,6 +136,15 @@ class GamePlay extends PureComponent {
     makeMove() {
         const newGameState = camelotEngine().update().applyMoves(this.state.game.gameState, this.state.possibleMove);
         this.setState({possibleMove: []}, () => this.gameRef.update({gameState: newGameState}));
+    }
+
+    @autobind
+    getWinMessage(gameWinner) {
+        if (!gameWinner) {
+            return;
+        }
+        const {displayName} = gameWinner === 'playerA' ? this.state.host : this.state.opponent;
+        return `${displayName} wins!`;
     }
 }
 
