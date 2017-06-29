@@ -7,30 +7,26 @@ import { Link } from 'react-router';
 import camelotEngine from 'camelot-engine';
 import HandleConnectivity from '../../utils/HandleConnectivity';
 
-@HandleConnectivity({
-    componentWillMount: _.noop,
-    componentWillUnmount: _.noop
-}, {
-    componentWillMount: () => {
+export class GameList extends PureComponent {
+    render = () =>
+        <div>
+            <ul>
+                {
+                    _.map(this.props.games, ((game, key) => <li key={key}><Link to={`play/${key}`}>{game.host}</Link></li>))
+                }
+            </ul>
+            <Button bsStyle="primary" onClick={this.props.createNewGame}>New</Button>
+        </div>;
+}
+
+class OnlineGameListContainer extends PureComponent {
+    componentWillMount() {
         this.gamesRef = firebase.database().ref('games');
         this.gamesRef.on('value', this.onGamesUpdate);
-    },
-    componentWillUnmount: () => {
-        this.gamesRef.off('value', this.onGamesUpdate);
-    }
-})
-class GameList extends PureComponent {
-    constructor() {
-        super();
-        this.state = {};
-    }
-
-    componentWillMount() {
-        this.props.componentWillMount();
     }
     
     componentWillUnmount() {
-        this.props.componentWillUnmount();
+        this.gamesRef.off('value', this.onGamesUpdate);
     }
 
     @autobind
@@ -41,17 +37,6 @@ class GameList extends PureComponent {
         }
     }
 
-    render() {
-        return <div>
-            <ul>
-                {
-                    _.map(this.state.games, ((game, key) => <li key={key}><Link to={`play/${key}`}>{game.host}</Link></li>))
-                }
-            </ul>
-            <Button bsStyle="primary" onClick={this.createNewGame}>New</Button>
-        </div>;
-    }
-
     @autobind
     createNewGame() {
         this.gamesRef.push({
@@ -59,6 +44,15 @@ class GameList extends PureComponent {
             gameState: camelotEngine().createEmptyGame()
         });
     }
+
+    render = () => <GameList createNewGame={this.createNewGame} />
 }
 
-export default GameList;
+class OfflineGameListContainer extends PureComponent {
+    render = () => <GameList />
+}
+
+export default HandleConnectivity(
+    OnlineGameListContainer,
+    OfflineGameListContainer
+);
