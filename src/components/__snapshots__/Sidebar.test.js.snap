@@ -1,9 +1,7 @@
 exports[`Sidebar renders 1`] = `
-<div
-  data-radium={true}>
+<div>
   <div
-    className="bm-overlay"
-    data-radium={true}
+    className="bm-overlay "
     onClick={[Function]}
     style={
       Object {
@@ -23,7 +21,6 @@ exports[`Sidebar renders 1`] = `
     } />
   <div
     className="bm-menu-wrap "
-    data-radium={true}
     id=""
     style={
       Object {
@@ -36,13 +33,12 @@ exports[`Sidebar renders 1`] = `
         "right": "inherit",
         "transform": "translate3d(-100%, 0, 0)",
         "transition": "all 0.5s",
-        "width": 300,
+        "width": "300px",
         "zIndex": 2,
       }
     }>
     <div
-      className="bm-menu"
-      data-radium={true}
+      className="bm-menu "
       style={
         Object {
           "boxSizing": "border-box",
@@ -51,8 +47,7 @@ exports[`Sidebar renders 1`] = `
         }
       }>
       <nav
-        className="bm-item-list"
-        data-radium={true}
+        className="bm-item-list "
         style={
           Object {
             "height": "100%",
@@ -60,7 +55,6 @@ exports[`Sidebar renders 1`] = `
         }>
         <div
           className="user-bar"
-          data-radium={true}
           style={
             Object {
               "display": "block",
@@ -80,12 +74,10 @@ exports[`Sidebar renders 1`] = `
           disabled={false}
           onClick={undefined}
           style={
-            Array [
-              Object {
-                "display": "block",
-                "outline": "none",
-              },
-            ]
+            Object {
+              "display": "block",
+              "outline": "none",
+            }
           }
           type="button">
           Sign Out
@@ -93,11 +85,9 @@ exports[`Sidebar renders 1`] = `
       </nav>
     </div>
     <div
-      data-radium={true}
       style={Object {}}>
       <div
-        className="bm-cross-button"
-        data-radium={true}
+        className="bm-cross-button "
         style={
           Object {
             "height": 24,
@@ -108,7 +98,6 @@ exports[`Sidebar renders 1`] = `
           }
         }>
         <span
-          data-radium={true}
           style={
             Object {
               "position": "absolute",
@@ -117,8 +106,7 @@ exports[`Sidebar renders 1`] = `
             }
           }>
           <span
-            className="bm-cross"
-            data-radium={true}
+            className="bm-cross "
             style={
               Object {
                 "height": 14,
@@ -128,8 +116,7 @@ exports[`Sidebar renders 1`] = `
               }
             } />
           <span
-            className="bm-cross"
-            data-radium={true}
+            className="bm-cross "
             style={
               Object {
                 "height": 14,
@@ -140,7 +127,6 @@ exports[`Sidebar renders 1`] = `
             } />
         </span>
         <button
-          data-radium={true}
           onClick={[Function]}
           style={
             Object {
@@ -163,18 +149,15 @@ exports[`Sidebar renders 1`] = `
     </div>
   </div>
   <div
-    className="bm-burger-button"
-    data-radium={true}
+    className="bm-burger-button "
     style={
       Object {
         "zIndex": 1,
       }
     }>
-    <span
-      data-radium={true}>
+    <span>
       <span
-        className="bm-burger-bars"
-        data-radium={true}
+        className="bm-burger-bars "
         style={
           Object {
             "height": "20%",
@@ -186,8 +169,7 @@ exports[`Sidebar renders 1`] = `
           }
         } />
       <span
-        className="bm-burger-bars"
-        data-radium={true}
+        className="bm-burger-bars "
         style={
           Object {
             "height": "20%",
@@ -199,8 +181,7 @@ exports[`Sidebar renders 1`] = `
           }
         } />
       <span
-        className="bm-burger-bars"
-        data-radium={true}
+        className="bm-burger-bars "
         style={
           Object {
             "height": "20%",
@@ -213,10 +194,9 @@ exports[`Sidebar renders 1`] = `
         } />
     </span>
     <button
-      data-radium={true}
       onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
       style={
         Object {
           "border": "none",
