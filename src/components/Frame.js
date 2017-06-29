@@ -13,6 +13,16 @@ class Frame extends Component {
   }
 
   componentWillMount() {
+    if (localStorage.offline) {
+      this.setState({
+        currentUser: {
+          displayName: 'Offline Jim',
+          photoURL: 'https://invalid.offline-url.com/i.png'
+        }
+      });
+      return;
+    }
+
     // TODO handle auth error
     this.unsubscribeFirebaseAuthWatcher = this.auth.onAuthStateChanged(currentUser => {
       // TODO Is this the best place to do this?

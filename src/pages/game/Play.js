@@ -5,7 +5,7 @@ import Avatar from '../../components/Avatar';
 import Board from '../../components/Board';
 import './Play.less';
 import {Button} from 'react-bootstrap';
-import CapturedPieces from '../components/CapturedPieces';
+import CapturedPieces from '../../components/CapturedPieces';
 import _ from 'lodash';
 
 import camelotEngine from 'camelot-engine';
