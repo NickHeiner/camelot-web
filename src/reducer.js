@@ -6,7 +6,8 @@ const defaultState = {
     currentUser: {
         displayName: '',
         photoURL: ''
-    }
+    },
+    games: []
 };
 
 export default (state, action) => {
@@ -21,6 +22,14 @@ export default (state, action) => {
                         displayName: 'Offline Jim',
                         photoURL: 'https://invalid.offline-url.com/i.png'
                     }
+                },
+                games: {
+                    $set: [
+                        {
+                            key: 'offline-1',
+                            host: 'Offline Jim'
+                        }
+                    ]
                 }
             });
         default:

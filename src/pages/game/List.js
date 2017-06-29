@@ -6,8 +6,12 @@ import _ from 'lodash';
 import { Link } from 'react-router';
 import camelotEngine from 'camelot-engine';
 import HandleConnectivity from '../../utils/HandleConnectivity';
+import {connect} from 'react-redux';
 
-export class GameList extends PureComponent {
+@connect(
+    state => _.pick(state, 'games')
+)
+class GameList extends PureComponent {
     render = () =>
         <div>
             <ul>
