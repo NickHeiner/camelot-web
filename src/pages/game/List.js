@@ -5,20 +5,32 @@ import firebase from 'firebase';
 import _ from 'lodash';
 import { Link } from 'react-router';
 import camelotEngine from 'camelot-engine';
+import HandleConnectivity from '../../utils/HandleConnectivity';
 
+@HandleConnectivity({
+    componentWillMount: _.noop,
+    componentWillUnmount: _.noop
+}, {
+    componentWillMount: () => {
+        this.gamesRef = firebase.database().ref('games');
+        this.gamesRef.on('value', this.onGamesUpdate);
+    },
+    componentWillUnmount: () => {
+        this.gamesRef.off('value', this.onGamesUpdate);
+    }
+})
 class GameList extends PureComponent {
     constructor() {
         super();
-        this.state = {count: null};
+        this.state = {};
     }
 
     componentWillMount() {
-        this.gamesRef = firebase.database().ref('games');
-        this.gamesRef.on('value', this.onGamesUpdate);
+        this.props.componentWillMount();
     }
     
     componentWillUnmount() {
-        this.gamesRef.off('value', this.onGamesUpdate);
+        this.props.componentWillUnmount();
     }
 
     @autobind
