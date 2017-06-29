@@ -14,12 +14,7 @@ class Frame extends Component {
 
   componentWillMount() {
     if (localStorage.offline) {
-      this.setState({
-        currentUser: {
-          displayName: 'Offline Jim',
-          photoURL: 'https://invalid.offline-url.com/i.png'
-        }
-      });
+      setOffline();
       return;
     }
 
