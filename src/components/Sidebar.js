@@ -6,16 +6,10 @@ import {browserHistory} from 'react-router';
 import { slide as SlideMenu } from 'react-burger-menu';
 import Avatar from './Avatar';
 
-class Sidebar extends PureComponent {
+export class SidebarPresentation extends PureComponent {
     static propTypes = {
-        currentUser: React.PropTypes.object
+        currentUser: React.PropTypes.object.isRequired
     }
-
-    constructor() {
-        super();
-        this.auth = new firebase.auth();
-    }
-
     render() {
         const currentUser = this.props.currentUser;
         return (
@@ -28,14 +22,24 @@ class Sidebar extends PureComponent {
             </SlideMenu>
         );
     }
+}
+
+export default class Sidebar extends PureComponent {
+    static propTypes = {
+        currentUser: React.PropTypes.object.isRequired
+    }
+
+    constructor() {
+        super();
+        this.auth = new firebase.auth();
+    }
+
+    render() {
+        return <SidebarPresentation onClick={this.signOut} currentUser={this.props.currentUser} />;
+    }
 
     @autobind
     signOut() {
         this.auth.signOut().then(() => browserHistory.push('/'));
     }
 }
-
-export default Sidebar;
-
-
-
