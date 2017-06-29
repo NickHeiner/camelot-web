@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 import autobind from 'autobind-decorator';
 import { Button } from 'react-bootstrap';
@@ -8,7 +9,7 @@ import Avatar from './Avatar';
 
 export class SidebarPresentation extends PureComponent {
     static propTypes = {
-        currentUser: React.PropTypes.object.isRequired
+        currentUser: PropTypes.object.isRequired
     }
     render() {
         const currentUser = this.props.currentUser;
@@ -26,7 +27,7 @@ export class SidebarPresentation extends PureComponent {
 
 export default class Sidebar extends PureComponent {
     static propTypes = {
-        currentUser: React.PropTypes.object.isRequired
+        currentUser: PropTypes.object.isRequired
     }
 
     constructor() {
