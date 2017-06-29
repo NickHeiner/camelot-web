@@ -12,11 +12,11 @@ import reducer from './reducer';
 import {reactReduxFirebase, firebaseStateReducer} from 'react-redux-firebase';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCGnYHyEB2_iHhVmrvnHYkpt_KJlxyb3k0',
-  authDomain: 'policourse.firebaseapp.com',
-  databaseURL: 'https://policourse.firebaseio.com',
-  projectId: 'policourse',
-  messagingSenderId: '603341743697'
+  apiKey: 'AIzaSyC0mhGKUKIERUXlB8Amh2kq9S6gjbiqg9A',
+  authDomain: 'camelot-ac734.firebaseapp.com',
+  databaseURL: 'https://camelot-ac734.firebaseio.com',
+  storageBucket: 'camelot-ac734.appspot.com',
+  messagingSenderId: '644309983634'
 };
 
 const rootReducer = combineReducers({
