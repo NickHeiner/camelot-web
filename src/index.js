@@ -7,6 +7,9 @@ import Frame from './components/Frame';
 import NoMatch from './pages/NoMatch';
 import GameList from './pages/game/List';
 import GamePlay from './pages/game/Play';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import reducer from './reducer';
 
 firebase.initializeApp({
   apiKey: 'AIzaSyC0mhGKUKIERUXlB8Amh2kq9S6gjbiqg9A',
@@ -16,13 +19,18 @@ firebase.initializeApp({
   messagingSenderId: '644309983634'
 });
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducer, composeEnhancers(applyMiddleware()));
+
 ReactDOM.render(
-  <Router history={browserHistory}>
-    <Route path="/" component={Frame}>
-      <IndexRoute component={GameList} />
-      <Route path="play/:id" component={GamePlay} />
-    </Route>
-    <Route path="*" component={NoMatch} />
-  </Router>,
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path="/" component={Frame}>
+        <IndexRoute component={GameList} />
+        <Route path="play/:id" component={GamePlay} />
+      </Route>
+      <Route path="*" component={NoMatch} />
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
