@@ -1,1 +1,5 @@
-exports[`NoMatch renders 1`] = `"<h1>404 – Page Not Found</h1>"`;
+exports[`NoMatch renders 1`] = `
+<h1>
+  404 – Page Not Found
+</h1>
+`;

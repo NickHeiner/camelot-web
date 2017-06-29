@@ -1,28 +1,28 @@
 import Avatar from './Avatar';
 import React from 'React';
-import { shallow } from 'enzyme';
+import reactTestRenderer from 'react-test-renderer';
 import { getDummyCurrentUser } from '../utils/test-utils';
 
 describe('Avatar', () => {
     it('renders with no user', () => {
-        expect(shallow(
+        expect(reactTestRenderer.create(
             <Avatar />
-        ).html()).toMatchSnapshot();
+        )).toMatchSnapshot();
     });
 
     describe('has a current user', () => {
         it('inactive', () => {
             const currentUser = getDummyCurrentUser();
-            expect(shallow(
+            expect(reactTestRenderer.create(
                 <Avatar currentUser={currentUser} />
-            ).html()).toMatchSnapshot();
+            )).toMatchSnapshot();
         });
 
         it('active', () => {
             const currentUser = getDummyCurrentUser();
-            expect(shallow(
+            expect(reactTestRenderer.create(
                 <Avatar currentUser={currentUser} isActive />
-            ).html()).toMatchSnapshot();
+            )).toMatchSnapshot();
         });
     });
 });

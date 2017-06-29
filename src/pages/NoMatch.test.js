@@ -1,11 +1,11 @@
 import NoMatch from './NoMatch';
 import React from 'React';
-import { shallow } from 'enzyme';
+import reactTestRenderer from 'react-test-renderer';
 
 describe('NoMatch', () => {
     it('renders', () => {
-        expect(shallow(
+        expect(reactTestRenderer.create(
             <NoMatch />
-        ).html()).toMatchSnapshot();
+        )).toMatchSnapshot();
     });
 });

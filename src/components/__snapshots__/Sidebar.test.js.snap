@@ -1,1 +1,238 @@
-exports[`Sidebar renders 1`] = `"<div data-radium=\"true\"><div class=\"bm-overlay\" style=\"position:fixed;z-index:1;width:100%;height:100%;background:rgba(0, 0, 0, 0.3);opacity:0;transform:translate3d(100%, 0, 0);transition:opacity 0.3s, transform 0s 0.3s;\" data-radium=\"true\"></div><div id=\"\" class=\"bm-menu-wrap\" style=\"position:fixed;right:inherit;z-index:2;width:300px;height:100%;transform:translate3d(-100%, 0, 0);transition:all 0.5s;\" data-radium=\"true\"><div class=\"bm-menu\" style=\"height:100%;box-sizing:border-box;overflow:auto;\" data-radium=\"true\"><nav class=\"bm-item-list\" style=\"height:100%;\" data-radium=\"true\"><div class=\"user-bar\" style=\"display:block;outline:none;\" data-radium=\"true\"><span>Display Name</span><img src=\"photoURL\" alt=\"avatar for Display Name\" class=\"profile-picture\"/></div><button style=\"0:[object Object];\" type=\"button\" class=\"btn btn-primary\">Sign Out</button></nav></div><div data-radium=\"true\"><div class=\"bm-cross-button\" style=\"position:absolute;width:24px;height:24px;right:8px;top:8px;\" data-radium=\"true\"><span style=\"position:absolute;top:6px;right:14px;\" data-radium=\"true\"><span class=\"bm-cross\" style=\"position:absolute;width:3px;height:14px;transform:rotate(45deg);\" data-radium=\"true\"></span><span class=\"bm-cross\" style=\"position:absolute;width:3px;height:14px;transform:rotate(-45deg);\" data-radium=\"true\"></span></span><button style=\"position:absolute;left:0;top:0;width:100%;height:100%;margin:0;padding:0;border:none;text-indent:-9999px;background:transparent;outline:none;\" data-radium=\"true\">Close Menu</button></div></div></div><div class=\"bm-burger-button\" style=\"z-index:1;\" data-radium=\"true\"><span data-radium=\"true\"><span class=\"bm-burger-bars\" style=\"position:absolute;height:20%;left:0;right:0;top:0%;opacity:1;\" data-radium=\"true\"></span><span class=\"bm-burger-bars\" style=\"position:absolute;height:20%;left:0;right:0;top:40%;opacity:1;\" data-radium=\"true\"></span><span class=\"bm-burger-bars\" style=\"position:absolute;height:20%;left:0;right:0;top:80%;opacity:1;\" data-radium=\"true\"></span></span><button style=\"position:absolute;left:0;top:0;width:100%;height:100%;margin:0;padding:0;border:none;opacity:0;font-size:8px;\" data-radium=\"true\">Open Menu</button></div></div>"`;
+exports[`Sidebar renders 1`] = `
+<div
+  data-radium={true}>
+  <div
+    className="bm-overlay"
+    data-radium={true}
+    onClick={[Function]}
+    style={
+      Object {
+        "MozTransform": "translate3d(100%, 0, 0)",
+        "MsTransform": "translate3d(100%, 0, 0)",
+        "OTransform": "translate3d(100%, 0, 0)",
+        "WebkitTransform": "translate3d(100%, 0, 0)",
+        "background": "rgba(0, 0, 0, 0.3)",
+        "height": "100%",
+        "opacity": 0,
+        "position": "fixed",
+        "transform": "translate3d(100%, 0, 0)",
+        "transition": "opacity 0.3s, transform 0s 0.3s",
+        "width": "100%",
+        "zIndex": 1,
+      }
+    } />
+  <div
+    className="bm-menu-wrap "
+    data-radium={true}
+    id=""
+    style={
+      Object {
+        "MozTransform": "translate3d(-100%, 0, 0)",
+        "MsTransform": "translate3d(-100%, 0, 0)",
+        "OTransform": "translate3d(-100%, 0, 0)",
+        "WebkitTransform": "translate3d(-100%, 0, 0)",
+        "height": "100%",
+        "position": "fixed",
+        "right": "inherit",
+        "transform": "translate3d(-100%, 0, 0)",
+        "transition": "all 0.5s",
+        "width": 300,
+        "zIndex": 2,
+      }
+    }>
+    <div
+      className="bm-menu"
+      data-radium={true}
+      style={
+        Object {
+          "boxSizing": "border-box",
+          "height": "100%",
+          "overflow": "auto",
+        }
+      }>
+      <nav
+        className="bm-item-list"
+        data-radium={true}
+        style={
+          Object {
+            "height": "100%",
+          }
+        }>
+        <div
+          className="user-bar"
+          data-radium={true}
+          style={
+            Object {
+              "display": "block",
+              "outline": "none",
+            }
+          }>
+          <span>
+            Display Name
+          </span>
+          <img
+            alt="avatar for Display Name"
+            className="profile-picture"
+            src="photoURL" />
+        </div>
+        <button
+          className="btn btn-primary"
+          disabled={false}
+          onClick={undefined}
+          style={
+            Array [
+              Object {
+                "display": "block",
+                "outline": "none",
+              },
+            ]
+          }
+          type="button">
+          Sign Out
+        </button>
+      </nav>
+    </div>
+    <div
+      data-radium={true}
+      style={Object {}}>
+      <div
+        className="bm-cross-button"
+        data-radium={true}
+        style={
+          Object {
+            "height": 24,
+            "position": "absolute",
+            "right": 8,
+            "top": 8,
+            "width": 24,
+          }
+        }>
+        <span
+          data-radium={true}
+          style={
+            Object {
+              "position": "absolute",
+              "right": "14px",
+              "top": "6px",
+            }
+          }>
+          <span
+            className="bm-cross"
+            data-radium={true}
+            style={
+              Object {
+                "height": 14,
+                "position": "absolute",
+                "transform": "rotate(45deg)",
+                "width": 3,
+              }
+            } />
+          <span
+            className="bm-cross"
+            data-radium={true}
+            style={
+              Object {
+                "height": 14,
+                "position": "absolute",
+                "transform": "rotate(-45deg)",
+                "width": 3,
+              }
+            } />
+        </span>
+        <button
+          data-radium={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "background": "transparent",
+              "border": "none",
+              "height": "100%",
+              "left": 0,
+              "margin": 0,
+              "outline": "none",
+              "padding": 0,
+              "position": "absolute",
+              "textIndent": -9999,
+              "top": 0,
+              "width": "100%",
+            }
+          }>
+          Close Menu
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    className="bm-burger-button"
+    data-radium={true}
+    style={
+      Object {
+        "zIndex": 1,
+      }
+    }>
+    <span
+      data-radium={true}>
+      <span
+        className="bm-burger-bars"
+        data-radium={true}
+        style={
+          Object {
+            "height": "20%",
+            "left": 0,
+            "opacity": 1,
+            "position": "absolute",
+            "right": 0,
+            "top": "0%",
+          }
+        } />
+      <span
+        className="bm-burger-bars"
+        data-radium={true}
+        style={
+          Object {
+            "height": "20%",
+            "left": 0,
+            "opacity": 1,
+            "position": "absolute",
+            "right": 0,
+            "top": "40%",
+          }
+        } />
+      <span
+        className="bm-burger-bars"
+        data-radium={true}
+        style={
+          Object {
+            "height": "20%",
+            "left": 0,
+            "opacity": 1,
+            "position": "absolute",
+            "right": 0,
+            "top": "80%",
+          }
+        } />
+    </span>
+    <button
+      data-radium={true}
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      style={
+        Object {
+          "border": "none",
+          "fontSize": 8,
+          "height": "100%",
+          "left": 0,
+          "margin": 0,
+          "opacity": 0,
+          "padding": 0,
+          "position": "absolute",
+          "top": 0,
+          "width": "100%",
+        }
+      }>
+      Open Menu
+    </button>
+  </div>
+</div>
+`;

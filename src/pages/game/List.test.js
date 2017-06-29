@@ -1,12 +1,12 @@
 import {PresentationGameList} from './List';
 import React from 'React';
-import { shallow } from 'enzyme';
+import reactTestRenderer from 'react-test-renderer';
 
 describe('GameList', () => {
     it('renders with no games', () => {
-        expect(shallow(
+        expect(reactTestRenderer.create(
             <PresentationGameList />
-        ).html()).toMatchSnapshot();
+        )).toMatchSnapshot();
     });
     it('renders with games', () => {
         const games = [
@@ -19,8 +19,8 @@ describe('GameList', () => {
                 key: 'game-key-2'
             }
         ];
-        expect(shallow(
+        expect(reactTestRenderer.create(
             <PresentationGameList games={games} />
-        ).html()).toMatchSnapshot();
+        )).toMatchSnapshot();
     });
 });

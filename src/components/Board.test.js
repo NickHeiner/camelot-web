@@ -1,15 +1,15 @@
 import Board from './Board';
 import React from 'React';
-import { shallow } from 'enzyme';
+import reactTestRenderer from 'react-test-renderer';
 import camelotEngine from 'camelot-engine';
 const {getBoardSpace} = camelotEngine().query();
 
 describe('Board', () => {
     it('message', () => {
         const gameState = camelotEngine().createEmptyGame();
-        expect(shallow(
+        expect(reactTestRenderer.create(
             <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" message="the message" />
-        ).html()).toMatchSnapshot();
+        )).toMatchSnapshot();
     });
 
     describe('possible moves', () => {
@@ -25,9 +25,9 @@ describe('Board', () => {
                     col: 6
                 }
             ];
-            expect(shallow(
+            expect(reactTestRenderer.create(
                 <Board gameState={gameState} possibleMove={possibleMove} currentUserPlayer="playerA" />
-            ).html()).toMatchSnapshot();
+            )).toMatchSnapshot();
         });
     });
 
@@ -43,9 +43,9 @@ describe('Board', () => {
                     player: 'playerA'
                 };
 
-                expect(shallow(
+                expect(reactTestRenderer.create(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
-                ).html()).toMatchSnapshot();
+                )).toMatchSnapshot();
             });        
             it('knight', () => {
                 const gameState = camelotEngine().createEmptyGame();
@@ -57,9 +57,9 @@ describe('Board', () => {
                     player: 'playerA'
                 };
 
-                expect(shallow(
+                expect(reactTestRenderer.create(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
-                ).html()).toMatchSnapshot();
+                )).toMatchSnapshot();
             });      
         });
         describe('opponent goal', () => {
@@ -73,9 +73,9 @@ describe('Board', () => {
                     player: 'playerB'
                 };
 
-                expect(shallow(
+                expect(reactTestRenderer.create(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
-                ).html()).toMatchSnapshot();
+                )).toMatchSnapshot();
             });        
             it('knight', () => {
                 const gameState = camelotEngine().createEmptyGame();
@@ -87,9 +87,9 @@ describe('Board', () => {
                     player: 'playerB'
                 };
 
-                expect(shallow(
+                expect(reactTestRenderer.create(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
-                ).html()).toMatchSnapshot();
+                )).toMatchSnapshot();
             });      
         });
     });
@@ -98,31 +98,31 @@ describe('Board', () => {
         describe('playerA', () => {
             it('active', () => {
                 const gameState = camelotEngine().createEmptyGame();
-                expect(shallow(
+                expect(reactTestRenderer.create(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" isCurrentUserActive />
-                ).html()).toMatchSnapshot();
+                )).toMatchSnapshot();
             });
 
             it('not active', () => {
                 const gameState = camelotEngine().createEmptyGame();
-                expect(shallow(
+                expect(reactTestRenderer.create(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
-                ).html()).toMatchSnapshot();
+                )).toMatchSnapshot();
             });
         });
         describe('playerB', () => {
             it('active', () => {
                 const gameState = camelotEngine().createEmptyGame();
-                expect(shallow(
+                expect(reactTestRenderer.create(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerB" isCurrentUserActive />
-                ).html()).toMatchSnapshot();
+                )).toMatchSnapshot();
             });
 
             it('not active', () => {
                 const gameState = camelotEngine().createEmptyGame();
-                expect(shallow(
+                expect(reactTestRenderer.create(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerB" />
-                ).html()).toMatchSnapshot();
+                )).toMatchSnapshot();
             });
         });
     });

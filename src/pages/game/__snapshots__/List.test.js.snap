@@ -1,3 +1,40 @@
-exports[`GameList renders with games 1`] = `"<div><ul><li><a>Game Host 1</a></li><li><a>Game Host 2</a></li></ul><button type=\"button\" class=\"btn btn-primary\">New</button></div>"`;
+exports[`GameList renders with games 1`] = `
+<div>
+  <ul>
+    <li>
+      <a
+        onClick={[Function]}
+        style={Object {}}>
+        Game Host 1
+      </a>
+    </li>
+    <li>
+      <a
+        onClick={[Function]}
+        style={Object {}}>
+        Game Host 2
+      </a>
+    </li>
+  </ul>
+  <button
+    className="btn btn-primary"
+    disabled={false}
+    onClick={undefined}
+    type="button">
+    New
+  </button>
+</div>
+`;
 
-exports[`GameList renders with no games 1`] = `"<div><ul></ul><button type=\"button\" class=\"btn btn-primary\">New</button></div>"`;
+exports[`GameList renders with no games 1`] = `
+<div>
+  <ul />
+  <button
+    className="btn btn-primary"
+    disabled={false}
+    onClick={undefined}
+    type="button">
+    New
+  </button>
+</div>
+`;

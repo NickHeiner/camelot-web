@@ -1,9 +1,97 @@
 exports[`CapturedPieces renders when there is no game state 1`] = `null`;
 
-exports[`CapturedPieces with game state captured pieces host is captured 1`] = `"<div class=\"captured\"><div class=\"piece-count-pair\"><span class=\"host glyphicon glyphicon-tower\"></span><span class=\"badge\">1</span></div><div class=\"piece-count-pair\"><span class=\"host glyphicon glyphicon-pawn\"></span><span class=\"badge\">3</span></div></div>"`;
+exports[`CapturedPieces with game state captured pieces host is captured 1`] = `
+<div
+  className="captured">
+  <div
+    className="piece-count-pair">
+    <span
+      className="host glyphicon glyphicon-tower" />
+    <span
+      className="badge">
+      1
+    </span>
+  </div>
+  <div
+    className="piece-count-pair">
+    <span
+      className="host glyphicon glyphicon-pawn" />
+    <span
+      className="badge">
+      3
+    </span>
+  </div>
+</div>
+`;
 
-exports[`CapturedPieces with game state captured pieces opponent is captured 1`] = `"<div class=\"captured\"><div class=\"piece-count-pair\"><span class=\"opponent glyphicon glyphicon-tower\"></span><span class=\"badge\">4</span></div><div class=\"piece-count-pair\"><span class=\"opponent glyphicon glyphicon-pawn\"></span><span class=\"badge\">1</span></div></div>"`;
+exports[`CapturedPieces with game state captured pieces opponent is captured 1`] = `
+<div
+  className="captured">
+  <div
+    className="piece-count-pair">
+    <span
+      className="opponent glyphicon glyphicon-tower" />
+    <span
+      className="badge">
+      4
+    </span>
+  </div>
+  <div
+    className="piece-count-pair">
+    <span
+      className="opponent glyphicon glyphicon-pawn" />
+    <span
+      className="badge">
+      1
+    </span>
+  </div>
+</div>
+`;
 
-exports[`CapturedPieces with game state no captured pieces host is captured 1`] = `"<div class=\"captured\"><div class=\"piece-count-pair\"><span class=\"host glyphicon glyphicon-tower\"></span><span class=\"badge\">0</span></div><div class=\"piece-count-pair\"><span class=\"host glyphicon glyphicon-pawn\"></span><span class=\"badge\">0</span></div></div>"`;
+exports[`CapturedPieces with game state no captured pieces host is captured 1`] = `
+<div
+  className="captured">
+  <div
+    className="piece-count-pair">
+    <span
+      className="host glyphicon glyphicon-tower" />
+    <span
+      className="badge">
+      0
+    </span>
+  </div>
+  <div
+    className="piece-count-pair">
+    <span
+      className="host glyphicon glyphicon-pawn" />
+    <span
+      className="badge">
+      0
+    </span>
+  </div>
+</div>
+`;
 
-exports[`CapturedPieces with game state no captured pieces opponent is captured 1`] = `"<div class=\"captured\"><div class=\"piece-count-pair\"><span class=\"opponent glyphicon glyphicon-tower\"></span><span class=\"badge\">0</span></div><div class=\"piece-count-pair\"><span class=\"opponent glyphicon glyphicon-pawn\"></span><span class=\"badge\">0</span></div></div>"`;
+exports[`CapturedPieces with game state no captured pieces opponent is captured 1`] = `
+<div
+  className="captured">
+  <div
+    className="piece-count-pair">
+    <span
+      className="opponent glyphicon glyphicon-tower" />
+    <span
+      className="badge">
+      0
+    </span>
+  </div>
+  <div
+    className="piece-count-pair">
+    <span
+      className="opponent glyphicon glyphicon-pawn" />
+    <span
+      className="badge">
+      0
+    </span>
+  </div>
+</div>
+`;
