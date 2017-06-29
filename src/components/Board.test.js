@@ -47,7 +47,7 @@ describe('Board', () => {
                 expect(reactTestRenderer.create(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
                 )).toMatchSnapshot();
-            });        
+            });            
             it('knight', () => {
                 const gameState = camelotEngine().createEmptyGame();
 
