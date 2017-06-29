@@ -10,7 +10,6 @@ import GamePlay from './pages/game/Play';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import reducer from './reducer';
-import {setOffline} from './actions';
 
 firebase.initializeApp({
   apiKey: 'AIzaSyC0mhGKUKIERUXlB8Amh2kq9S6gjbiqg9A',

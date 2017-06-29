@@ -10,12 +10,6 @@ const defaultState = {
 
 export default (state, action) => {
     switch(action.type) {
-        case Constants.SET_CURRENT_USER:
-            return update(state, {
-                currentUser: {
-                    $set: action.payload
-                }
-            });
         case Constants.SET_OFFLINE:
             return update(state, {
                 offline: {

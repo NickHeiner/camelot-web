@@ -4,7 +4,16 @@ import Sidebar from './Sidebar';
 import {PageHeader} from 'react-bootstrap';
 import firebase from 'firebase';
 import _ from 'lodash';
+import {setOffline} from '../actions';
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
 
+@connect(
+  null,
+  dispatch => bindActionCreators({
+    setOffline
+  }, dispatch)
+)
 class Frame extends Component {
   constructor() {
     super();
@@ -14,7 +23,7 @@ class Frame extends Component {
 
   componentWillMount() {
     if (localStorage.offline) {
-      setOffline();
+      this.props.setOffline();
       return;
     }
 
