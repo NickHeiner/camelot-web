@@ -8,10 +8,7 @@ import camelotEngine from 'camelot-engine';
 import HandleConnectivity from '../../utils/HandleConnectivity';
 import {connect} from 'react-redux';
 
-@connect(
-    state => _.pick(state, 'games')
-)
-class GameList extends PureComponent {
+export class PresentationGameList extends PureComponent {
     render = () =>
         <div>
             <ul>
@@ -22,6 +19,8 @@ class GameList extends PureComponent {
             <Button bsStyle="primary" onClick={this.props.createNewGame}>New</Button>
         </div>;
 }
+
+const GameList = connect(state => _.pick('games'))(PresentationGameList);
 
 class OnlineGameListContainer extends PureComponent {
     componentWillMount() {

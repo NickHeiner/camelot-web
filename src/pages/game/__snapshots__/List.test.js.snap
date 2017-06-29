@@ -1,0 +1,3 @@
+exports[`GameList renders with games 1`] = `"<div><ul><li><a>Game Host 1</a></li><li><a>Game Host 2</a></li></ul><button type=\"button\" class=\"btn btn-primary\">New</button></div>"`;
+
+exports[`GameList renders with no games 1`] = `"<div><ul></ul><button type=\"button\" class=\"btn btn-primary\">New</button></div>"`;
