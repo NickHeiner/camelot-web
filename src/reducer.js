@@ -2,6 +2,7 @@ import * as Constants from './constants';
 import update from 'immutability-helper';
 
 const defaultState = {
+    offline: false,
     currentUser: {
         displayName: '',
         photoURL: ''

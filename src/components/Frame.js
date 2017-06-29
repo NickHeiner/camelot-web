@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 @connect(
-  null,
+  state => _.pick(state, 'currentUser', 'offline'),
   dispatch => bindActionCreators({
     setOffline
   }, dispatch)
@@ -44,7 +44,7 @@ class Frame extends Component {
   }
 
   render() {
-    const currentUser = this.state.currentUser;
+    const currentUser = this.props.currentUser;
     
     let body;
     if (currentUser) {
@@ -61,7 +61,7 @@ class Frame extends Component {
       <div>
         {currentUser && <Sidebar currentUser={currentUser} />}
         <main className="App">
-          <PageHeader>Camelot</PageHeader>
+          <PageHeader>Camelot {this.props.offline && '– Offline Dev Mode'}</PageHeader>
           {body}
         </main>
       </div>
