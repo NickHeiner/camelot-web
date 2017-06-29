@@ -1,11 +1,10 @@
 import React, {PureComponent} from 'react';
 import { Button } from 'react-bootstrap';
 import autobind from 'autobind-decorator';
-import firebase from 'firebase';
 import _ from 'lodash';
 import { Link } from 'react-router';
 import camelotEngine from 'camelot-engine';
-import HandleConnectivity from '../../utils/HandleConnectivity';
+import {firebaseConnect} from 'react-redux-firebase';
 import {connect} from 'react-redux';
 
 export class PresentationGameList extends PureComponent {
@@ -20,18 +19,13 @@ export class PresentationGameList extends PureComponent {
         </div>;
 }
 
-const GameList = connect(state => _.pick('games'))(PresentationGameList);
-
-class OnlineGameListContainer extends PureComponent {
-    componentWillMount() {
-        this.gamesRef = firebase.database().ref('games');
-        this.gamesRef.on('value', this.onGamesUpdate);
-    }
-    
-    componentWillUnmount() {
-        this.gamesRef.off('value', this.onGamesUpdate);
-    }
-
+@firebaseConnect(['/games'])
+@connect(
+    ({firebase}) => ({
+        games: firebase.getIn(['data', 'games'])
+    })
+)
+class GameListContainer extends PureComponent {
     @autobind
     onGamesUpdate(snapshot) {
         const val = snapshot.val();
@@ -42,28 +36,13 @@ class OnlineGameListContainer extends PureComponent {
 
     @autobind
     createNewGame() {
-        this.gamesRef.push({
+        this.props.firebase.push('/games', {
             host: this.props.params.currentUser.uid,
             gameState: camelotEngine().createEmptyGame()
         });
     }
 
-    render = () => <GameList createNewGame={this.createNewGame} />
+    render = () => <PresentationGameList createNewGame={this.createNewGame} games={this.props.games} />
 }
 
-class OfflineGameListContainer extends PureComponent {
-    @autobind
-    createNewGame() {
-        this.gamesRef.push({
-            host: this.props.params.currentUser.uid,
-            gameState: camelotEngine().createEmptyGame()
-        });
-    }
-
-    render = () => <GameList createEmptyGame={this.createNewGame} />
-}
-
-export default HandleConnectivity(
-    OnlineGameListContainer,
-    OfflineGameListContainer
-);
+export default GameListContainer;
