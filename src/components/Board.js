@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {Glyphicon, Modal} from 'react-bootstrap';
 import camelotEngine from 'camelot-engine';
 import _ from 'lodash';
@@ -10,7 +10,7 @@ import pairwise from 'camelot-engine/lib/util/pairwise';
 
 const {getBoardSpace, isValidMove, isGoal, getCoordsBetween} = camelotEngine().query();
 
-class Board extends Component {
+class Board extends PureComponent {
     render() {
 
         let spacesBetweenMoves = [];

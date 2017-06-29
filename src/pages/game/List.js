@@ -52,7 +52,15 @@ class OnlineGameListContainer extends PureComponent {
 }
 
 class OfflineGameListContainer extends PureComponent {
-    render = () => <GameList />
+    @autobind
+    createNewGame() {
+        this.gamesRef.push({
+            host: this.props.params.currentUser.uid,
+            gameState: camelotEngine().createEmptyGame()
+        });
+    }
+
+    render = () => <GameList createEmptyGame={this.createNewGame} />
 }
 
 export default HandleConnectivity(
