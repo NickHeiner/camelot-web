@@ -4,7 +4,8 @@ import autobind from 'autobind-decorator';
 import Avatar from '../../components/Avatar';
 import Board from '../../components/Board';
 import './Play.less';
-import {Button, Glyphicon, Badge} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
+import CapturedPieces from '../components/CapturedPieces';
 import _ from 'lodash';
 
 import camelotEngine from 'camelot-engine';
@@ -142,26 +143,6 @@ class GamePlay extends PureComponent {
         }
         const {displayName} = gameWinner === 'playerA' ? this.state.host : this.state.opponent;
         return `${displayName} wins!`;
-    }
-}
-
-class CapturedPieces extends PureComponent {
-    render() {
-        if (!this.props.gameState) {
-            return;
-        }
-
-        const whichPlayer = this.props.whosePiecesWereCaptured === 'host' ? 'playerA' : 'playerB';
-        return <div className="captured">
-            <div className="piece-count-pair">
-                <Glyphicon glyph="tower" className={this.props.whosePiecesWereCaptured} /> 
-                <Badge>{this.props.gameState.capturedPieces[whichPlayer].knight}</Badge> 
-            </div>
-            <div className="piece-count-pair">
-                <Glyphicon glyph="pawn" className={this.props.whosePiecesWereCaptured} /> 
-                <Badge>{this.props.gameState.capturedPieces[whichPlayer].pawn}</Badge>
-            </div>
-        </div>;
     }
 }
 

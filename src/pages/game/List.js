@@ -6,7 +6,6 @@ import _ from 'lodash';
 import { Link } from 'react-router';
 import camelotEngine from 'camelot-engine';
 
-
 class GameList extends PureComponent {
     constructor() {
         super();
