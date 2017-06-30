@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react';
-import firebase from 'firebase';
 import autobind from 'autobind-decorator';
 import Avatar from '../../components/Avatar';
 import Board from '../../components/Board';
@@ -7,65 +6,45 @@ import './Play.less';
 import {Button} from 'react-bootstrap';
 import CapturedPieces from '../../components/CapturedPieces';
 import _ from 'lodash';
+import {firebaseConnect} from 'react-redux-firebase';
+import {connect} from 'react-redux';
 
 import camelotEngine from 'camelot-engine';
 const {isValidMove, getGameWinner} = camelotEngine().query();
 
+@firebaseConnect(['/users'])
+@connect(
+    ({firebase}, ownProps) => ({
+        host: firebase.getIn(['data', 'users', ownProps.game.get('host')]),
+        opponent: firebase.getIn(['data', 'users', ownProps.game.get('opponent')], null),
+        currentUser: firebase.get('profile')
+    })
+)
 class GamePlay extends PureComponent {
     constructor() {
         super();
         this.state = {
-            game: undefined,
             possibleMove: []
         };
         this.unmountFunctions = [];
     }
-    componentWillMount() {
-        this.gameRef = firebase.database().ref(`games/${this.props.params.id}`);
-        this.gameRef.on('value', this.onGameUpdate);
-        this.unmountFunctions.push(() => this.gameRef.off('value', this.onGameUpdate));
-    }
-    
+
     componentWillUnmount() {
         this.unmountFunctions.forEach(fn => fn());
-        this.unmountFunctions = [];
-    }
-
-    @autobind
-    onGameUpdate(snapshot) {
-        const val = snapshot.val();
-
-        if (val) {
-            const hostRef = firebase.database().ref(`users/${val.host}`),
-                hostListener = hostRef.on('value', snapshot => {
-                    this.setState({host: snapshot.val()});
-                }),
-                opponentRef = firebase.database().ref(`users/${val.opponent}`),
-                opponentListener = opponentRef.on('value', snapshot => {
-                    this.setState({opponent: snapshot.val()});
-                });
-                
-            this.unmountFunctions.push(
-                () => hostRef.off('value', hostListener), 
-                () => opponentRef.off('value', opponentListener),
-            );
-        }
-
-        this.setState({game: val});
     }
     
     render() {
         let gameDisplay;
-        if (this.state.game === undefined || this.state.host === undefined || this.state.opponent === undefined) {
+        if (this.props.game === undefined || this.props.host === undefined || this.props.opponent === undefined) {
             gameDisplay = <p>Loading...</p>;
-        } else if (this.state.game === null) {
+        } else if (this.props.game === null) {
             gameDisplay = <p>This link is not valid. Did someone share it with you incorrectly?</p>;
         } else {
-            const currentUserUid = _.get(this.props.params.currentUser, 'uid'),
-                currentUserIsHost = currentUserUid === this.state.game.host;
+            const currentUserUid = this.props.currentUser.get('uid'),
+                currentUserIsHost = currentUserUid === this.props.host;
 
             let findOpponentMessage;
-            if (!this.state.game.opponent) {
+            if (!this.props.game.opponent) {
                 if (currentUserIsHost) {
                     findOpponentMessage = <p>Find someone to play with you by sharing this link with them.</p>;
                 } else {
@@ -89,8 +68,8 @@ class GamePlay extends PureComponent {
 
                 isCurrentUserActive = currentUserUid === this.state[activeUser].uid;
 
-                currentUserPlayer = currentUserUid === this.state.host.uid ? 'playerA' : 
-                    currentUserUid === _.get(this.state.opponent, 'uid') ? 'playerB' : null;
+                currentUserPlayer = currentUserUid === this.props.host.uid ? 'playerA' : 
+                    currentUserUid === _.get(this.props.opponent, 'uid') ? 'playerB' : null;
 
                 userHasValidMove = isValidMove(gameState, this.state.possibleMove, currentUserPlayer);
 
@@ -106,7 +85,7 @@ class GamePlay extends PureComponent {
                         message={findOpponentMessage || this.getWinMessage(gameWinner)}
                         currentUserPlayer={currentUserPlayer} />
                     <div className="control-bar">
-                        <Avatar currentUser={this.state.host} isActive={activeUser === 'host'} />
+                        <Avatar currentUser={this.props.host} isActive={activeUser === 'host'} />
                         <CapturedPieces whosePiecesWereCaptured="opponent" gameState={gameState} />
                         {
                             isCurrentUserActive ?
@@ -116,7 +95,7 @@ class GamePlay extends PureComponent {
                                 <p>Other player's turn</p>
                         }
                         <CapturedPieces whosePiecesWereCaptured="host" gameState={gameState} />
-                        <Avatar currentUser={this.state.opponent} isActive={activeUser === 'opponent'} />
+                        <Avatar currentUser={this.props.opponent} isActive={activeUser === 'opponent'} />
                     </div>
                 </div>
             );
@@ -132,7 +111,7 @@ class GamePlay extends PureComponent {
 
     @autobind
     makeMove() {
-        const newGameState = camelotEngine().update().applyMoves(this.state.game.gameState, this.state.possibleMove);
+        const newGameState = camelotEngine().update().applyMoves(this.props.game.gameState, this.state.possibleMove);
         this.setState({possibleMove: []}, () => this.gameRef.update({gameState: newGameState}));
     }
 
@@ -141,9 +120,19 @@ class GamePlay extends PureComponent {
         if (!gameWinner) {
             return;
         }
-        const {displayName} = gameWinner === 'playerA' ? this.state.host : this.state.opponent;
+        const {displayName} = gameWinner === 'playerA' ? this.props.host : this.props.opponent;
         return `${displayName} wins!`;
     }
 }
 
-export default GamePlay;
+@firebaseConnect(['/games'])
+@connect(
+    ({firebase}, ownProps) => ({
+        game: firebase.getIn(['data', 'games', ownProps.params.id]),
+    })
+)
+class GamePlayContainer extends PureComponent {
+    render = () => Boolean(this.props.game) && <GamePlay game={this.props.game} />
+}
+
+export default GamePlayContainer;
