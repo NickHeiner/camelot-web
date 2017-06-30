@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 import { createStore, compose, combineReducers } from 'redux';
 import reducer from './reducer';
 import {reactReduxFirebase, firebaseStateReducer} from 'react-redux-firebase';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyC0mhGKUKIERUXlB8Amh2kq9S6gjbiqg9A',
@@ -21,6 +22,7 @@ const firebaseConfig = {
 
 const rootReducer = combineReducers({
   firebase: firebaseStateReducer,
+  routing: routerReducer,
   ui: reducer
 });
 
@@ -30,10 +32,11 @@ const createStoreWithFirebase = compose(
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStoreWithFirebase(rootReducer, composeEnhancers());
+const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={history}>
       <Route path="/" component={Frame}>
         <IndexRoute component={GameList} />
         <Route path="play/:id" component={GamePlay} />
