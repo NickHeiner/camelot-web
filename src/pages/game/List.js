@@ -12,28 +12,30 @@ export class PresentationGameList extends PureComponent {
         <div>
             <ul>
                 {
-                    _.map(this.props.games, ((game, key) => <li key={key}><Link to={`play/${key}`}>{game.host}</Link></li>))
+                    this.props.games &&
+                    this.props.users && 
+                        this.props.games
+                        .map(((game, key) => 
+                            <li key={key}><Link to={`play/${key}`}>
+                                Hosted by {this.props.users.getIn([game.get('host'), 'displayName'])}
+                            </Link></li>
+                        ))
+                        .toList()
+                        .toJS()
                 }
             </ul>
             <Button bsStyle="primary" onClick={this.props.createNewGame}>New</Button>
         </div>;
 }
 
-@firebaseConnect(['/games'])
+@firebaseConnect(['/games', '/users'])
 @connect(
     ({firebase}) => ({
-        games: firebase.getIn(['data', 'games'])
+        games: firebase.getIn(['data', 'games']),
+        users: firebase.getIn(['data', 'users']),
     })
 )
 class GameListContainer extends PureComponent {
-    @autobind
-    onGamesUpdate(snapshot) {
-        const val = snapshot.val();
-        if (val) {
-            this.setState({games: val});
-        }
-    }
-
     @autobind
     createNewGame() {
         this.props.firebase.push('/games', {
@@ -42,7 +44,10 @@ class GameListContainer extends PureComponent {
         });
     }
 
-    render = () => <PresentationGameList createNewGame={this.createNewGame} games={this.props.games} />
+    render = () => <PresentationGameList 
+        createNewGame={this.createNewGame} 
+        games={this.props.games} 
+        users={this.props.users} />
 }
 
 export default GameListContainer;
