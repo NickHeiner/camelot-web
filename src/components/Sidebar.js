@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 import autobind from 'autobind-decorator';
 import { Button } from 'react-bootstrap';
-import firebase from 'firebase';
 import {browserHistory} from 'react-router';
 import { slide as SlideMenu } from 'react-burger-menu';
+import { firebaseConnect } from 'react-redux-firebase';
 import Avatar from './Avatar';
 
 export class SidebarPresentation extends PureComponent {
@@ -25,14 +25,10 @@ export class SidebarPresentation extends PureComponent {
     }
 }
 
-export default class Sidebar extends PureComponent {
+@firebaseConnect()
+class Sidebar extends PureComponent {
     static propTypes = {
         currentUser: PropTypes.object.isRequired
-    }
-
-    constructor() {
-        super();
-        this.auth = new firebase.auth();
     }
 
     render() {
@@ -41,6 +37,8 @@ export default class Sidebar extends PureComponent {
 
     @autobind
     signOut() {
-        this.auth.signOut().then(() => browserHistory.push('/'));
+        this.props.firebase.logout().then(() => browserHistory.push('/'));
     }
 }
+
+export default Sidebar;
