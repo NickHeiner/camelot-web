@@ -41,7 +41,7 @@ class GamePlay extends PureComponent {
             gameDisplay = <p>This link is not valid. Did someone share it with you incorrectly?</p>;
         } else {
             const currentUserUid = this.props.currentUser.get('uid'),
-                currentUserIsHost = currentUserUid === this.props.host;
+                currentUserIsHost = currentUserUid === this.props.host.get('uid');
 
             let findOpponentMessage;
             if (!this.props.game.opponent) {
@@ -57,19 +57,21 @@ class GamePlay extends PureComponent {
                 }
             }
 
-            const gameState = _.get(this.state, ['game', 'gameState']);
+            const gameState = this.props.game.get('gameState');
             let activeUser = null;
             let isCurrentUserActive = false;
             let currentUserPlayer = null;
             let userHasValidMove = false;
             let gameWinner = null;
             if (gameState) {
-                activeUser = gameState.turnCount % 2 === 0 ? 'host' : 'opponent';
+                activeUser = gameState.get('turnCount') % 2 === 0 ? 'host' : 'opponent';
 
-                isCurrentUserActive = currentUserUid === this.state[activeUser].uid;
+                isCurrentUserActive = currentUserUid === this.props[activeUser].get('uid');
 
-                currentUserPlayer = currentUserUid === this.props.host.uid ? 'playerA' : 
-                    currentUserUid === _.get(this.props.opponent, 'uid') ? 'playerB' : null;
+                const opponentUid = this.props.opponent && this.props.opponent.get('uid');
+
+                currentUserPlayer = currentUserUid === this.props.host.get('uid') ? 'playerA' : 
+                    currentUserUid === opponentUid ? 'playerB' : null;
 
                 userHasValidMove = isValidMove(gameState, this.state.possibleMove, currentUserPlayer);
 
@@ -120,8 +122,8 @@ class GamePlay extends PureComponent {
         if (!gameWinner) {
             return;
         }
-        const {displayName} = gameWinner === 'playerA' ? this.props.host : this.props.opponent;
-        return `${displayName} wins!`;
+        const {winningUser} = gameWinner === 'playerA' ? this.props.host : this.props.opponent;
+        return `${winningUser.get('displayName')} wins!`;
     }
 }
 

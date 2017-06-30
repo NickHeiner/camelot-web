@@ -9,14 +9,15 @@ export default class CapturedPieces extends PureComponent {
         }
 
         const whichPlayer = this.props.whosePiecesWereCaptured === 'host' ? 'playerA' : 'playerB';
+        const gameState = this.props.gameState.toJS();
         return <div className="captured">
             <div className="piece-count-pair">
                 <Glyphicon glyph="tower" className={this.props.whosePiecesWereCaptured} /> 
-                <Badge>{this.props.gameState.capturedPieces[whichPlayer].knight}</Badge> 
+                <Badge>{gameState.capturedPieces[whichPlayer].knight}</Badge> 
             </div>
             <div className="piece-count-pair">
                 <Glyphicon glyph="pawn" className={this.props.whosePiecesWereCaptured} /> 
-                <Badge>{this.props.gameState.capturedPieces[whichPlayer].pawn}</Badge>
+                <Badge>{gameState.capturedPieces[whichPlayer].pawn}</Badge>
             </div>
         </div>;
     }

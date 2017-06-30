@@ -21,6 +21,8 @@ class Board extends PureComponent {
             spacesBetweenMoves = movePairs.map(movePair => getCoordsBetween(...movePair));
         }
 
+        const gameState = this.props.gameState.toJS();
+
         const camelotConstants = camelotEngine().constants(),
             boardPieces = _(camelotConstants.BOARD_HEIGHT)
                 .range()
@@ -28,7 +30,7 @@ class Board extends PureComponent {
                     _(camelotConstants.BOARD_WIDTH)
                         .range()
                         .map(col => {
-                            const findBoardSpace = _.partial(getBoardSpace, this.props.gameState),
+                            const findBoardSpace = _.partial(getBoardSpace, gameState),
                                 boardSpace = findBoardSpace({row, col}),
                                 noTopBoardSpace = !findBoardSpace({row: row - 1, col}),
                                 noBottomBoardSpace = !findBoardSpace({row: row + 1, col}),
@@ -48,14 +50,14 @@ class Board extends PureComponent {
 
                             const possibleValidMove = this.props.possibleMove.length && 
                                 isValidMove(
-                                    this.props.gameState, 
+                                    gameState, 
                                     this.props.possibleMove.concat({row, col}), 
                                     this.props.currentUserPlayer
                                 );
 
                             if (boardSpace) {
                                 let glyph;
-                                const originalMoveBoardSpace = getBoardSpace(this.props.gameState, this.props.possibleMove[0]);
+                                const originalMoveBoardSpace = getBoardSpace(gameState, this.props.possibleMove[0]);
                                 if (boardSpace.piece) {
                                     _.merge(spaceClassNames, {
                                         [boardSpace.piece.type]: true,
@@ -71,7 +73,7 @@ class Board extends PureComponent {
                                         glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
                                     }
                                 } else {
-                                    const lastMoveBoardSpace = getBoardSpace(this.props.gameState, _.last(this.props.possibleMove));
+                                    const lastMoveBoardSpace = getBoardSpace(gameState, _.last(this.props.possibleMove));
                                     if (possibleValidMove || _.isEqual(lastMoveBoardSpace, boardSpace)) {
                                         glyph = originalMoveBoardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
                                         _.merge(spaceClassNames, {
@@ -81,7 +83,7 @@ class Board extends PureComponent {
                                     }
                                 }
 
-                                const isGoalSpace = isGoal(this.props.gameState, boardSpace.row, boardSpace.col);
+                                const isGoalSpace = isGoal(gameState, boardSpace.row, boardSpace.col);
                                 if (isGoalSpace && !glyph) {
                                     glyph = 'star';
                                 }
