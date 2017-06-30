@@ -44,7 +44,7 @@ class GamePlay extends PureComponent {
                 currentUserIsHost = currentUserUid === this.props.host.get('uid');
 
             let findOpponentMessage;
-            if (!this.props.game.opponent) {
+            if (!this.props.opponent) {
                 if (currentUserIsHost) {
                     findOpponentMessage = <p>Find someone to play with you by sharing this link with them.</p>;
                 } else {
@@ -75,7 +75,7 @@ class GamePlay extends PureComponent {
 
                 userHasValidMove = isValidMove(gameState, this.state.possibleMove, currentUserPlayer);
 
-                gameWinner = getGameWinner(gameState);
+                gameWinner = getGameWinner(gameState.toJS());
             }
 
             gameDisplay = (
@@ -108,7 +108,9 @@ class GamePlay extends PureComponent {
 
     @autobind
     joinGame() {
-        this.gameRef.update({opponent: this.props.params.currentUser.uid});
+        this.props.firebase
+            .ref(`/games/${this.props.gameId}/opponent`)
+            .set(this.props.currentUser.get('uid'));
     }
 
     @autobind
@@ -134,7 +136,7 @@ class GamePlay extends PureComponent {
     })
 )
 class GamePlayContainer extends PureComponent {
-    render = () => Boolean(this.props.game) && <GamePlay game={this.props.game} />
+    render = () => Boolean(this.props.game) && <GamePlay game={this.props.game} gameId={this.props.params.id} />
 }
 
 export default GamePlayContainer;
