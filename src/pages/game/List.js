@@ -33,13 +33,14 @@ export class PresentationGameList extends PureComponent {
     ({firebase}) => ({
         games: firebase.getIn(['data', 'games']),
         users: firebase.getIn(['data', 'users']),
+        currentUserUid: firebase.getIn(['profile', 'uid'])
     })
 )
 class GameListContainer extends PureComponent {
     @autobind
     createNewGame() {
         this.props.firebase.push('/games', {
-            host: this.props.params.currentUser.uid,
+            host: this.props.currentUserUid,
             gameState: camelotEngine().createEmptyGame()
         });
     }
