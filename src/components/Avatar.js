@@ -9,8 +9,8 @@ export default class Avatar extends PureComponent {
             active: isActive
         });
         return currentUser ? 
-            <img src={currentUser.photoURL} 
-                alt={`avatar for ${currentUser.displayName}`} 
+            <img src={currentUser.get('photoURL')} 
+                alt={`avatar for ${currentUser.get('displayName')}`} 
                 className={classes} />
             : <span className="profile-picture unknown" aria-label="No one">?</span>;
     }

@@ -26,6 +26,7 @@ const rootReducer = combineReducers({
   ui: reducer
 });
 
+// TODO what is the difference between `auth` and `profile` that react-redux-firebase sets up?
 const createStoreWithFirebase = compose(
   reactReduxFirebase(firebaseConfig, {userProfile: 'users'}),
 )(createStore);
