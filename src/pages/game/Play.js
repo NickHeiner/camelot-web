@@ -73,9 +73,13 @@ class GamePlay extends PureComponent {
                 currentUserPlayer = currentUserUid === this.props.host.get('uid') ? 'playerA' : 
                     currentUserUid === opponentUid ? 'playerB' : null;
 
-                userHasValidMove = isValidMove(gameState, this.state.possibleMove, currentUserPlayer);
+                const gameStateJs = gameState.toJS();
 
-                gameWinner = getGameWinner(gameState.toJS());
+                // I don't know why isValidMove considers [] and [singleMove] to be valid.
+                userHasValidMove = this.state.possibleMove.length > 1 && 
+                    isValidMove(gameStateJs, this.state.possibleMove, currentUserPlayer);
+
+                gameWinner = getGameWinner(gameStateJs);
             }
 
             gameDisplay = (
