@@ -5,11 +5,20 @@ import _ from 'lodash';
 import './Board.less';
 import autobind from 'autobind-decorator';
 import classnames from 'classnames';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {boardSpaceClick} from '../actions';
 // This is a bit hacky but w/e.
 import pairwise from 'camelot-engine/lib/util/pairwise';
 
 const {getBoardSpace, isValidMove, isGoal, getCoordsBetween} = camelotEngine().query();
 
+@connect(
+  null,
+  dispatch => bindActionCreators({
+    boardSpaceClick
+  }, dispatch)
+)
 class Board extends PureComponent {
   render() {
 
@@ -132,19 +141,21 @@ class Board extends PureComponent {
     );
   }
 
-    @autobind
+  @autobind
   onBoardSpaceClick(boardSpace, possibleValidMove) {
     if (!this.props.isCurrentUserActive || !boardSpace) {
       return;
     }
 
-    const possibleMoveAddition = _.pick(boardSpace, ['row', 'col']);
+    this.props.boardSpaceClick(boardSpace);
 
-    if (!boardSpace.piece && possibleValidMove) {
-      this.props.setPossibleMove(this.props.possibleMove.concat(possibleMoveAddition));
-    } else if (this.props.currentUserPlayer === _.get(boardSpace, ['piece', 'player'])) {
-      this.props.setPossibleMove([possibleMoveAddition]);
-    }
+    // const possibleMoveAddition = _.pick(boardSpace, ['row', 'col']);
+
+    // if (!boardSpace.piece && possibleValidMove) {
+    //   this.props.setPossibleMove(this.props.possibleMove.concat(possibleMoveAddition));
+    // } else if (this.props.currentUserPlayer === _.get(boardSpace, ['piece', 'player'])) {
+    //   this.props.setPossibleMove([possibleMoveAddition]);
+    // }
   }
 }
 

@@ -1,1 +1,1 @@
-export const SET_OFFLINE = 'SET_OFFLINE';
+export const BOARD_SPACE_CLICK = 'BOARD_SPACE_CLICK';

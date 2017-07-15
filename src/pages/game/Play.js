@@ -14,25 +14,14 @@ const {isValidMove, getGameWinner} = camelotEngine().query();
 
 @firebaseConnect(['/users'])
 @connect(
-    ({firebase}, ownProps) => ({
+    ({firebase, ui}, ownProps) => ({
+      possibleMoveSteps: ui.get('possibleMoveSteps'),
       host: firebase.getIn(['data', 'users', ownProps.game.get('host')]),
       opponent: firebase.getIn(['data', 'users', ownProps.game.get('opponent')], null),
       currentUser: firebase.get('profile')
     })
 )
 class GamePlay extends PureComponent {
-  constructor() {
-    super();
-    this.state = {
-      possibleMove: []
-    };
-    this.unmountFunctions = [];
-  }
-
-  componentWillUnmount() {
-    this.unmountFunctions.forEach(fn => fn());
-  }
-    
   render() {
     let gameDisplay;
     if (this.props.game === undefined || this.props.host === undefined || this.props.opponent === undefined) {
@@ -49,11 +38,11 @@ class GamePlay extends PureComponent {
           findOpponentMessage = <p>Find someone to play with you by sharing this link with them.</p>;
         } else {
           findOpponentMessage = (
-                        <div>
-                            <p>This game is currently looking for an opponent.</p>
-                            <Button bsStyle="primary" onClick={this.joinGame}>Join</Button>
-                        </div>
-                    );
+              <div>
+                <p>This game is currently looking for an opponent.</p>
+                <Button bsStyle="primary" onClick={this.joinGame}>Join</Button>
+              </div>
+          );
         }
       }
 
@@ -75,9 +64,9 @@ class GamePlay extends PureComponent {
 
         const gameStateJs = gameState.toJS();
 
-                // I don't know why isValidMove considers [] and [singleMove] to be valid.
-        userHasValidMove = this.state.possibleMove.length > 1 && 
-                    isValidMove(gameStateJs, this.state.possibleMove, currentUserPlayer);
+        // I don't know why isValidMove considers [] and [singleMove] to be valid.
+        userHasValidMove = this.props.possibleMoveSteps.size > 1 && 
+                    isValidMove(gameStateJs, this.props.possibleMoveSteps, currentUserPlayer);
 
         gameWinner = getGameWinner(gameStateJs);
       }
@@ -86,8 +75,7 @@ class GamePlay extends PureComponent {
                 <div>
                     <Board gameState={gameState} 
                         isCurrentUserActive={isCurrentUserActive}
-                        possibleMove={this.state.possibleMove}
-                        setPossibleMove={possibleMove => this.setState({possibleMove})}
+                        possibleMove={this.props.possibleMoveSteps}
                         message={findOpponentMessage || this.getWinMessage(gameWinner)}
                         currentUserPlayer={currentUserPlayer} />
                     <div className="control-bar">
@@ -110,20 +98,20 @@ class GamePlay extends PureComponent {
     return gameDisplay;
   }
 
-    @autobind
+  @autobind
   joinGame() {
     this.props.firebase
             .ref(`/games/${this.props.gameId}/opponent`)
             .set(this.props.currentUser.get('uid'));
   }
 
-    @autobind
+  @autobind
   makeMove() {
-    const newGameState = camelotEngine().update().applyMoves(this.props.game.gameState, this.state.possibleMove);
+    const newGameState = camelotEngine().update().applyMoves(this.props.game.get('gameState').toJS(), this.props.possibleMoveSteps);
     this.setState({possibleMove: []}, () => this.gameRef.update({gameState: newGameState}));
   }
 
-    @autobind
+  @autobind
   getWinMessage(gameWinner) {
     if (!gameWinner) {
       return;
