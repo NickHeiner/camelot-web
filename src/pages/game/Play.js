@@ -76,6 +76,7 @@ class GamePlay extends PureComponent {
                     <Board gameState={gameState} 
                         isCurrentUserActive={isCurrentUserActive}
                         possibleMove={this.props.possibleMoveSteps}
+                        gameId={this.props.gameId}
                         message={findOpponentMessage || this.getWinMessage(gameWinner)}
                         currentUserPlayer={currentUserPlayer} />
                     <div className="control-bar">

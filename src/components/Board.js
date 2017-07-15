@@ -14,7 +14,9 @@ import pairwise from 'camelot-engine/lib/util/pairwise';
 const {getBoardSpace, isValidMove, isGoal, getCoordsBetween} = camelotEngine().query();
 
 @connect(
-  null,
+  ({ui}) => ({
+    possibleMoveSteps: ui.get('possibleMoveSteps')
+  }),
   dispatch => bindActionCreators({
     boardSpaceClick
   }, dispatch)
@@ -23,9 +25,9 @@ class Board extends PureComponent {
   render() {
 
     let spacesBetweenMoves = [];
-    const multiplePossibleMovesExist = this.props.possibleMove.length > 1;
-    if (multiplePossibleMovesExist) {
-      const movePairs = pairwise(this.props.possibleMove);
+    const multipleMoveStepsExist = this.props.possibleMoveSteps.size > 1;
+    if (multipleMoveStepsExist) {
+      const movePairs = pairwise(this.props.possibleMoveSteps);
 
       spacesBetweenMoves = movePairs.map(movePair => getCoordsBetween(...movePair));
     }
@@ -57,16 +59,16 @@ class Board extends PureComponent {
 
                           let pieceIcon;
 
-                          const possibleValidMove = this.props.possibleMove.length && 
+                          const possibleValidMove = this.props.possibleMoveSteps.length && 
                                 isValidMove(
                                     gameState, 
-                                    this.props.possibleMove.concat({row, col}), 
+                                    this.props.possibleMoveSteps.concat({row, col}), 
                                     this.props.currentUserPlayer
                                 );
 
                           if (boardSpace) {
                             let glyph;
-                            const originalMoveBoardSpace = getBoardSpace(gameState, this.props.possibleMove[0]);
+                            const originalMoveBoardSpace = getBoardSpace(gameState, this.props.possibleMoveSteps[0]);
                             if (boardSpace.piece) {
                               _.merge(spaceClassNames, {
                                 [boardSpace.piece.type]: true,
@@ -78,11 +80,11 @@ class Board extends PureComponent {
 
                               spaceClassNames['space-between-moves'] = _.some(spacesBetweenMoves, {row, col});
 
-                              if (!(_.isEqual(originalMoveBoardSpace, boardSpace) && multiplePossibleMovesExist)) {
+                              if (!(_.isEqual(originalMoveBoardSpace, boardSpace) && multipleMoveStepsExist)) {
                                 glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
                               }
                             } else {
-                              const lastMoveBoardSpace = getBoardSpace(gameState, _.last(this.props.possibleMove));
+                              const lastMoveBoardSpace = getBoardSpace(gameState, _.last(this.props.possibleMoveSteps));
                               if (possibleValidMove || _.isEqual(lastMoveBoardSpace, boardSpace)) {
                                 glyph = originalMoveBoardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
                                 _.merge(spaceClassNames, {
@@ -102,7 +104,9 @@ class Board extends PureComponent {
                             }
 
                             _.merge(spaceClassNames, {
-                              'possibly-moving-space': _.find(this.props.possibleMove, {row, col}),
+                              'possibly-moving-space': this.props.possibleMoveSteps.find(
+                                step => step.get('row') === row && step.get('col') === col
+                              ),
                               goal: isGoalSpace,
                               'possible-valid-move': possibleValidMove
                             });
@@ -147,14 +151,14 @@ class Board extends PureComponent {
       return;
     }
 
-    this.props.boardSpaceClick(boardSpace);
+    this.props.boardSpaceClick(boardSpace, this.props.gameId);
 
-    // const possibleMoveAddition = _.pick(boardSpace, ['row', 'col']);
+    // const possibleMoveStepsAddition = _.pick(boardSpace, ['row', 'col']);
 
     // if (!boardSpace.piece && possibleValidMove) {
-    //   this.props.setPossibleMove(this.props.possibleMove.concat(possibleMoveAddition));
+    //   this.props.setpossibleMoveSteps(this.props.possibleMoveSteps.concat(possibleMoveStepsAddition));
     // } else if (this.props.currentUserPlayer === _.get(boardSpace, ['piece', 'player'])) {
-    //   this.props.setPossibleMove([possibleMoveAddition]);
+    //   this.props.setpossibleMoveSteps([possibleMoveStepsAddition]);
     // }
   }
 }
