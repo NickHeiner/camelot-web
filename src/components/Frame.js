@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 import SignIn from '../pages/SignIn';
 import Sidebar from './Sidebar';
 import {PageHeader} from 'react-bootstrap';
 import _ from 'lodash';
 import {setOffline} from '../actions';
 import {connect} from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {bindActionCreators} from 'redux';
 
 @connect(
   ({firebase}) => ({currentUser: firebase.get('profile')}),

@@ -2,15 +2,15 @@ import {Glyphicon, Badge} from 'react-bootstrap';
 import React, {PureComponent} from 'react';
 
 export default class CapturedPieces extends PureComponent {
-    render() {
+  render() {
         // Is this really necessary or is it an artifact of some other bad practice?
-        if (!this.props.gameState) {
-            return null;
-        }
+    if (!this.props.gameState) {
+      return null;
+    }
 
-        const whichPlayer = this.props.whosePiecesWereCaptured === 'host' ? 'playerA' : 'playerB';
-        const gameState = this.props.gameState.toJS();
-        return <div className="captured">
+    const whichPlayer = this.props.whosePiecesWereCaptured === 'host' ? 'playerA' : 'playerB';
+    const gameState = this.props.gameState.toJS();
+    return <div className="captured">
             <div className="piece-count-pair">
                 <Glyphicon glyph="tower" className={this.props.whosePiecesWereCaptured} /> 
                 <Badge>{gameState.capturedPieces[whichPlayer].knight}</Badge> 
@@ -20,5 +20,5 @@ export default class CapturedPieces extends PureComponent {
                 <Badge>{gameState.capturedPieces[whichPlayer].pawn}</Badge>
             </div>
         </div>;
-    }
+  }
 }

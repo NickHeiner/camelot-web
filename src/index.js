@@ -6,11 +6,11 @@ import Frame from './components/Frame';
 import NoMatch from './pages/NoMatch';
 import GameList from './pages/game/List';
 import GamePlay from './pages/game/Play';
-import { Provider } from 'react-redux';
-import { createStore, compose, combineReducers } from 'redux';
+import {Provider} from 'react-redux';
+import {createStore, compose, combineReducers} from 'redux';
 import reducer from './reducer';
 import {reactReduxFirebase, firebaseStateReducer} from 'react-redux-firebase';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import {syncHistoryWithStore, routerReducer} from 'react-router-redux';
 import gameListJson from '../offline-data/game-play';
 
 const firebaseConfig = {
