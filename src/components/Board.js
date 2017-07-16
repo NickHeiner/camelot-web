@@ -10,8 +10,11 @@ import {connect} from 'react-redux';
 import {boardSpaceClick} from '../actions';
 // This is a bit hacky but w/e.
 import pairwise from 'camelot-engine/lib/util/pairwise';
+import {fromJS} from 'immutable';
 
-const {getBoardSpace, isValidMove, isGoal, getCoordsBetween} = camelotEngine().query();
+const {getCoordsBetween} = camelotEngine().query();
+
+import {isValidMove, getBoardSpace, isGoal} from '../utils/camelot-engine';
 
 @connect(
   ({ui}) => ({
@@ -32,8 +35,6 @@ class Board extends PureComponent {
       spacesBetweenMoves = movePairs.map(movePair => getCoordsBetween(...movePair));
     }
 
-    const gameState = this.props.gameState.toJS();
-
     const camelotConstants = camelotEngine().constants(),
       boardPieces = _(camelotConstants.BOARD_HEIGHT)
                 .range()
@@ -41,7 +42,7 @@ class Board extends PureComponent {
                     _(camelotConstants.BOARD_WIDTH)
                         .range()
                         .map(col => {
-                          const findBoardSpace = _.partial(getBoardSpace, gameState),
+                          const findBoardSpace = _.partial(getBoardSpace, this.props.gameState),
                             boardSpace = findBoardSpace({row, col}),
                             noTopBoardSpace = !findBoardSpace({row: row - 1, col}),
                             noBottomBoardSpace = !findBoardSpace({row: row + 1, col}),
@@ -59,16 +60,16 @@ class Board extends PureComponent {
 
                           let pieceIcon;
 
-                          const possibleValidMove = this.props.possibleMoveSteps.length && 
-                                isValidMove(
-                                    gameState, 
-                                    this.props.possibleMoveSteps.concat({row, col}), 
-                                    this.props.currentUserPlayer
-                                );
+                          const possibleValidMove = this.props.possibleMoveSteps.size && 
+                            isValidMove(
+                                this.props.gameState, 
+                                this.props.possibleMoveSteps.push(fromJS({row, col})), 
+                                this.props.currentUserPlayer
+                            );
 
                           if (boardSpace) {
                             let glyph;
-                            const originalMoveBoardSpace = getBoardSpace(gameState, this.props.possibleMoveSteps[0]);
+                            const originalMoveBoardSpace = findBoardSpace(this.props.possibleMoveSteps.get(0));
                             if (boardSpace.piece) {
                               _.merge(spaceClassNames, {
                                 [boardSpace.piece.type]: true,
@@ -84,7 +85,7 @@ class Board extends PureComponent {
                                 glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
                               }
                             } else {
-                              const lastMoveBoardSpace = getBoardSpace(gameState, _.last(this.props.possibleMoveSteps));
+                              const lastMoveBoardSpace = findBoardSpace(this.props.possibleMoveSteps.last());
                               if (possibleValidMove || _.isEqual(lastMoveBoardSpace, boardSpace)) {
                                 glyph = originalMoveBoardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
                                 _.merge(spaceClassNames, {
@@ -94,7 +95,7 @@ class Board extends PureComponent {
                               }
                             }
 
-                            const isGoalSpace = isGoal(gameState, boardSpace.row, boardSpace.col);
+                            const isGoalSpace = isGoal(this.props.gameState, boardSpace.row, boardSpace.col);
                             if (isGoalSpace && !glyph) {
                               glyph = 'star';
                             }
