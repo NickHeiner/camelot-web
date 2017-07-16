@@ -8,13 +8,8 @@ import classnames from 'classnames';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {boardSpaceClick} from '../actions';
-// This is a bit hacky but w/e.
-import pairwise from 'camelot-engine/lib/util/pairwise';
 import {fromJS} from 'immutable';
-
-const {getCoordsBetween} = camelotEngine().query();
-
-import {isValidMove, getBoardSpace, isGoal} from '../utils/camelot-engine';
+import {isValidMove, getBoardSpace, isGoal, getPairs, getCoordsBetween} from '../utils/camelot-engine';
 
 @connect(
   ({ui}) => ({
@@ -30,7 +25,7 @@ class Board extends PureComponent {
     let spacesBetweenMoves = [];
     const multipleMoveStepsExist = this.props.possibleMoveSteps.size > 1;
     if (multipleMoveStepsExist) {
-      const movePairs = pairwise(this.props.possibleMoveSteps);
+      const movePairs = getPairs(this.props.possibleMoveSteps);
 
       spacesBetweenMoves = movePairs.map(movePair => getCoordsBetween(...movePair));
     }

@@ -31,15 +31,20 @@ export default (state = defaultState, action, restOfState) => {
     return (() => {
       const possibleMoveSteps = state.get('possibleMoveSteps');
       const boardCoords = _.pick(action.payload.boardSpace, 'row', 'col');
-      const possibleValidMove = isValidMove(
-        getCurrentGame(restOfState, action.payload.gameId),
-        possibleMoveSteps.push(boardCoords), 
-        getCurrentUserPlayerName(restOfState, action.payload.gameId)
-      );
-
       if (!possibleMoveSteps.size) {
         return state.set('possibleMoveSteps', fromJS([boardCoords]));
       }
+
+      const stepsWithThisMoveAdded = possibleMoveSteps.push(fromJS(boardCoords));
+      const possibleValidMove = isValidMove(
+        getCurrentGame(restOfState, action.payload.gameId),
+        stepsWithThisMoveAdded, 
+        getCurrentUserPlayerName(restOfState, action.payload.gameId)
+      );
+
+      return possibleValidMove ?
+        state.set('possibleMoveSteps', stepsWithThisMoveAdded) :
+        state;
     })();
   default:
     return state;
