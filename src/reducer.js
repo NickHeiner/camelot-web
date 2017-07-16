@@ -25,9 +25,9 @@ export default (state = defaultState, action, restOfState) => {
         getCurrentUserPlayerName(restOfState, action.payload.gameId)
       );
 
-      return possibleValidMove ?
-        state.set('possibleMoveSteps', stepsWithThisMoveAdded) :
-        state;
+      return possibleValidMove
+        ? state.set('possibleMoveSteps', stepsWithThisMoveAdded)
+        : state;
     })();
   default:
     return state;

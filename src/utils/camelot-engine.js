@@ -13,7 +13,7 @@ export const isValidMove = (gameState, possibleMoveSteps, movingPlayerName) =>
   query.isValidMove(ensureJS(gameState), ensureJS(possibleMoveSteps), movingPlayerName);
 
 export const getBoardSpace = (...args) =>
-  query.getBoardSpace(...args.map(ensureJS))
+  query.getBoardSpace(...args.map(ensureJS));
 
 export const isGoal = (gameState, ...rest) =>
   query.isGoal(ensureJS(gameState), ...rest);
