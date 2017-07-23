@@ -885,7 +885,8 @@ const initialData = `{
 const parsedData = JSON.parse(initialData);
 
 export default {
-  ..._.pick(parsedData, 'ui', 'routing'),
-  firebase: fromJS(parsedData.firebase)
+  ..._.pick(parsedData, 'routing'),
+  firebase: fromJS(parsedData.firebase),
+  ui: fromJS(parsedData.ui)
 };
 

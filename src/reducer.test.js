@@ -11,7 +11,21 @@ describe('reducer', () => {
 
   describe(Constants.BOARD_SPACE_CLICK, () => {
     it('handles the first board space in a move chain', () => {
-      
+      const nextState = reducer(dataPostInitialLoad, {
+        type: Constants.BOARD_SPACE_CLICK,
+        payload: {
+          gameId: '-KnrZP2chDv_4frmGLqQ',
+          boardSpace: {
+            col: 3,
+            row: 6,
+            piece: {
+              player: 'playerA',
+              type: 'knight'
+            }
+          }
+        }
+      });
+      expect(nextState).toMatchSnapshot();
     });
   });
 });
