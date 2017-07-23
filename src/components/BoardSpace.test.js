@@ -1,3 +1,5 @@
+/* eslint-disable no-magic-numbers */
+import _ from 'lodash';
 import BoardSpace from './BoardSpace';
 import React from 'React';
 import reactTestRenderer from 'react-test-renderer';
@@ -16,24 +18,17 @@ describe('BoardSpace', () => {
       currentUserPlayer={null}
       isCurrentUserActive={false} />
 
-    it('top-left board space', () => {
-      expect(reactTestRenderer.create(getBoardSpace(0, 0))).toMatchSnapshot();
-    })
-
-    it('top goal first column', () => {
-      expect(reactTestRenderer.create(getBoardSpace(0, 5))).toMatchSnapshot();
-    })
-
-    it('top goal second column', () => {
-      expect(reactTestRenderer.create(getBoardSpace(0, 6))).toMatchSnapshot();
-    })
-
-    it('bottom goal first column', () => {
-      expect(reactTestRenderer.create(getBoardSpace(16, 5))).toMatchSnapshot();
-    })
-
-    it('bottom goal second column', () => {
-      expect(reactTestRenderer.create(getBoardSpace(16, 6))).toMatchSnapshot();
-    })
+    const camelotConstants = camelotEngine().constants();
+    _(camelotConstants.BOARD_HEIGHT)
+      .range()
+      .forEach(row => 
+          _(camelotConstants.BOARD_WIDTH)
+              .range()
+              .forEach(col => 
+                it(`renders (row=${row}, col=${col}) correctly`, () => {
+                  expect(reactTestRenderer.create(getBoardSpace(row, col))).toMatchSnapshot();
+                })
+              )
+      );
   })
 })
