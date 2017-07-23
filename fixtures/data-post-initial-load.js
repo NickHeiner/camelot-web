@@ -880,12 +880,12 @@ const initialData = `{
   "ui": {
     "possibleMoveSteps": []
   }
-}`
+}`;
 
 const parsedData = JSON.parse(initialData);
 
 export default {
-    ..._.pick(parsedData, 'ui', 'routing'),
-    firebase: fromJS(parsedData.firebase)
+  ..._.pick(parsedData, 'ui', 'routing'),
+  firebase: fromJS(parsedData.firebase)
 };
 

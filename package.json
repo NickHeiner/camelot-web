@@ -71,7 +71,7 @@
     "redux": "^3.7.1"
   },
   "scripts": {
-    "lint": "eslint src",
+    "lint": "eslint src fixtures",
     "lint-fix": "npm run lint -- --fix",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
