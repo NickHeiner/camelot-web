@@ -1,0 +1,41 @@
+exports[`BoardSpace board position classnames bottom goal first column 1`] = `
+<div
+  className="board-space actual highlight last-row first-col goal"
+  onClick={[Function]}>
+  <span
+    className="glyphicon glyphicon-star" />
+</div>
+`;
+
+exports[`BoardSpace board position classnames bottom goal second column 1`] = `
+<div
+  className="board-space actual last-row last-col goal"
+  onClick={[Function]}>
+  <span
+    className="glyphicon glyphicon-star" />
+</div>
+`;
+
+exports[`BoardSpace board position classnames top goal first column 1`] = `
+<div
+  className="board-space actual highlight first-row first-col goal"
+  onClick={[Function]}>
+  <span
+    className="glyphicon glyphicon-star" />
+</div>
+`;
+
+exports[`BoardSpace board position classnames top goal second column 1`] = `
+<div
+  className="board-space actual first-row last-col goal"
+  onClick={[Function]}>
+  <span
+    className="glyphicon glyphicon-star" />
+</div>
+`;
+
+exports[`BoardSpace board position classnames top-left board space 1`] = `
+<div
+  className="board-space first-row last-row first-col last-col"
+  onClick={[Function]} />
+`;
