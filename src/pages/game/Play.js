@@ -108,7 +108,10 @@ class GamePlay extends PureComponent {
 
   @autobind
   makeMove() {
-    const newGameState = camelotEngine().update().applyMoves(this.props.game.get('gameState').toJS(), this.props.possibleMoveSteps);
+    const newGameState = camelotEngine().update().applyMoves(
+      this.props.game.get('gameState').toJS(), 
+      this.props.possibleMoveSteps
+    );
     this.setState({possibleMove: []}, () => this.gameRef.update({gameState: newGameState}));
   }
 
