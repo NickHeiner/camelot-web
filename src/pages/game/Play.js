@@ -15,7 +15,7 @@ const {isValidMove, getGameWinner} = camelotEngine().query();
 export class PresentationGamePlay extends PureComponent {
   render() {
     let gameDisplay;
-    if (this.props.game === undefined || this.props.host === undefined || this.props.opponent === undefined) {
+    if (this.props.host === undefined || this.props.opponent === undefined) {
       gameDisplay = <p>Loading...</p>;
     } else if (this.props.game === null) {
       gameDisplay = <p>This link is not valid. Did someone share it with you incorrectly?</p>;
@@ -111,7 +111,7 @@ export class PresentationGamePlay extends PureComponent {
     if (!gameWinner) {
       return;
     }
-    const {winningUser} = gameWinner === 'playerA' ? this.props.host : this.props.opponent;
+    const winningUser = gameWinner === 'playerA' ? this.props.host : this.props.opponent;
     return `${winningUser.get('displayName')} wins!`;
   }
 }

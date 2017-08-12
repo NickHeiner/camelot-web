@@ -1,19 +1,42 @@
 import {PresentationGamePlay} from './Play';
 import React from 'React';
-import reactTestRenderer from 'react-test-renderer';
 import {fromJS} from 'immutable';
+import {setPieceInBoardSpace, getGameStateWithPiece, shallowRenderComponent} from '../../utils/test-utils';
 
 describe('GamePlay', () => {
   it('renders with no games', () => {
-    expect(reactTestRenderer.create(
+    expect(shallowRenderComponent(
       <PresentationGamePlay />
     )).toMatchSnapshot();
   });
 
   it('renders with a game that has a winner', () => {
-    
-    expect(reactTestRenderer.create(
-      <PresentationGamePlay />
+    const gameState = getGameStateWithPiece({row: 0, col: 5}, {
+      type: 'pawn',
+      player: 'playerA'
+    });
+    const gameStateWithWinner = setPieceInBoardSpace(gameState, {row: 0, col: 6}, {
+      type: 'pawn',
+      player: 'playerA'
+    });
+
+    const game = fromJS({
+      gameState: gameStateWithWinner
+    });
+
+    const host = fromJS({
+      uid: 'host-uid'
+    });
+
+    const opponent = fromJS({
+      uid: 'host-uid'
+    });
+
+    const possibleMoveSteps = fromJS([]);
+
+    expect(shallowRenderComponent(
+      <PresentationGamePlay game={game} host={host} 
+        opponent={opponent} currentUser={host} possibleMoveSteps={possibleMoveSteps} />
     )).toMatchSnapshot();
   });
 });

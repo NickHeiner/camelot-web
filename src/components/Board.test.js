@@ -1,20 +1,13 @@
 import Board from './Board';
 import React from 'React';
-import ReactShallowRenderer from 'react-test-renderer/shallow';
 import camelotEngine from 'camelot-engine';
-import {setPieceInBoardSpace} from '../utils/test-utils';
-
-const renderComponent = component => {
-  const renderer = new ReactShallowRenderer();
-  renderer.render(component);
-  return renderer.getRenderOutput();
-};
+import {getGameStateWithPiece, shallowRenderComponent} from '../utils/test-utils';
 
 describe('Board', () => {
   // This fails because of what looks like a sub-dep of react-bootstrap.
   it.skip('message', () => {
     const gameState = camelotEngine().createEmptyGame();
-    const renderOutput = renderComponent(
+    const renderOutput = shallowRenderComponent(
         <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" message="the message" />
     );
     expect(renderOutput).toMatchSnapshot();
@@ -33,16 +26,13 @@ describe('Board', () => {
           col: 6
         }
       ];
-      expect(renderComponent(
+      expect(shallowRenderComponent(
                 <Board gameState={gameState} possibleMove={possibleMove} currentUserPlayer="playerA" />
             )).toMatchSnapshot();
     });
   });
 
-  const getGameStateWithPiece = (...args) => setPieceInBoardSpace(
-    camelotEngine().createEmptyGame(),
-    ...args
-  )
+
 
   describe('pieces in goal', () => {
     describe('host goal', () => {
@@ -55,7 +45,7 @@ describe('Board', () => {
           }
         );
 
-        expect(renderComponent(
+        expect(shallowRenderComponent(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
                 )).toMatchSnapshot();
       });            
@@ -68,7 +58,7 @@ describe('Board', () => {
           }
         );
         
-        expect(renderComponent(
+        expect(shallowRenderComponent(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
                 )).toMatchSnapshot();
       });      
@@ -83,7 +73,7 @@ describe('Board', () => {
           }
         );
         
-        expect(renderComponent(
+        expect(shallowRenderComponent(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
                 )).toMatchSnapshot();
       });        
@@ -96,7 +86,7 @@ describe('Board', () => {
           }
         );
 
-        expect(renderComponent(
+        expect(shallowRenderComponent(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
                 )).toMatchSnapshot();
       });      
@@ -107,14 +97,14 @@ describe('Board', () => {
     describe('playerA', () => {
       it('active', () => {
         const gameState = camelotEngine().createEmptyGame();
-        expect(renderComponent(
+        expect(shallowRenderComponent(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" isCurrentUserActive />
                 )).toMatchSnapshot();
       });
 
       it('not active', () => {
         const gameState = camelotEngine().createEmptyGame();
-        expect(renderComponent(
+        expect(shallowRenderComponent(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
                 )).toMatchSnapshot();
       });
@@ -122,14 +112,14 @@ describe('Board', () => {
     describe('playerB', () => {
       it('active', () => {
         const gameState = camelotEngine().createEmptyGame();
-        expect(renderComponent(
+        expect(shallowRenderComponent(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerB" isCurrentUserActive />
                 )).toMatchSnapshot();
       });
 
       it('not active', () => {
         const gameState = camelotEngine().createEmptyGame();
-        expect(renderComponent(
+        expect(shallowRenderComponent(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerB" />
                 )).toMatchSnapshot();
       });

@@ -1,4 +1,5 @@
 import {fromJS} from 'immutable';
+import ReactShallowRenderer from 'react-test-renderer/shallow';
 import camelotEngine from 'camelot-engine';
 const {getBoardSpace} = camelotEngine().query();
 
@@ -16,3 +17,14 @@ export const setPieceInBoardSpace = (gameState, {row, col}, piece) => {
   };
   return gameState;
 }
+
+export const getGameStateWithPiece = (coords, piece) => setPieceInBoardSpace(
+  camelotEngine().createEmptyGame(),
+  coords, piece
+);
+
+export const shallowRenderComponent = component => {
+  const renderer = new ReactShallowRenderer();
+  renderer.render(component);
+  return renderer.getRenderOutput();
+};
