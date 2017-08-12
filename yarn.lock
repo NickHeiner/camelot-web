@@ -4483,9 +4483,9 @@ react-bootstrap@^0.31.0:
     uncontrollable "^4.1.0"
     warning "^3.0.0"
 
-react-burger-menu@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/react-burger-menu/-/react-burger-menu-2.1.1.tgz#76c6d4fc6e075af10af41a5cc8acb6dd32b1775d"
+react-burger-menu@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/react-burger-menu/-/react-burger-menu-2.1.4.tgz#7a7d31c96c32c0c329d0bd5bbd78a844662708dd"
   dependencies:
     browserify-optional "^1.0.0"
     classnames "^2.1.1"
