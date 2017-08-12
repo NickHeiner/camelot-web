@@ -1,0 +1,11 @@
+exports[`GamePlay renders with a game that has a winner 1`] = `
+<p>
+  Loading...
+</p>
+`;
+
+exports[`GamePlay renders with no games 1`] = `
+<p>
+  Loading...
+</p>
+`;

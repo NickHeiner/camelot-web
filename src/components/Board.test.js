@@ -2,7 +2,7 @@ import Board from './Board';
 import React from 'React';
 import ReactShallowRenderer from 'react-test-renderer/shallow';
 import camelotEngine from 'camelot-engine';
-const {getBoardSpace} = camelotEngine().query();
+import {setPieceInBoardSpace} from '../utils/test-utils';
 
 const renderComponent = component => {
   const renderer = new ReactShallowRenderer();
@@ -39,32 +39,35 @@ describe('Board', () => {
     });
   });
 
+  const getGameStateWithPiece = (...args) => setPieceInBoardSpace(
+    camelotEngine().createEmptyGame(),
+    ...args
+  )
+
   describe('pieces in goal', () => {
     describe('host goal', () => {
       it('pawn', () => {
-        const gameState = camelotEngine().createEmptyGame();
-
-                // TODO: add method to set a piece's location directly
-                // without breaking encapsulation like we're doing here.
-        getBoardSpace(gameState, {row: 0, col: 5}).piece = {
-          type: 'pawn',
-          player: 'playerA'
-        };
+        const gameState = getGameStateWithPiece(
+          {row: 0, col: 5}, 
+          {
+            type: 'pawn',
+            player: 'playerA'
+          }
+        );
 
         expect(renderComponent(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
                 )).toMatchSnapshot();
       });            
       it('knight', () => {
-        const gameState = camelotEngine().createEmptyGame();
-
-                // TODO: add method to set a piece's location directly
-                // without breaking encapsulation like we're doing here.
-        getBoardSpace(gameState, {row: 0, col: 5}).piece = {
-          type: 'knight',
-          player: 'playerA'
-        };
-
+        const gameState = getGameStateWithPiece(
+          {row: 0, col: 5}, 
+          {
+            type: 'knight',
+            player: 'playerA'
+          }
+        );
+        
         expect(renderComponent(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
                 )).toMatchSnapshot();
@@ -72,28 +75,26 @@ describe('Board', () => {
     });
     describe('opponent goal', () => {
       it('pawn', () => {
-        const gameState = camelotEngine().createEmptyGame();
-
-                // TODO: add method to set a piece's location directly
-                // without breaking encapsulation like we're doing here.
-        getBoardSpace(gameState, {row: 16, col: 6}).piece = {
-          type: 'pawn',
-          player: 'playerB'
-        };
-
+        const gameState = getGameStateWithPiece(
+          {row: 16, col: 6}, 
+          {
+            type: 'pawn',
+            player: 'playerB'
+          }
+        );
+        
         expect(renderComponent(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
                 )).toMatchSnapshot();
       });        
       it('knight', () => {
-        const gameState = camelotEngine().createEmptyGame();
-
-                // TODO: add method to set a piece's location directly
-                // without breaking encapsulation like we're doing here.
-        getBoardSpace(gameState, {row: 16, col: 6}).piece = {
-          type: 'knight',
-          player: 'playerB'
-        };
+        const gameState = getGameStateWithPiece(
+          {row: 16, col: 6}, 
+          {
+            type: 'knight',
+            player: 'playerB'
+          }
+        );
 
         expect(renderComponent(
                     <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />

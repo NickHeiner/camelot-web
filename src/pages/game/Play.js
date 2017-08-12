@@ -12,16 +12,7 @@ import {connect} from 'react-redux';
 import camelotEngine from 'camelot-engine';
 const {isValidMove, getGameWinner} = camelotEngine().query();
 
-@firebaseConnect(['/users'])
-@connect(
-    ({firebase, ui}, ownProps) => ({
-      possibleMoveSteps: ui.get('possibleMoveSteps'),
-      host: firebase.getIn(['data', 'users', ownProps.game.get('host')]),
-      opponent: firebase.getIn(['data', 'users', ownProps.game.get('opponent')], null),
-      currentUser: firebase.get('profile')
-    })
-)
-class GamePlay extends PureComponent {
+export class PresentationGamePlay extends PureComponent {
   render() {
     let gameDisplay;
     if (this.props.game === undefined || this.props.host === undefined || this.props.opponent === undefined) {
@@ -125,14 +116,21 @@ class GamePlay extends PureComponent {
   }
 }
 
-@firebaseConnect(['/games'])
+@firebaseConnect(['/games', '/users'])
 @connect(
-    ({firebase}, ownProps) => ({
-      game: firebase.getIn(['data', 'games', ownProps.params.id])
-    })
+  ({firebase, ui}, ownProps) => {
+    const game = firebase.getIn(['data', 'games', ownProps.params.id]);
+    
+    return {
+      game,
+      possibleMoveSteps: ui.get('possibleMoveSteps'),
+      host: game && firebase.getIn(['data', 'users', game.get('host')]),
+      opponent: game && firebase.getIn(['data', 'users', game.get('opponent')], null),
+      currentUser: firebase.get('profile')
+    };
+  }
 )
-class GamePlayContainer extends PureComponent {
-  render = () => Boolean(this.props.game) && <GamePlay game={this.props.game} gameId={this.props.params.id} />
+export default class GamePlayContainer extends PureComponent {
+  render = () => Boolean(this.props.game) && 
+    <PresentationGamePlay gameId={this.props.params.id} {...this.props} />
 }
-
-export default GamePlayContainer;
