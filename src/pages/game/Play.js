@@ -56,8 +56,8 @@ export class PresentationGamePlay extends PureComponent {
         const gameStateJs = gameState.toJS();
 
         // I don't know why isValidMove considers [] and [singleMove] to be valid.
-        userHasValidMove = this.props.possibleMoveSteps.size > 1 && 
-                    isValidMove(gameStateJs, this.props.possibleMoveSteps, currentUserPlayer);
+        userHasValidMove = this.props.chosenMoveSteps.size > 1 && 
+                    isValidMove(gameStateJs, this.props.chosenMoveSteps, currentUserPlayer);
 
         gameWinner = getGameWinner(gameStateJs);
       }
@@ -66,7 +66,7 @@ export class PresentationGamePlay extends PureComponent {
                 <div>
                     <Board gameState={gameState} 
                         isCurrentUserActive={isCurrentUserActive}
-                        possibleMove={this.props.possibleMoveSteps}
+                        possibleMove={this.props.chosenMoveSteps}
                         gameId={this.props.gameId}
                         message={findOpponentMessage || this.getWinMessage(gameWinner)}
                         currentUserPlayer={currentUserPlayer} />
@@ -101,7 +101,7 @@ export class PresentationGamePlay extends PureComponent {
   makeMove() {
     const newGameState = camelotEngine().update().applyMoves(
       this.props.game.get('gameState').toJS(), 
-      this.props.possibleMoveSteps
+      this.props.chosenMoveSteps
     );
     this.setState({possibleMove: []}, () => this.gameRef.update({gameState: newGameState}));
   }
@@ -123,7 +123,7 @@ export class PresentationGamePlay extends PureComponent {
     
     return {
       game,
-      possibleMoveSteps: ui.get('possibleMoveSteps'),
+      chosenMoveSteps: ui.get('chosenMoveSteps'),
       host: game && firebase.getIn(['data', 'users', game.get('host')]),
       opponent: game && firebase.getIn(['data', 'users', game.get('opponent')], null),
       currentUser: firebase.get('profile')

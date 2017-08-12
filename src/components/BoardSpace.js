@@ -23,12 +23,12 @@ export class BoardSpace extends PureComponent {
 
     this.props.boardSpaceClick(boardSpace, this.props.gameId);
 
-    // const possibleMoveStepsAddition = _.pick(boardSpace, ['row', 'col']);
+    // const chosenMoveStepsAddition = _.pick(boardSpace, ['row', 'col']);
 
     // if (!boardSpace.piece && possibleValidMove) {
-    //   this.props.setpossibleMoveSteps(this.props.possibleMoveSteps.concat(possibleMoveStepsAddition));
+    //   this.props.setchosenMoveSteps(this.props.chosenMoveSteps.concat(chosenMoveStepsAddition));
     // } else if (this.props.currentUserPlayer === _.get(boardSpace, ['piece', 'player'])) {
-    //   this.props.setpossibleMoveSteps([possibleMoveStepsAddition]);
+    //   this.props.setchosenMoveSteps([chosenMoveStepsAddition]);
     // }
   }
 
@@ -51,16 +51,16 @@ export class BoardSpace extends PureComponent {
 
     let pieceIcon;
 
-    const possibleValidMove = this.props.possibleMoveSteps.size && 
+    const possibleValidMove = this.props.chosenMoveSteps.size && 
       isValidMove(
         this.props.gameState, 
-        this.props.possibleMoveSteps.push(fromJS({row, col})), 
+        this.props.chosenMoveSteps.push(fromJS({row, col})), 
         this.props.currentUserPlayer
       );
 
     if (boardSpace) {
       let glyph;
-      const originalMoveBoardSpace = this.findBoardSpace(this.props.possibleMoveSteps.get(0));
+      const originalMoveBoardSpace = this.findBoardSpace(this.props.chosenMoveSteps.get(0));
       if (boardSpace.piece) {
         _.merge(spaceClassNames, {
           [boardSpace.piece.type]: true,
@@ -71,9 +71,9 @@ export class BoardSpace extends PureComponent {
         });
 
         let spacesBetweenMoves = [];
-        const multipleMoveStepsExist = this.props.possibleMoveSteps.size > 1;
+        const multipleMoveStepsExist = this.props.chosenMoveSteps.size > 1;
         if (multipleMoveStepsExist) {
-          const movePairs = getPairs(this.props.possibleMoveSteps);
+          const movePairs = getPairs(this.props.chosenMoveSteps);
 
           spacesBetweenMoves = movePairs.map(movePair => getCoordsBetween(...movePair));
         }
@@ -84,7 +84,7 @@ export class BoardSpace extends PureComponent {
           glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
         }
       } else {
-        const lastMoveBoardSpace = this.findBoardSpace(this.props.possibleMoveSteps.last());
+        const lastMoveBoardSpace = this.findBoardSpace(this.props.chosenMoveSteps.last());
         if (possibleValidMove || _.isEqual(lastMoveBoardSpace, boardSpace)) {
           glyph = originalMoveBoardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
           _.merge(spaceClassNames, {
@@ -104,7 +104,7 @@ export class BoardSpace extends PureComponent {
       }
 
       _.merge(spaceClassNames, {
-        'possibly-moving-space': this.props.possibleMoveSteps.find(
+        'possibly-moving-space': this.props.chosenMoveSteps.find(
           step => step.get('row') === row && step.get('col') === col
         ),
         goal: isGoalSpace,
@@ -124,7 +124,7 @@ export class BoardSpace extends PureComponent {
 
 @connect(
   ({ui}) => ({
-    possibleMoveSteps: ui.get('possibleMoveSteps')
+    chosenMoveSteps: ui.get('chosenMoveSteps')
   }),
   dispatch => bindActionCreators({
     boardSpaceClick

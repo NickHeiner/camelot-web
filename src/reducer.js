@@ -8,20 +8,20 @@ import {firebaseStateReducer} from 'react-redux-firebase';
 import {routerReducer} from 'react-router-redux';
 
 const defaultState = fromJS({
-  possibleMoveSteps: []
+  chosenMoveSteps: []
 });
 
 const reducer = (state = defaultState, action, restOfState) => {
   switch (action.type) {
   case Constants.BOARD_SPACE_CLICK:
     return (() => {
-      const possibleMoveSteps = state.get('possibleMoveSteps');
+      const chosenMoveSteps = state.get('chosenMoveSteps');
       const boardCoords = _.pick(action.payload.boardSpace, 'row', 'col');
-      if (!possibleMoveSteps.size) {
-        return state.set('possibleMoveSteps', fromJS([boardCoords]));
+      if (!chosenMoveSteps.size) {
+        return state.set('chosenMoveSteps', fromJS([boardCoords]));
       }
 
-      const stepsWithThisMoveAdded = possibleMoveSteps.push(fromJS(boardCoords));
+      const stepsWithThisMoveAdded = chosenMoveSteps.push(fromJS(boardCoords));
       const possibleValidMove = isValidMove(
         getCurrentGame(restOfState, action.payload.gameId).get('gameState'),
         stepsWithThisMoveAdded, 
@@ -29,7 +29,7 @@ const reducer = (state = defaultState, action, restOfState) => {
       );
 
       return possibleValidMove
-        ? state.set('possibleMoveSteps', stepsWithThisMoveAdded)
+        ? state.set('chosenMoveSteps', stepsWithThisMoveAdded)
         : state;
     })();
   default:

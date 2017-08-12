@@ -32,11 +32,11 @@ describe('GamePlay', () => {
       uid: 'host-uid'
     });
 
-    const possibleMoveSteps = fromJS([]);
+    const chosenMoveSteps = fromJS([]);
 
     expect(shallowRenderComponent(
       <PresentationGamePlay game={game} host={host} 
-        opponent={opponent} currentUser={host} possibleMoveSteps={possibleMoveSteps} />
+        opponent={opponent} currentUser={host} chosenMoveSteps={chosenMoveSteps} />
     )).toMatchSnapshot();
   });
 });

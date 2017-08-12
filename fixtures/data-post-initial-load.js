@@ -878,7 +878,7 @@ const initialData = `{
     }
   },
   "ui": {
-    "possibleMoveSteps": []
+    "chosenMoveSteps": []
   }
 }`;
 

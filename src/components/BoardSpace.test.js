@@ -14,7 +14,7 @@ describe('BoardSpace', () => {
       row={row} 
       col={col} 
       gameState={gameState}
-      possibleMoveSteps={fromJS([])}
+      chosenMoveSteps={fromJS([])}
       currentUserPlayer={null}
       isCurrentUserActive={false} />;
 
