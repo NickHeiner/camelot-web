@@ -5,14 +5,16 @@ exports[`GameList renders with games 1`] = `
       <a
         onClick={[Function]}
         style={Object {}}>
-        Game Host 1
+        Hosted by 
+        Display Name 1
       </a>
     </li>
     <li>
       <a
         onClick={[Function]}
         style={Object {}}>
-        Game Host 2
+        Hosted by 
+        Display Name 2
       </a>
     </li>
   </ul>

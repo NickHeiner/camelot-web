@@ -5,18 +5,40 @@ import {fromJS} from 'immutable';
 import {isValidMove, getBoardSpace, isGoal, getPairs, getCoordsBetween} from '../utils/camelot-engine';
 import _ from 'lodash';
 import camelotEngine from 'camelot-engine';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {boardSpaceClick} from '../actions';
 
 const camelotConstants = camelotEngine().constants();
 
-export default class BoardSpace extends PureComponent {
+export class BoardSpace extends PureComponent {
+  findBoardSpace = _.partial(getBoardSpace, this.props.gameState);
+  
+  getBoardSpace = () => this.findBoardSpace(_.pick(this.props, 'row', 'col'));
+
+  onBoardSpaceClick = (boardSpace, possibleValidMove) => {
+    if (!this.props.isCurrentUserActive || !boardSpace) {
+      return;
+    }
+
+    this.props.boardSpaceClick(boardSpace, this.props.gameId);
+
+    // const possibleMoveStepsAddition = _.pick(boardSpace, ['row', 'col']);
+
+    // if (!boardSpace.piece && possibleValidMove) {
+    //   this.props.setpossibleMoveSteps(this.props.possibleMoveSteps.concat(possibleMoveStepsAddition));
+    // } else if (this.props.currentUserPlayer === _.get(boardSpace, ['piece', 'player'])) {
+    //   this.props.setpossibleMoveSteps([possibleMoveStepsAddition]);
+    // }
+  }
+
   render() {
     const {row, col} = this.props,
-      findBoardSpace = _.partial(getBoardSpace, this.props.gameState),
-      boardSpace = findBoardSpace({row, col}),
-      noTopBoardSpace = !findBoardSpace({row: row - 1, col}),
-      noBottomBoardSpace = !findBoardSpace({row: row + 1, col}),
-      noLeftBoardSpace = !findBoardSpace({row, col: col - 1}),
-      noRightBoardSpace = !findBoardSpace({row, col: col + 1}),
+      boardSpace = this.getBoardSpace(),
+      noTopBoardSpace = !this.findBoardSpace({row: row - 1, col}),
+      noBottomBoardSpace = !this.findBoardSpace({row: row + 1, col}),
+      noLeftBoardSpace = !this.findBoardSpace({row, col: col - 1}),
+      noRightBoardSpace = !this.findBoardSpace({row, col: col + 1}),
       spaceClassNames = {
         'board-space': true,
         actual: boardSpace,
@@ -38,7 +60,7 @@ export default class BoardSpace extends PureComponent {
 
     if (boardSpace) {
       let glyph;
-      const originalMoveBoardSpace = findBoardSpace(this.props.possibleMoveSteps.get(0));
+      const originalMoveBoardSpace = this.findBoardSpace(this.props.possibleMoveSteps.get(0));
       if (boardSpace.piece) {
         _.merge(spaceClassNames, {
           [boardSpace.piece.type]: true,
@@ -62,7 +84,7 @@ export default class BoardSpace extends PureComponent {
           glyph = boardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
         }
       } else {
-        const lastMoveBoardSpace = findBoardSpace(this.props.possibleMoveSteps.last());
+        const lastMoveBoardSpace = this.findBoardSpace(this.props.possibleMoveSteps.last());
         if (possibleValidMove || _.isEqual(lastMoveBoardSpace, boardSpace)) {
           glyph = originalMoveBoardSpace.piece.type === 'pawn' ? 'pawn' : 'tower';
           _.merge(spaceClassNames, {
@@ -99,3 +121,21 @@ export default class BoardSpace extends PureComponent {
     );    
   }
 }
+
+@connect(
+  ({ui}) => ({
+    possibleMoveSteps: ui.get('possibleMoveSteps')
+  }),
+  dispatch => bindActionCreators({
+    boardSpaceClick
+  }, dispatch)
+)
+class ConnectedBoardSpace extends React.PureComponent {
+  render() {
+    return <BoardSpace
+      {...this.props}
+    />;
+  }
+}
+
+export default ConnectedBoardSpace;

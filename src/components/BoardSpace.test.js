@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers */
 import _ from 'lodash';
-import BoardSpace from './BoardSpace';
+import {BoardSpace} from './BoardSpace';
 import React from 'React';
 import reactTestRenderer from 'react-test-renderer';
 import camelotEngine from 'camelot-engine';
@@ -16,7 +16,7 @@ describe('BoardSpace', () => {
       gameState={gameState}
       possibleMoveSteps={fromJS([])}
       currentUserPlayer={null}
-      isCurrentUserActive={false} />
+      isCurrentUserActive={false} />;
 
     const camelotConstants = camelotEngine().constants();
     _(camelotConstants.BOARD_HEIGHT)
@@ -30,5 +30,5 @@ describe('BoardSpace', () => {
                 })
               )
       );
-  })
-})
+  });
+});
