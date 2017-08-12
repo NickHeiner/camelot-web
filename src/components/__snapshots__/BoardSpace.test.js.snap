@@ -1317,3 +1317,12 @@ exports[`BoardSpace board position classnames renders (row=16, col=11) correctly
   className="board-space highlight first-row last-row first-col last-col"
   onClick={[Function]} />
 `;
+
+exports[`BoardSpace when the user has chosen the first step of a move 1`] = `
+<div
+  className="board-space actual possible-valid-move"
+  onClick={[Function]}>
+  <span
+    className="glyphicon glyphicon-pawn" />
+</div>
+`;

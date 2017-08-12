@@ -22,14 +22,6 @@ export class BoardSpace extends PureComponent {
     }
 
     this.props.boardSpaceClick(boardSpace, this.props.gameId);
-
-    // const chosenMoveStepsAddition = _.pick(boardSpace, ['row', 'col']);
-
-    // if (!boardSpace.piece && possibleValidMove) {
-    //   this.props.setchosenMoveSteps(this.props.chosenMoveSteps.concat(chosenMoveStepsAddition));
-    // } else if (this.props.currentUserPlayer === _.get(boardSpace, ['piece', 'player'])) {
-    //   this.props.setchosenMoveSteps([chosenMoveStepsAddition]);
-    // }
   }
 
   render() {
@@ -51,6 +43,9 @@ export class BoardSpace extends PureComponent {
 
     let pieceIcon;
 
+    // This is not working because currentUserPlayer is not correct. 
+    // I think that all the playerA / playerB v. host and opponent stuff
+    // may have some issues.
     const possibleValidMove = this.props.chosenMoveSteps.size && 
       isValidMove(
         this.props.gameState, 
