@@ -9,7 +9,7 @@ exports[`CapturedPieces with game state captured pieces host is captured 1`] = `
       className="host glyphicon glyphicon-tower" />
     <span
       className="badge">
-      1
+      0
     </span>
   </div>
   <div
@@ -18,7 +18,7 @@ exports[`CapturedPieces with game state captured pieces host is captured 1`] = `
       className="host glyphicon glyphicon-pawn" />
     <span
       className="badge">
-      3
+      0
     </span>
   </div>
 </div>
@@ -33,7 +33,7 @@ exports[`CapturedPieces with game state captured pieces opponent is captured 1`]
       className="opponent glyphicon glyphicon-tower" />
     <span
       className="badge">
-      4
+      0
     </span>
   </div>
   <div
@@ -42,7 +42,7 @@ exports[`CapturedPieces with game state captured pieces opponent is captured 1`]
       className="opponent glyphicon glyphicon-pawn" />
     <span
       className="badge">
-      1
+      0
     </span>
   </div>
 </div>
