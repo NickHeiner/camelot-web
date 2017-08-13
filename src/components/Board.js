@@ -18,6 +18,7 @@ class Board extends PureComponent {
                         row={row} 
                         col={col} 
                         key={`${row}-${col}`} 
+                        gameId={this.props.gameId}
                         gameState={this.props.gameState} 
                         currentUserPlayer={this.props.currentUserPlayer}
                         isCurrentUserActive={this.props.isCurrentUserActive}

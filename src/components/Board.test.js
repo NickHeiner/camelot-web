@@ -8,7 +8,8 @@ describe('Board', () => {
   it.skip('message', () => {
     const gameState = camelotEngine().createEmptyGame();
     const renderOutput = shallowRenderComponent(
-        <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" message="the message" />
+      <Board gameState={gameState} possibleMove={[]} 
+        currentUserPlayer="playerA" message="the message" gameId="game-id" />
     );
     expect(renderOutput).toMatchSnapshot();
   });
@@ -27,8 +28,8 @@ describe('Board', () => {
         }
       ];
       expect(shallowRenderComponent(
-                <Board gameState={gameState} possibleMove={possibleMove} currentUserPlayer="playerA" />
-            )).toMatchSnapshot();
+        <Board gameState={gameState} possibleMove={possibleMove} currentUserPlayer="playerA" gameId="game-id" />
+      )).toMatchSnapshot();
     });
   });
 
@@ -46,8 +47,8 @@ describe('Board', () => {
         );
 
         expect(shallowRenderComponent(
-                    <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
-                )).toMatchSnapshot();
+          <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" gameId="game-id" />
+        )).toMatchSnapshot();
       });            
       it('knight', () => {
         const gameState = getGameStateWithPiece(
@@ -59,8 +60,8 @@ describe('Board', () => {
         );
         
         expect(shallowRenderComponent(
-                    <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
-                )).toMatchSnapshot();
+          <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" gameId="game-id" />
+        )).toMatchSnapshot();
       });      
     });
     describe('opponent goal', () => {
@@ -74,8 +75,8 @@ describe('Board', () => {
         );
         
         expect(shallowRenderComponent(
-                    <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
-                )).toMatchSnapshot();
+          <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" gameId="game-id"  />
+        )).toMatchSnapshot();
       });        
       it('knight', () => {
         const gameState = getGameStateWithPiece(
@@ -87,8 +88,8 @@ describe('Board', () => {
         );
 
         expect(shallowRenderComponent(
-                    <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
-                )).toMatchSnapshot();
+          <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" gameId="game-id" />
+        )).toMatchSnapshot();
       });      
     });
   });
@@ -98,30 +99,31 @@ describe('Board', () => {
       it('active', () => {
         const gameState = camelotEngine().createEmptyGame();
         expect(shallowRenderComponent(
-                    <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" isCurrentUserActive />
-                )).toMatchSnapshot();
+          <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" 
+            isCurrentUserActive gameId="game-id" />
+        )).toMatchSnapshot();
       });
 
       it('not active', () => {
         const gameState = camelotEngine().createEmptyGame();
         expect(shallowRenderComponent(
-                    <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" />
-                )).toMatchSnapshot();
+          <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" gameId="game-id" />
+        )).toMatchSnapshot();
       });
     });
     describe('playerB', () => {
       it('active', () => {
         const gameState = camelotEngine().createEmptyGame();
         expect(shallowRenderComponent(
-                    <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerB" isCurrentUserActive />
-                )).toMatchSnapshot();
+          <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerB" isCurrentUserActive gameId="game-id" />
+        )).toMatchSnapshot();
       });
 
       it('not active', () => {
         const gameState = camelotEngine().createEmptyGame();
         expect(shallowRenderComponent(
-                    <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerB" />
-                )).toMatchSnapshot();
+          <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerB" gameId="game-id" />
+        )).toMatchSnapshot();
       });
     });
   });

@@ -27,5 +27,23 @@ describe('reducer', () => {
       });
       expect(nextState).toMatchSnapshot();
     });
+
+    it('handles clicking on a space that is owned by the other player', () => {
+      const nextState = reducer(dataPostInitialLoad, {
+        type: Constants.BOARD_SPACE_CLICK,
+        payload: {
+          gameId: '-KnrZP2chDv_4frmGLqQ',
+          boardSpace: {
+            col: 4,
+            row: 9,
+            piece: {
+              player: 'playerB',
+              type: 'pawn'
+            }
+          }
+        }
+      });
+      expect(nextState).toMatchSnapshot();
+    });
   });
 });

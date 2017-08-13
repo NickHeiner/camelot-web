@@ -17,6 +17,12 @@ const reducer = (state = defaultState, action, restOfState) => {
     return (() => {
       const chosenMoveSteps = state.get('chosenMoveSteps');
       const boardCoords = _.pick(action.payload.boardSpace, 'row', 'col');
+      const currentUserPlayerName = getCurrentUserPlayerName(restOfState, action.payload.gameId);
+
+      if (action.payload.boardSpace.piece && currentUserPlayerName !== action.payload.boardSpace.piece.player) {
+        return state;
+      }
+
       if (!chosenMoveSteps.size) {
         return state.set('chosenMoveSteps', fromJS([boardCoords]));
       }
@@ -25,7 +31,7 @@ const reducer = (state = defaultState, action, restOfState) => {
       const possibleValidMove = isValidMove(
         getCurrentGame(restOfState, action.payload.gameId).get('gameState'),
         stepsWithThisMoveAdded, 
-        getCurrentUserPlayerName(restOfState, action.payload.gameId)
+        currentUserPlayerName
       );
 
       return possibleValidMove
