@@ -7,10 +7,9 @@ import NoMatch from './pages/NoMatch';
 import GameList from './pages/game/List';
 import GamePlay from './pages/game/Play';
 import {Provider} from 'react-redux';
-import {createStore, compose, applyMiddleware} from 'redux';
-import thunk from 'redux-thunk';
+import {createStore, compose} from 'redux';
 import reducer from './reducer';
-import {reactReduxFirebase, getFirebase} from 'react-redux-firebase';
+import {reactReduxFirebase} from 'react-redux-firebase';
 import {syncHistoryWithStore} from 'react-router-redux';
 import gameListJson from '../offline-data/game-play';
 import _ from 'lodash';
@@ -26,7 +25,6 @@ const firebaseConfig = {
 // TODO what is the difference between `auth` and `profile` that react-redux-firebase sets up?
 // Do we want to use composeEnhancers instead of compose here?
 const createStoreWithFirebase = compose(
-  applyMiddleware(thunk),
   reactReduxFirebase(firebaseConfig, {userProfile: 'users'}),
 )(createStore);
 

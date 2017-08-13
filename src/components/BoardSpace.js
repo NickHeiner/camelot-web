@@ -12,7 +12,7 @@ import {boardSpaceClick} from '../actions';
 const camelotConstants = camelotEngine().constants();
 
 export class BoardSpace extends PureComponent {
-  findBoardSpace = _.partial(getBoardSpace, this.props.gameState);
+  findBoardSpace = (...args) => getBoardSpace(this.props.gameState, ...args)
   
   getBoardSpace = () => this.findBoardSpace(_.pick(this.props, 'row', 'col'));
 
