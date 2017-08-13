@@ -1,6 +1,9 @@
 import reducer from './reducer';
+import {makeMove} from './actions';
 import * as Constants from './constants';
 import dataPostInitialLoad from '../fixtures/data-post-initial-load';
+import update from 'immutability-helper';
+import {fromJS} from 'immutable';
 
 describe('reducer', () => {
   describe('unrecognized action', () => {
@@ -43,6 +46,23 @@ describe('reducer', () => {
           }
         }
       });
+      expect(nextState).toMatchSnapshot();
+    });
+  });
+
+  describe(Constants.MAKE_MOVE, () => {
+    it('makes a move', () => {
+      const state = update(dataPostInitialLoad, {
+        ui: {
+          $set: fromJS({
+            chosenMoveSteps: [
+              {row: 6, col: 6},
+              {row: 7, col: 6},
+            ]
+          })
+        }
+      });
+      const nextState = reducer(state, makeMove('-KnrZP2chDv_4frmGLqQ'))
       expect(nextState).toMatchSnapshot();
     });
   });
