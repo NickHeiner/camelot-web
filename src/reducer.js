@@ -42,7 +42,7 @@ const reducer = (state, action) => {
     return (() => {
       const gameState = getCurrentGame(state, action.payload.gameId).get('gameState');
       const newGameState = applyMoves(gameState, state.getIn(['ui', 'chosenMoveSteps']));
-      return state.setIn(['firebase', 'data', 'games', action.payload.gameId], newGameState);
+      return state.setIn(['firebase', 'data', 'games', action.payload.gameId, 'gameState'], newGameState);
     })();
   default:
     return state;
