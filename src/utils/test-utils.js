@@ -16,7 +16,7 @@ export const setPieceInBoardSpace = (gameState, {row, col}, piece) => {
     player: 'playerA'
   };
   return gameState;
-}
+};
 
 export const getGameStateWithPiece = (coords, piece) => setPieceInBoardSpace(
   camelotEngine().createEmptyGame(),

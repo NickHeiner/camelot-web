@@ -12,10 +12,10 @@ describe('GameList', () => {
   it('renders with games', () => {
     const games = fromJS({
       'game-key-1': {
-        host: 'Game Host 1',
+        host: 'Game Host 1'
       },
       'game-key-2': {
-        host: 'Game Host 2',
+        host: 'Game Host 2'
       }
     });
     const users = fromJS({

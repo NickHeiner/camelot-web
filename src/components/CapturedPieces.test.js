@@ -4,6 +4,8 @@ import reactTestRenderer from 'react-test-renderer';
 import camelotEngine from 'camelot-engine';
 import {fromJS} from 'immutable';
 
+/* eslint-disable no-magic-numbers */
+
 describe('CapturedPieces', () => {
   it('renders when there is no game state', () => {
     expect(reactTestRenderer.create(

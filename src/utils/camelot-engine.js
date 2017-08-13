@@ -14,7 +14,7 @@ export const isValidMove = (gameState, chosenMoveSteps, movingPlayerName) => {
     throw new Error('ArgumentError: movingPlayerName is required to be the name of the player making the move');
   }
   return query.isValidMove(ensureJS(gameState), ensureJS(chosenMoveSteps), movingPlayerName);
-}
+};
 
 export const getBoardSpace = (...args) =>
   query.getBoardSpace(...args.map(ensureJS));

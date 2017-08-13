@@ -33,8 +33,6 @@ describe('Board', () => {
     });
   });
 
-
-
   describe('pieces in goal', () => {
     describe('host goal', () => {
       it('pawn', () => {
@@ -75,7 +73,7 @@ describe('Board', () => {
         );
         
         expect(shallowRenderComponent(
-          <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" gameId="game-id"  />
+          <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerA" gameId="game-id" />
         )).toMatchSnapshot();
       });        
       it('knight', () => {
@@ -115,7 +113,8 @@ describe('Board', () => {
       it('active', () => {
         const gameState = camelotEngine().createEmptyGame();
         expect(shallowRenderComponent(
-          <Board gameState={gameState} possibleMove={[]} currentUserPlayer="playerB" isCurrentUserActive gameId="game-id" />
+          <Board gameState={gameState} possibleMove={[]} 
+            currentUserPlayer="playerB" isCurrentUserActive gameId="game-id" />
         )).toMatchSnapshot();
       });
 
