@@ -23,7 +23,7 @@ export const applyMoves = (gameState, chosenMoves) =>
   fromJS(camelotEngine().update().applyMoves(
     gameState.toJS(), 
     chosenMoves.toJS()
-  ))
+  ));
 
 export const isGoal = (gameState, ...rest) =>
   query.isGoal(ensureJS(gameState), ...rest);

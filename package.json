@@ -72,7 +72,7 @@
   },
   "scripts": {
     "lint": "eslint src fixtures",
-    "lint-fix": "npm run lint -- --fix",
+    "lint:fix": "npm run lint -- --fix",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "npm run lint && node scripts/test.js --env=jsdom"

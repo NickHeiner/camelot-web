@@ -57,12 +57,12 @@ describe('reducer', () => {
           $set: fromJS({
             chosenMoveSteps: [
               {row: 6, col: 6},
-              {row: 7, col: 6},
+              {row: 7, col: 6}
             ]
           })
         }
       });
-      const nextState = reducer(state, makeMove('-KnrZP2chDv_4frmGLqQ'))
+      const nextState = reducer(state, makeMove('-KnrZP2chDv_4frmGLqQ'));
       expect(nextState).toMatchSnapshot();
     });
   });
