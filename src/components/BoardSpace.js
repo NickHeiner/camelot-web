@@ -43,9 +43,6 @@ export class BoardSpace extends PureComponent {
 
     let pieceIcon;
 
-    // This is not working because currentUserPlayer is not correct. 
-    // I think that all the playerA / playerB v. host and opponent stuff
-    // may have some issues.
     const possibleValidMove = this.props.chosenMoveSteps.size && 
       isValidMove(
         this.props.gameState, 

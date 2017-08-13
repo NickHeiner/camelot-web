@@ -32,13 +32,13 @@ describe('BoardSpace', () => {
       );
   });
 
-  it.only('when the user has chosen the first step of a move', () => {
+  it('when the user has chosen the first step of a move', () => {
     const gameState = camelotEngine().createEmptyGame();
 
     const chosenCol = 6;
-    const chosenRow = 9;
+    const chosenRow = 6;
     const boardSpace = <BoardSpace 
-      row={chosenRow - 1} 
+      row={chosenRow + 1} 
       col={chosenCol} 
       gameState={gameState}
       chosenMoveSteps={fromJS([{row: chosenRow, col: chosenCol}])}
