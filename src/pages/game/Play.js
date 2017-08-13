@@ -8,6 +8,8 @@ import CapturedPieces from '../../components/CapturedPieces';
 import _ from 'lodash';
 import {firebaseConnect} from 'react-redux-firebase';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {makeMove} from '../../actions';
 
 import camelotEngine from 'camelot-engine';
 const {isValidMove, getGameWinner} = camelotEngine().query();
@@ -99,11 +101,7 @@ export class PresentationGamePlay extends PureComponent {
 
   @autobind
   makeMove() {
-    const newGameState = camelotEngine().update().applyMoves(
-      this.props.game.get('gameState').toJS(), 
-      this.props.chosenMoveSteps
-    );
-    this.setState({possibleMove: []}, () => this.gameRef.update({gameState: newGameState}));
+    this.props.makeMove(this.props.gameId);
   }
 
   @autobind
@@ -128,7 +126,10 @@ export class PresentationGamePlay extends PureComponent {
       opponent: game && firebase.getIn(['data', 'users', game.get('opponent')], null),
       currentUser: firebase.get('profile')
     };
-  }
+  },
+  dispatch => bindActionCreators({
+    makeMove
+  }, dispatch)
 )
 export default class GamePlayContainer extends PureComponent {
   render = () => Boolean(this.props.game) && 

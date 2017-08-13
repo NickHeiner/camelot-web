@@ -7,3 +7,10 @@ export const boardSpaceClick = (boardSpace, gameId) => ({
     gameId
   }
 });
+
+export const makeMove = (gameId) => ({
+  type: Constants.MAKE_MOVE,
+  payload: {
+    gameId
+  }
+});

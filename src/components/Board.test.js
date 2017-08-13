@@ -3,6 +3,8 @@ import React from 'React';
 import camelotEngine from 'camelot-engine';
 import {getGameStateWithPiece, shallowRenderComponent} from '../utils/test-utils';
 
+// This test is slow. And now that BoardSpace is fully split out, it would be much
+// more efficient to write some specific tests in BoardSpace rather than dump everything in here.
 describe('Board', () => {
   // This fails because of what looks like a sub-dep of react-bootstrap.
   it.skip('message', () => {
