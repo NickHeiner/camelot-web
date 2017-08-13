@@ -101,7 +101,7 @@ export class PresentationGamePlay extends PureComponent {
 
   @autobind
   makeMove() {
-    this.props.makeMove(this.props.gameId);
+    this.props.makeMove(this.props.gameId, this.props.game.get('gameState'), this.props.chosenMoveSteps);
   }
 
   @autobind

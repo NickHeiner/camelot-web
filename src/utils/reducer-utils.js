@@ -1,11 +1,11 @@
 
-export const getCurrentGame = (fullState, gameId) => fullState.getIn(['firebase', 'data', 'games', gameId]);
+export const getCurrentGame = (fullState, gameId) => fullState.firebase.getIn(['data', 'games', gameId]);
 
 export const getCurrentUserPlayerName = (fullState, gameId) => {
-  const currentUserUid = fullState.getIn(['firebase', 'profile', 'uid']);
+  const currentUserUid = fullState.firebase.getIn(['profile', 'uid']);
   const currentGame = getCurrentGame(fullState, gameId);
-  const currentHostUid = fullState.getIn(['firebase', 'data', 'users', currentGame.get('host'), 'uid']);
-  const currentOpponentUid = fullState.getIn(['firebase', 'data', 'users', currentGame.get('opponent'), 'uid']);
+  const currentHostUid = fullState.firebase.getIn(['data', 'users', currentGame.get('host'), 'uid']);
+  const currentOpponentUid = fullState.firebase.getIn(['data', 'users', currentGame.get('opponent'), 'uid']);
 
   if (currentUserUid === currentHostUid) {
     return 'playerA';
