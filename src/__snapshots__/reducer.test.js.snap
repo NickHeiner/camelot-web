@@ -2077,7 +2077,10 @@ Object {
               },
               Object {
                 "col": 6,
-                "piece": null,
+                "piece": Object {
+                  "player": "playerA",
+                  "type": "pawn",
+                },
                 "row": 6,
               },
               Object {
@@ -2134,10 +2137,6 @@ Object {
               },
               Object {
                 "col": 6,
-                "piece": Object {
-                  "player": "playerA",
-                  "type": "pawn",
-                },
                 "row": 7,
               },
               Object {
@@ -2595,7 +2594,7 @@ Object {
                 "pawn": 0,
               },
             },
-            "turnCount": 1,
+            "turnCount": 0,
           },
           "host": "current-user-uid",
           "opponent": "some-user-uid",
@@ -2648,16 +2647,7 @@ Object {
     },
   },
   "ui": Object {
-    "chosenMoveSteps": Array [
-      Object {
-        "col": 6,
-        "row": 6,
-      },
-      Object {
-        "col": 6,
-        "row": 7,
-      },
-    ],
+    "chosenMoveSteps": Array [],
   },
 }
 `;

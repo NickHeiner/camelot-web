@@ -4,8 +4,8 @@ import * as ReducerUtils from './reducer-utils';
 describe('ReducerUtils', () => {
   describe('getCurrentGame', () => {
     it('gets the current game', () => {
-      const state = fromJS({
-        firebase: {
+      const state = {
+        firebase: fromJS({
           // eslint-disable-next-line id-blacklist
           data: {
             games: {
@@ -13,8 +13,8 @@ describe('ReducerUtils', () => {
               otherGameId: 'wrong game'
             }
           }
-        }
-      });
+        })
+      };
 
       expect(ReducerUtils.getCurrentGame(state, 'gameId')).toEqual('correct game');
     });
@@ -22,8 +22,8 @@ describe('ReducerUtils', () => {
 
   describe('getCurrentUserPlayerName', () => {
     it('handles the current user not being in the game', () => {
-      const state = fromJS({
-        firebase: {
+      const state = {
+        firebase: fromJS({
           profile: {
             uid: 'currentPlayerUid'
           },
@@ -45,15 +45,15 @@ describe('ReducerUtils', () => {
               }
             }
           }
-        }
-      });
+        })
+      };
 
       expect(ReducerUtils.getCurrentUserPlayerName(state, 'gameId')).toBeNull();
     });
 
     it('handles the current user being the host', () => {
-      const state = fromJS({
-        firebase: {
+      const state = {
+        firebase: fromJS({
           profile: {
             uid: 'currentPlayerUid'
           },
@@ -75,15 +75,15 @@ describe('ReducerUtils', () => {
               }
             }
           }
-        }
-      });
+        })
+      };
 
       expect(ReducerUtils.getCurrentUserPlayerName(state, 'gameId')).toEqual('playerA');
     });
 
     it('handles the current user being the opponent', () => {
-      const state = fromJS({
-        firebase: {
+      const state = {
+        firebase: fromJS({
           profile: {
             uid: 'currentPlayerUid'
           },
@@ -105,8 +105,8 @@ describe('ReducerUtils', () => {
               }
             }
           }
-        }
-      });
+        })
+      };
 
       expect(ReducerUtils.getCurrentUserPlayerName(state, 'gameId')).toEqual('playerB');
     });

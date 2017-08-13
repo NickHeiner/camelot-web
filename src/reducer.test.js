@@ -62,7 +62,12 @@ describe('reducer', () => {
           })
         }
       });
-      const nextState = reducer(state, makeMove('-KnrZP2chDv_4frmGLqQ'));
+      const nextState = reducer(state, {
+        type: Constants.MAKE_MOVE,
+        payload: {
+          gameId: '-KnrZP2chDv_4frmGLqQ'
+        }
+      });
       expect(nextState).toMatchSnapshot();
     });
   });
