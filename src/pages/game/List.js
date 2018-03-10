@@ -1,53 +1,54 @@
 import React, {PureComponent} from 'react';
-import { Button } from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import autobind from 'autobind-decorator';
-import firebase from 'firebase';
 import _ from 'lodash';
-import { Link } from 'react-router';
+import {Link} from 'react-router';
 import camelotEngine from 'camelot-engine';
+import {firebaseConnect} from 'react-redux-firebase';
+import {connect} from 'react-redux';
 
-
-class GameList extends PureComponent {
-    constructor() {
-        super();
-        this.state = {count: null};
-    }
-
-    componentWillMount() {
-        this.gamesRef = firebase.database().ref('games');
-        this.gamesRef.on('value', this.onGamesUpdate);
-    }
-    
-    componentWillUnmount() {
-        this.gamesRef.off('value', this.onGamesUpdate);
-    }
-
-    @autobind
-    onGamesUpdate(snapshot) {
-        const val = snapshot.val();
-        if (val) {
-            this.setState({games: val});
-        }
-    }
-
-    render() {
-        return <div>
+export class PresentationGameList extends PureComponent {
+  render = () =>
+        <div>
             <ul>
                 {
-                    _.map(this.state.games, ((game, key) => <li key={key}><Link to={`play/${key}`}>{game.host}</Link></li>))
+                    this.props.games &&
+                    this.props.users && 
+                        this.props.games
+                        .map(((game, key) => 
+                            <li key={key}><Link to={`play/${key}`}>
+                                Hosted by {this.props.users.getIn([game.get('host'), 'displayName'])}
+                            </Link></li>
+                        ))
+                        .toList()
+                        .toJS()
                 }
             </ul>
-            <Button bsStyle="primary" onClick={this.createNewGame}>New</Button>
+            <Button bsStyle="primary" onClick={this.props.createNewGame}>New</Button>
         </div>;
-    }
-
-    @autobind
-    createNewGame() {
-        this.gamesRef.push({
-            host: this.props.params.currentUser.uid,
-            gameState: camelotEngine().createEmptyGame()
-        });
-    }
 }
 
-export default GameList;
+@firebaseConnect(['/games', '/users'])
+@connect(
+    ({firebase}) => ({
+      games: firebase.getIn(['data', 'games']),
+      users: firebase.getIn(['data', 'users']),
+      currentUserUid: firebase.getIn(['profile', 'uid'])
+    })
+)
+class GameListContainer extends PureComponent {
+    @autobind
+  createNewGame() {
+    this.props.firebase.push('/games', {
+      host: this.props.currentUserUid,
+      gameState: camelotEngine().createEmptyGame()
+    });
+  }
+
+  render = () => <PresentationGameList 
+        createNewGame={this.createNewGame} 
+        games={this.props.games} 
+        users={this.props.users} />
+}
+
+export default GameListContainer;

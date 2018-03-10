@@ -1,0 +1,2947 @@
+exports[`GamePlay renders with a game that has a winner 1`] = `
+<div>
+  <Board
+    currentUserPlayer="playerA"
+    gameId={undefined}
+    gameState={
+      Object {
+        "boardSpaces": Array [
+          Object {
+            "col": 5,
+            "piece": Object {
+              "player": "playerA",
+              "type": "pawn",
+            },
+            "row": 0,
+          },
+          Object {
+            "col": 6,
+            "piece": Object {
+              "player": "playerA",
+              "type": "pawn",
+            },
+            "row": 0,
+          },
+          Object {
+            "col": 2,
+            "piece": null,
+            "row": 1,
+          },
+          Object {
+            "col": 3,
+            "piece": null,
+            "row": 1,
+          },
+          Object {
+            "col": 4,
+            "piece": null,
+            "row": 1,
+          },
+          Object {
+            "col": 5,
+            "piece": null,
+            "row": 1,
+          },
+          Object {
+            "col": 6,
+            "piece": null,
+            "row": 1,
+          },
+          Object {
+            "col": 7,
+            "piece": null,
+            "row": 1,
+          },
+          Object {
+            "col": 8,
+            "piece": null,
+            "row": 1,
+          },
+          Object {
+            "col": 9,
+            "piece": null,
+            "row": 1,
+          },
+          Object {
+            "col": 1,
+            "piece": null,
+            "row": 2,
+          },
+          Object {
+            "col": 2,
+            "piece": null,
+            "row": 2,
+          },
+          Object {
+            "col": 3,
+            "piece": null,
+            "row": 2,
+          },
+          Object {
+            "col": 4,
+            "piece": null,
+            "row": 2,
+          },
+          Object {
+            "col": 5,
+            "piece": null,
+            "row": 2,
+          },
+          Object {
+            "col": 6,
+            "piece": null,
+            "row": 2,
+          },
+          Object {
+            "col": 7,
+            "piece": null,
+            "row": 2,
+          },
+          Object {
+            "col": 8,
+            "piece": null,
+            "row": 2,
+          },
+          Object {
+            "col": 9,
+            "piece": null,
+            "row": 2,
+          },
+          Object {
+            "col": 10,
+            "piece": null,
+            "row": 2,
+          },
+          Object {
+            "col": 0,
+            "piece": null,
+            "row": 3,
+          },
+          Object {
+            "col": 1,
+            "piece": null,
+            "row": 3,
+          },
+          Object {
+            "col": 2,
+            "piece": null,
+            "row": 3,
+          },
+          Object {
+            "col": 3,
+            "piece": null,
+            "row": 3,
+          },
+          Object {
+            "col": 4,
+            "piece": null,
+            "row": 3,
+          },
+          Object {
+            "col": 5,
+            "piece": null,
+            "row": 3,
+          },
+          Object {
+            "col": 6,
+            "piece": null,
+            "row": 3,
+          },
+          Object {
+            "col": 7,
+            "piece": null,
+            "row": 3,
+          },
+          Object {
+            "col": 8,
+            "piece": null,
+            "row": 3,
+          },
+          Object {
+            "col": 9,
+            "piece": null,
+            "row": 3,
+          },
+          Object {
+            "col": 10,
+            "piece": null,
+            "row": 3,
+          },
+          Object {
+            "col": 11,
+            "piece": null,
+            "row": 3,
+          },
+          Object {
+            "col": 0,
+            "piece": null,
+            "row": 4,
+          },
+          Object {
+            "col": 1,
+            "piece": null,
+            "row": 4,
+          },
+          Object {
+            "col": 2,
+            "piece": null,
+            "row": 4,
+          },
+          Object {
+            "col": 3,
+            "piece": null,
+            "row": 4,
+          },
+          Object {
+            "col": 4,
+            "piece": null,
+            "row": 4,
+          },
+          Object {
+            "col": 5,
+            "piece": null,
+            "row": 4,
+          },
+          Object {
+            "col": 6,
+            "piece": null,
+            "row": 4,
+          },
+          Object {
+            "col": 7,
+            "piece": null,
+            "row": 4,
+          },
+          Object {
+            "col": 8,
+            "piece": null,
+            "row": 4,
+          },
+          Object {
+            "col": 9,
+            "piece": null,
+            "row": 4,
+          },
+          Object {
+            "col": 10,
+            "piece": null,
+            "row": 4,
+          },
+          Object {
+            "col": 11,
+            "piece": null,
+            "row": 4,
+          },
+          Object {
+            "col": 0,
+            "piece": null,
+            "row": 5,
+          },
+          Object {
+            "col": 1,
+            "piece": null,
+            "row": 5,
+          },
+          Object {
+            "col": 2,
+            "piece": Object {
+              "player": "playerA",
+              "type": "knight",
+            },
+            "row": 5,
+          },
+          Object {
+            "col": 3,
+            "piece": Object {
+              "player": "playerA",
+              "type": "pawn",
+            },
+            "row": 5,
+          },
+          Object {
+            "col": 4,
+            "piece": Object {
+              "player": "playerA",
+              "type": "pawn",
+            },
+            "row": 5,
+          },
+          Object {
+            "col": 5,
+            "piece": Object {
+              "player": "playerA",
+              "type": "pawn",
+            },
+            "row": 5,
+          },
+          Object {
+            "col": 6,
+            "piece": Object {
+              "player": "playerA",
+              "type": "pawn",
+            },
+            "row": 5,
+          },
+          Object {
+            "col": 7,
+            "piece": Object {
+              "player": "playerA",
+              "type": "pawn",
+            },
+            "row": 5,
+          },
+          Object {
+            "col": 8,
+            "piece": Object {
+              "player": "playerA",
+              "type": "pawn",
+            },
+            "row": 5,
+          },
+          Object {
+            "col": 9,
+            "piece": Object {
+              "player": "playerA",
+              "type": "knight",
+            },
+            "row": 5,
+          },
+          Object {
+            "col": 10,
+            "piece": null,
+            "row": 5,
+          },
+          Object {
+            "col": 11,
+            "piece": null,
+            "row": 5,
+          },
+          Object {
+            "col": 0,
+            "piece": null,
+            "row": 6,
+          },
+          Object {
+            "col": 1,
+            "piece": null,
+            "row": 6,
+          },
+          Object {
+            "col": 2,
+            "piece": null,
+            "row": 6,
+          },
+          Object {
+            "col": 3,
+            "piece": Object {
+              "player": "playerA",
+              "type": "knight",
+            },
+            "row": 6,
+          },
+          Object {
+            "col": 4,
+            "piece": Object {
+              "player": "playerA",
+              "type": "pawn",
+            },
+            "row": 6,
+          },
+          Object {
+            "col": 5,
+            "piece": Object {
+              "player": "playerA",
+              "type": "pawn",
+            },
+            "row": 6,
+          },
+          Object {
+            "col": 6,
+            "piece": Object {
+              "player": "playerA",
+              "type": "pawn",
+            },
+            "row": 6,
+          },
+          Object {
+            "col": 7,
+            "piece": Object {
+              "player": "playerA",
+              "type": "pawn",
+            },
+            "row": 6,
+          },
+          Object {
+            "col": 8,
+            "piece": Object {
+              "player": "playerA",
+              "type": "knight",
+            },
+            "row": 6,
+          },
+          Object {
+            "col": 9,
+            "piece": null,
+            "row": 6,
+          },
+          Object {
+            "col": 10,
+            "piece": null,
+            "row": 6,
+          },
+          Object {
+            "col": 11,
+            "piece": null,
+            "row": 6,
+          },
+          Object {
+            "col": 0,
+            "piece": null,
+            "row": 7,
+          },
+          Object {
+            "col": 1,
+            "piece": null,
+            "row": 7,
+          },
+          Object {
+            "col": 2,
+            "piece": null,
+            "row": 7,
+          },
+          Object {
+            "col": 3,
+            "piece": null,
+            "row": 7,
+          },
+          Object {
+            "col": 4,
+            "piece": null,
+            "row": 7,
+          },
+          Object {
+            "col": 5,
+            "piece": null,
+            "row": 7,
+          },
+          Object {
+            "col": 6,
+            "piece": null,
+            "row": 7,
+          },
+          Object {
+            "col": 7,
+            "piece": null,
+            "row": 7,
+          },
+          Object {
+            "col": 8,
+            "piece": null,
+            "row": 7,
+          },
+          Object {
+            "col": 9,
+            "piece": null,
+            "row": 7,
+          },
+          Object {
+            "col": 10,
+            "piece": null,
+            "row": 7,
+          },
+          Object {
+            "col": 11,
+            "piece": null,
+            "row": 7,
+          },
+          Object {
+            "col": 0,
+            "piece": null,
+            "row": 8,
+          },
+          Object {
+            "col": 1,
+            "piece": null,
+            "row": 8,
+          },
+          Object {
+            "col": 2,
+            "piece": null,
+            "row": 8,
+          },
+          Object {
+            "col": 3,
+            "piece": null,
+            "row": 8,
+          },
+          Object {
+            "col": 4,
+            "piece": null,
+            "row": 8,
+          },
+          Object {
+            "col": 5,
+            "piece": null,
+            "row": 8,
+          },
+          Object {
+            "col": 6,
+            "piece": null,
+            "row": 8,
+          },
+          Object {
+            "col": 7,
+            "piece": null,
+            "row": 8,
+          },
+          Object {
+            "col": 8,
+            "piece": null,
+            "row": 8,
+          },
+          Object {
+            "col": 9,
+            "piece": null,
+            "row": 8,
+          },
+          Object {
+            "col": 10,
+            "piece": null,
+            "row": 8,
+          },
+          Object {
+            "col": 11,
+            "piece": null,
+            "row": 8,
+          },
+          Object {
+            "col": 0,
+            "piece": null,
+            "row": 9,
+          },
+          Object {
+            "col": 1,
+            "piece": null,
+            "row": 9,
+          },
+          Object {
+            "col": 2,
+            "piece": null,
+            "row": 9,
+          },
+          Object {
+            "col": 3,
+            "piece": Object {
+              "player": "playerB",
+              "type": "knight",
+            },
+            "row": 9,
+          },
+          Object {
+            "col": 4,
+            "piece": Object {
+              "player": "playerB",
+              "type": "pawn",
+            },
+            "row": 9,
+          },
+          Object {
+            "col": 5,
+            "piece": Object {
+              "player": "playerB",
+              "type": "pawn",
+            },
+            "row": 9,
+          },
+          Object {
+            "col": 6,
+            "piece": Object {
+              "player": "playerB",
+              "type": "pawn",
+            },
+            "row": 9,
+          },
+          Object {
+            "col": 7,
+            "piece": Object {
+              "player": "playerB",
+              "type": "pawn",
+            },
+            "row": 9,
+          },
+          Object {
+            "col": 8,
+            "piece": Object {
+              "player": "playerB",
+              "type": "knight",
+            },
+            "row": 9,
+          },
+          Object {
+            "col": 9,
+            "piece": null,
+            "row": 9,
+          },
+          Object {
+            "col": 10,
+            "piece": null,
+            "row": 9,
+          },
+          Object {
+            "col": 11,
+            "piece": null,
+            "row": 9,
+          },
+          Object {
+            "col": 0,
+            "piece": null,
+            "row": 10,
+          },
+          Object {
+            "col": 1,
+            "piece": null,
+            "row": 10,
+          },
+          Object {
+            "col": 2,
+            "piece": Object {
+              "player": "playerB",
+              "type": "knight",
+            },
+            "row": 10,
+          },
+          Object {
+            "col": 3,
+            "piece": Object {
+              "player": "playerB",
+              "type": "pawn",
+            },
+            "row": 10,
+          },
+          Object {
+            "col": 4,
+            "piece": Object {
+              "player": "playerB",
+              "type": "pawn",
+            },
+            "row": 10,
+          },
+          Object {
+            "col": 5,
+            "piece": Object {
+              "player": "playerB",
+              "type": "pawn",
+            },
+            "row": 10,
+          },
+          Object {
+            "col": 6,
+            "piece": Object {
+              "player": "playerB",
+              "type": "pawn",
+            },
+            "row": 10,
+          },
+          Object {
+            "col": 7,
+            "piece": Object {
+              "player": "playerB",
+              "type": "pawn",
+            },
+            "row": 10,
+          },
+          Object {
+            "col": 8,
+            "piece": Object {
+              "player": "playerB",
+              "type": "pawn",
+            },
+            "row": 10,
+          },
+          Object {
+            "col": 9,
+            "piece": Object {
+              "player": "playerB",
+              "type": "knight",
+            },
+            "row": 10,
+          },
+          Object {
+            "col": 10,
+            "piece": null,
+            "row": 10,
+          },
+          Object {
+            "col": 11,
+            "piece": null,
+            "row": 10,
+          },
+          Object {
+            "col": 0,
+            "piece": null,
+            "row": 11,
+          },
+          Object {
+            "col": 1,
+            "piece": null,
+            "row": 11,
+          },
+          Object {
+            "col": 2,
+            "piece": null,
+            "row": 11,
+          },
+          Object {
+            "col": 3,
+            "piece": null,
+            "row": 11,
+          },
+          Object {
+            "col": 4,
+            "piece": null,
+            "row": 11,
+          },
+          Object {
+            "col": 5,
+            "piece": null,
+            "row": 11,
+          },
+          Object {
+            "col": 6,
+            "piece": null,
+            "row": 11,
+          },
+          Object {
+            "col": 7,
+            "piece": null,
+            "row": 11,
+          },
+          Object {
+            "col": 8,
+            "piece": null,
+            "row": 11,
+          },
+          Object {
+            "col": 9,
+            "piece": null,
+            "row": 11,
+          },
+          Object {
+            "col": 10,
+            "piece": null,
+            "row": 11,
+          },
+          Object {
+            "col": 11,
+            "piece": null,
+            "row": 11,
+          },
+          Object {
+            "col": 0,
+            "piece": null,
+            "row": 12,
+          },
+          Object {
+            "col": 1,
+            "piece": null,
+            "row": 12,
+          },
+          Object {
+            "col": 2,
+            "piece": null,
+            "row": 12,
+          },
+          Object {
+            "col": 3,
+            "piece": null,
+            "row": 12,
+          },
+          Object {
+            "col": 4,
+            "piece": null,
+            "row": 12,
+          },
+          Object {
+            "col": 5,
+            "piece": null,
+            "row": 12,
+          },
+          Object {
+            "col": 6,
+            "piece": null,
+            "row": 12,
+          },
+          Object {
+            "col": 7,
+            "piece": null,
+            "row": 12,
+          },
+          Object {
+            "col": 8,
+            "piece": null,
+            "row": 12,
+          },
+          Object {
+            "col": 9,
+            "piece": null,
+            "row": 12,
+          },
+          Object {
+            "col": 10,
+            "piece": null,
+            "row": 12,
+          },
+          Object {
+            "col": 11,
+            "piece": null,
+            "row": 12,
+          },
+          Object {
+            "col": 0,
+            "piece": null,
+            "row": 13,
+          },
+          Object {
+            "col": 1,
+            "piece": null,
+            "row": 13,
+          },
+          Object {
+            "col": 2,
+            "piece": null,
+            "row": 13,
+          },
+          Object {
+            "col": 3,
+            "piece": null,
+            "row": 13,
+          },
+          Object {
+            "col": 4,
+            "piece": null,
+            "row": 13,
+          },
+          Object {
+            "col": 5,
+            "piece": null,
+            "row": 13,
+          },
+          Object {
+            "col": 6,
+            "piece": null,
+            "row": 13,
+          },
+          Object {
+            "col": 7,
+            "piece": null,
+            "row": 13,
+          },
+          Object {
+            "col": 8,
+            "piece": null,
+            "row": 13,
+          },
+          Object {
+            "col": 9,
+            "piece": null,
+            "row": 13,
+          },
+          Object {
+            "col": 10,
+            "piece": null,
+            "row": 13,
+          },
+          Object {
+            "col": 11,
+            "piece": null,
+            "row": 13,
+          },
+          Object {
+            "col": 1,
+            "piece": null,
+            "row": 14,
+          },
+          Object {
+            "col": 2,
+            "piece": null,
+            "row": 14,
+          },
+          Object {
+            "col": 3,
+            "piece": null,
+            "row": 14,
+          },
+          Object {
+            "col": 4,
+            "piece": null,
+            "row": 14,
+          },
+          Object {
+            "col": 5,
+            "piece": null,
+            "row": 14,
+          },
+          Object {
+            "col": 6,
+            "piece": null,
+            "row": 14,
+          },
+          Object {
+            "col": 7,
+            "piece": null,
+            "row": 14,
+          },
+          Object {
+            "col": 8,
+            "piece": null,
+            "row": 14,
+          },
+          Object {
+            "col": 9,
+            "piece": null,
+            "row": 14,
+          },
+          Object {
+            "col": 10,
+            "piece": null,
+            "row": 14,
+          },
+          Object {
+            "col": 2,
+            "piece": null,
+            "row": 15,
+          },
+          Object {
+            "col": 3,
+            "piece": null,
+            "row": 15,
+          },
+          Object {
+            "col": 4,
+            "piece": null,
+            "row": 15,
+          },
+          Object {
+            "col": 5,
+            "piece": null,
+            "row": 15,
+          },
+          Object {
+            "col": 6,
+            "piece": null,
+            "row": 15,
+          },
+          Object {
+            "col": 7,
+            "piece": null,
+            "row": 15,
+          },
+          Object {
+            "col": 8,
+            "piece": null,
+            "row": 15,
+          },
+          Object {
+            "col": 9,
+            "piece": null,
+            "row": 15,
+          },
+          Object {
+            "col": 5,
+            "piece": null,
+            "row": 16,
+          },
+          Object {
+            "col": 6,
+            "piece": null,
+            "row": 16,
+          },
+        ],
+        "capturedPieces": Object {
+          "playerA": Object {
+            "knight": 0,
+            "pawn": 0,
+          },
+          "playerB": Object {
+            "knight": 0,
+            "pawn": 0,
+          },
+        },
+        "turnCount": 0,
+      }
+    }
+    isCurrentUserActive={true}
+    message="undefined wins!"
+    possibleMove={Array []} />
+  <div
+    className="control-bar">
+    <Avatar
+      currentUser={
+        Object {
+          "uid": "host-uid",
+        }
+      }
+      isActive={true} />
+    <CapturedPieces
+      gameState={
+        Object {
+          "boardSpaces": Array [
+            Object {
+              "col": 5,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 0,
+            },
+            Object {
+              "col": 6,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 0,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 1,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 1,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 1,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 1,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 1,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 1,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 1,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 1,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 5,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 5,
+            },
+            Object {
+              "col": 2,
+              "piece": Object {
+                "player": "playerA",
+                "type": "knight",
+              },
+              "row": 5,
+            },
+            Object {
+              "col": 3,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 5,
+            },
+            Object {
+              "col": 4,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 5,
+            },
+            Object {
+              "col": 5,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 5,
+            },
+            Object {
+              "col": 6,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 5,
+            },
+            Object {
+              "col": 7,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 5,
+            },
+            Object {
+              "col": 8,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 5,
+            },
+            Object {
+              "col": 9,
+              "piece": Object {
+                "player": "playerA",
+                "type": "knight",
+              },
+              "row": 5,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 5,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 5,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 6,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 6,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 6,
+            },
+            Object {
+              "col": 3,
+              "piece": Object {
+                "player": "playerA",
+                "type": "knight",
+              },
+              "row": 6,
+            },
+            Object {
+              "col": 4,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 6,
+            },
+            Object {
+              "col": 5,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 6,
+            },
+            Object {
+              "col": 6,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 6,
+            },
+            Object {
+              "col": 7,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 6,
+            },
+            Object {
+              "col": 8,
+              "piece": Object {
+                "player": "playerA",
+                "type": "knight",
+              },
+              "row": 6,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 6,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 6,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 6,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 9,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 9,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 9,
+            },
+            Object {
+              "col": 3,
+              "piece": Object {
+                "player": "playerB",
+                "type": "knight",
+              },
+              "row": 9,
+            },
+            Object {
+              "col": 4,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 9,
+            },
+            Object {
+              "col": 5,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 9,
+            },
+            Object {
+              "col": 6,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 9,
+            },
+            Object {
+              "col": 7,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 9,
+            },
+            Object {
+              "col": 8,
+              "piece": Object {
+                "player": "playerB",
+                "type": "knight",
+              },
+              "row": 9,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 9,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 9,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 9,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 10,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 10,
+            },
+            Object {
+              "col": 2,
+              "piece": Object {
+                "player": "playerB",
+                "type": "knight",
+              },
+              "row": 10,
+            },
+            Object {
+              "col": 3,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 10,
+            },
+            Object {
+              "col": 4,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 10,
+            },
+            Object {
+              "col": 5,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 10,
+            },
+            Object {
+              "col": 6,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 10,
+            },
+            Object {
+              "col": 7,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 10,
+            },
+            Object {
+              "col": 8,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 10,
+            },
+            Object {
+              "col": 9,
+              "piece": Object {
+                "player": "playerB",
+                "type": "knight",
+              },
+              "row": 10,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 10,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 10,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 15,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 15,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 15,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 15,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 15,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 15,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 15,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 15,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 16,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 16,
+            },
+          ],
+          "capturedPieces": Object {
+            "playerA": Object {
+              "knight": 0,
+              "pawn": 0,
+            },
+            "playerB": Object {
+              "knight": 0,
+              "pawn": 0,
+            },
+          },
+          "turnCount": 0,
+        }
+      }
+      whosePiecesWereCaptured="opponent" />
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      disabled={true}
+      onClick={[Function]}>
+      Make Move
+    </Button>
+    <CapturedPieces
+      gameState={
+        Object {
+          "boardSpaces": Array [
+            Object {
+              "col": 5,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 0,
+            },
+            Object {
+              "col": 6,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 0,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 1,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 1,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 1,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 1,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 1,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 1,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 1,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 1,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 2,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 3,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 4,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 5,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 5,
+            },
+            Object {
+              "col": 2,
+              "piece": Object {
+                "player": "playerA",
+                "type": "knight",
+              },
+              "row": 5,
+            },
+            Object {
+              "col": 3,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 5,
+            },
+            Object {
+              "col": 4,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 5,
+            },
+            Object {
+              "col": 5,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 5,
+            },
+            Object {
+              "col": 6,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 5,
+            },
+            Object {
+              "col": 7,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 5,
+            },
+            Object {
+              "col": 8,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 5,
+            },
+            Object {
+              "col": 9,
+              "piece": Object {
+                "player": "playerA",
+                "type": "knight",
+              },
+              "row": 5,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 5,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 5,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 6,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 6,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 6,
+            },
+            Object {
+              "col": 3,
+              "piece": Object {
+                "player": "playerA",
+                "type": "knight",
+              },
+              "row": 6,
+            },
+            Object {
+              "col": 4,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 6,
+            },
+            Object {
+              "col": 5,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 6,
+            },
+            Object {
+              "col": 6,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 6,
+            },
+            Object {
+              "col": 7,
+              "piece": Object {
+                "player": "playerA",
+                "type": "pawn",
+              },
+              "row": 6,
+            },
+            Object {
+              "col": 8,
+              "piece": Object {
+                "player": "playerA",
+                "type": "knight",
+              },
+              "row": 6,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 6,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 6,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 6,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 7,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 8,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 9,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 9,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 9,
+            },
+            Object {
+              "col": 3,
+              "piece": Object {
+                "player": "playerB",
+                "type": "knight",
+              },
+              "row": 9,
+            },
+            Object {
+              "col": 4,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 9,
+            },
+            Object {
+              "col": 5,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 9,
+            },
+            Object {
+              "col": 6,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 9,
+            },
+            Object {
+              "col": 7,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 9,
+            },
+            Object {
+              "col": 8,
+              "piece": Object {
+                "player": "playerB",
+                "type": "knight",
+              },
+              "row": 9,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 9,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 9,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 9,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 10,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 10,
+            },
+            Object {
+              "col": 2,
+              "piece": Object {
+                "player": "playerB",
+                "type": "knight",
+              },
+              "row": 10,
+            },
+            Object {
+              "col": 3,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 10,
+            },
+            Object {
+              "col": 4,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 10,
+            },
+            Object {
+              "col": 5,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 10,
+            },
+            Object {
+              "col": 6,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 10,
+            },
+            Object {
+              "col": 7,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 10,
+            },
+            Object {
+              "col": 8,
+              "piece": Object {
+                "player": "playerB",
+                "type": "pawn",
+              },
+              "row": 10,
+            },
+            Object {
+              "col": 9,
+              "piece": Object {
+                "player": "playerB",
+                "type": "knight",
+              },
+              "row": 10,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 10,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 10,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 11,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 12,
+            },
+            Object {
+              "col": 0,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 11,
+              "piece": null,
+              "row": 13,
+            },
+            Object {
+              "col": 1,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 10,
+              "piece": null,
+              "row": 14,
+            },
+            Object {
+              "col": 2,
+              "piece": null,
+              "row": 15,
+            },
+            Object {
+              "col": 3,
+              "piece": null,
+              "row": 15,
+            },
+            Object {
+              "col": 4,
+              "piece": null,
+              "row": 15,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 15,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 15,
+            },
+            Object {
+              "col": 7,
+              "piece": null,
+              "row": 15,
+            },
+            Object {
+              "col": 8,
+              "piece": null,
+              "row": 15,
+            },
+            Object {
+              "col": 9,
+              "piece": null,
+              "row": 15,
+            },
+            Object {
+              "col": 5,
+              "piece": null,
+              "row": 16,
+            },
+            Object {
+              "col": 6,
+              "piece": null,
+              "row": 16,
+            },
+          ],
+          "capturedPieces": Object {
+            "playerA": Object {
+              "knight": 0,
+              "pawn": 0,
+            },
+            "playerB": Object {
+              "knight": 0,
+              "pawn": 0,
+            },
+          },
+          "turnCount": 0,
+        }
+      }
+      whosePiecesWereCaptured="host" />
+    <Avatar
+      currentUser={
+        Object {
+          "uid": "host-uid",
+        }
+      }
+      isActive={false} />
+  </div>
+</div>
+`;
+
+exports[`GamePlay renders with no games 1`] = `
+<p>
+  Loading...
+</p>
+`;

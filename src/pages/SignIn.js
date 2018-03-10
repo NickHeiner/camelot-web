@@ -1,23 +1,15 @@
-import React, { PureComponent } from 'react';
-import { Button } from 'react-bootstrap';
+import React, {PureComponent} from 'react';
+import {Button} from 'react-bootstrap';
 import autobind from 'autobind-decorator';
-import firebase from 'firebase';
+import {getFirebase} from 'react-redux-firebase';
 
 class SignIn extends PureComponent {
-    constructor() {
-        super();
-        this.auth = new firebase.auth();
-        this.provider = new firebase.auth.GoogleAuthProvider();
-    }
-
-    render() {
-        return <Button bsStyle="primary" onClick={this.signIn}>Sign In</Button>;
-    }
+  render = () => <Button bsStyle="primary" onClick={this.signIn}>Sign In</Button>;
 
     @autobind
-    signIn() {
-        this.auth.signInWithRedirect(this.provider);
-    }
+  signIn() {
+    getFirebase().login({provider: 'Google'});
+  }
 }
 
 export default SignIn;
