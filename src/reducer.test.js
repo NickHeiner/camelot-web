@@ -1,5 +1,4 @@
 import reducer from './reducer';
-import {makeMove} from './actions';
 import * as Constants from './constants';
 import dataPostInitialLoad from '../fixtures/data-post-initial-load';
 import update from 'immutability-helper';

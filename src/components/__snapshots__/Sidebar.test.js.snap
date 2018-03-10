@@ -1,7 +1,7 @@
 exports[`Sidebar renders 1`] = `
 <div>
   <div
-    className="bm-overlay "
+    className="bm-overlay"
     onClick={[Function]}
     style={
       Object {
@@ -16,11 +16,11 @@ exports[`Sidebar renders 1`] = `
         "transform": "translate3d(100%, 0, 0)",
         "transition": "opacity 0.3s, transform 0s 0.3s",
         "width": "100%",
-        "zIndex": 1,
+        "zIndex": 1000,
       }
     } />
   <div
-    className="bm-menu-wrap "
+    className="bm-menu-wrap"
     id=""
     style={
       Object {
@@ -34,11 +34,11 @@ exports[`Sidebar renders 1`] = `
         "transform": "translate3d(-100%, 0, 0)",
         "transition": "all 0.5s",
         "width": "300px",
-        "zIndex": 2,
+        "zIndex": 1100,
       }
     }>
     <div
-      className="bm-menu "
+      className="bm-menu"
       style={
         Object {
           "boxSizing": "border-box",
@@ -47,7 +47,7 @@ exports[`Sidebar renders 1`] = `
         }
       }>
       <nav
-        className="bm-item-list "
+        className="bm-item-list"
         style={
           Object {
             "height": "100%",
@@ -87,7 +87,7 @@ exports[`Sidebar renders 1`] = `
     <div
       style={Object {}}>
       <div
-        className="bm-cross-button "
+        className="bm-cross-button"
         style={
           Object {
             "height": 24,
@@ -106,7 +106,7 @@ exports[`Sidebar renders 1`] = `
             }
           }>
           <span
-            className="bm-cross "
+            className="bm-cross"
             style={
               Object {
                 "height": 14,
@@ -116,7 +116,7 @@ exports[`Sidebar renders 1`] = `
               }
             } />
           <span
-            className="bm-cross "
+            className="bm-cross"
             style={
               Object {
                 "height": 14,
@@ -132,6 +132,7 @@ exports[`Sidebar renders 1`] = `
             Object {
               "background": "transparent",
               "border": "none",
+              "cursor": "pointer",
               "height": "100%",
               "left": 0,
               "margin": 0,
@@ -149,70 +150,74 @@ exports[`Sidebar renders 1`] = `
     </div>
   </div>
   <div
-    className="bm-burger-button "
-    style={
-      Object {
-        "zIndex": 1,
-      }
-    }>
-    <span>
-      <span
-        className="bm-burger-bars "
-        style={
-          Object {
-            "height": "20%",
-            "left": 0,
-            "opacity": 1,
-            "position": "absolute",
-            "right": 0,
-            "top": "0%",
-          }
-        } />
-      <span
-        className="bm-burger-bars "
-        style={
-          Object {
-            "height": "20%",
-            "left": 0,
-            "opacity": 1,
-            "position": "absolute",
-            "right": 0,
-            "top": "40%",
-          }
-        } />
-      <span
-        className="bm-burger-bars "
-        style={
-          Object {
-            "height": "20%",
-            "left": 0,
-            "opacity": 1,
-            "position": "absolute",
-            "right": 0,
-            "top": "80%",
-          }
-        } />
-    </span>
-    <button
-      onClick={[Function]}
-      onMouseOut={[Function]}
-      onMouseOver={[Function]}
+    style={Object {}}>
+    <div
+      className="bm-burger-button"
       style={
         Object {
-          "border": "none",
-          "fontSize": 8,
-          "height": "100%",
-          "left": 0,
-          "margin": 0,
-          "opacity": 0,
-          "padding": 0,
-          "position": "absolute",
-          "top": 0,
-          "width": "100%",
+          "zIndex": 1000,
         }
       }>
-      Open Menu
-    </button>
+      <span>
+        <span
+          className="bm-burger-bars"
+          style={
+            Object {
+              "height": "20%",
+              "left": 0,
+              "opacity": 1,
+              "position": "absolute",
+              "right": 0,
+              "top": "0%",
+            }
+          } />
+        <span
+          className="bm-burger-bars"
+          style={
+            Object {
+              "height": "20%",
+              "left": 0,
+              "opacity": 1,
+              "position": "absolute",
+              "right": 0,
+              "top": "40%",
+            }
+          } />
+        <span
+          className="bm-burger-bars"
+          style={
+            Object {
+              "height": "20%",
+              "left": 0,
+              "opacity": 1,
+              "position": "absolute",
+              "right": 0,
+              "top": "80%",
+            }
+          } />
+      </span>
+      <button
+        onClick={[Function]}
+        onMouseOut={[Function]}
+        onMouseOver={[Function]}
+        style={
+          Object {
+            "border": "none",
+            "cursor": "pointer",
+            "fontSize": 8,
+            "height": "100%",
+            "left": 0,
+            "margin": 0,
+            "opacity": 0,
+            "padding": 0,
+            "position": "absolute",
+            "top": 0,
+            "width": "100%",
+          }
+        }>
+        Open Menu
+      </button>
+    </div>
   </div>
 </div>
 `;
