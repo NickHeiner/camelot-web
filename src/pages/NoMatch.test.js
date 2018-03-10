@@ -1,5 +1,5 @@
 import NoMatch from './NoMatch';
-import React from 'React';
+import React from 'react';
 import reactTestRenderer from 'react-test-renderer';
 
 describe('NoMatch', () => {

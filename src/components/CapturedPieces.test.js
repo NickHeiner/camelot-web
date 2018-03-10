@@ -1,5 +1,5 @@
 import CapturedPieces from './CapturedPieces';
-import React from 'React';
+import React from 'react';
 import reactTestRenderer from 'react-test-renderer';
 import camelotEngine from 'camelot-engine';
 import {fromJS} from 'immutable';

@@ -1,5 +1,5 @@
 import Board from './Board';
-import React from 'React';
+import React from 'react';
 import camelotEngine from 'camelot-engine';
 import {getGameStateWithPiece, shallowRenderComponent} from '../utils/test-utils';
 

@@ -1,5 +1,5 @@
 import {SidebarPresentation} from './Sidebar';
-import React from 'React';
+import React from 'react';
 import reactTestRenderer from 'react-test-renderer';
 import {getDummyCurrentUser} from '../utils/test-utils';
 

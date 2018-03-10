@@ -1,5 +1,5 @@
 import {PresentationGameList} from './List';
-import React from 'React';
+import React from 'react';
 import reactTestRenderer from 'react-test-renderer';
 import {fromJS} from 'immutable';
 

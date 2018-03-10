@@ -1,5 +1,5 @@
 import {PresentationGamePlay} from './Play';
-import React from 'React';
+import React from 'react';
 import {fromJS} from 'immutable';
 import {setPieceInBoardSpace, getGameStateWithPiece, shallowRenderComponent} from '../../utils/test-utils';
 
