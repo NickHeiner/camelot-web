@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 @connect(
-  ({firebase}) => ({currentUser: firebase.get('profile')}),
+  ({firebase}) => ({currentUser: firebase.profile}),
   dispatch => bindActionCreators({
     setOffline
   }, dispatch)

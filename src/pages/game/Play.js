@@ -22,8 +22,8 @@ export class PresentationGamePlay extends PureComponent {
     } else if (this.props.game === null) {
       gameDisplay = <p>This link is not valid. Did someone share it with you incorrectly?</p>;
     } else {
-      const currentUserUid = this.props.currentUser.get('uid'),
-        currentUserIsHost = currentUserUid === this.props.host.get('uid');
+      const currentUserUid = this.props.currentUser.uid,
+        currentUserIsHost = currentUserUid === this.props.host.uid;
 
       let findOpponentMessage;
       if (!this.props.opponent) {
@@ -39,29 +39,27 @@ export class PresentationGamePlay extends PureComponent {
         }
       }
 
-      const gameState = this.props.game.get('gameState');
+      const gameState = this.props.game.gameState;
       let activeUser = null;
       let isCurrentUserActive = false;
       let currentUserPlayer = null;
       let userHasValidMove = false;
       let gameWinner = null;
       if (gameState) {
-        activeUser = gameState.get('turnCount') % 2 === 0 ? 'host' : 'opponent';
+        activeUser = gameState.turnCount % 2 === 0 ? 'host' : 'opponent';
 
-        isCurrentUserActive = currentUserUid === this.props[activeUser].get('uid');
+        isCurrentUserActive = currentUserUid === this.props[activeUser].uid;
 
-        const opponentUid = this.props.opponent && this.props.opponent.get('uid');
+        const opponentUid = this.props.opponent && this.props.opponent.uid;
 
-        currentUserPlayer = currentUserUid === this.props.host.get('uid') ? 'playerA' 
+        currentUserPlayer = currentUserUid === this.props.host.uid ? 'playerA' 
                     : currentUserUid === opponentUid ? 'playerB' : null;
-
-        const gameStateJs = gameState.toJS();
 
         // I don't know why isValidMove considers [] and [singleMove] to be valid.
         userHasValidMove = this.props.chosenMoveSteps.size > 1 && 
-                    isValidMove(gameStateJs, this.props.chosenMoveSteps, currentUserPlayer);
+                    isValidMove(gameState, this.props.chosenMoveSteps, currentUserPlayer);
 
-        gameWinner = getGameWinner(gameStateJs);
+        gameWinner = getGameWinner(gameState);
       }
 
       gameDisplay = (
@@ -96,12 +94,12 @@ export class PresentationGamePlay extends PureComponent {
   joinGame() {
     this.props.firebase
             .ref(`/games/${this.props.gameId}/opponent`)
-            .set(this.props.currentUser.get('uid'));
+            .set(this.props.currentUser.uid);
   }
 
   @autobind
   makeMove() {
-    this.props.makeMove(this.props.gameId, this.props.game.get('gameState'), this.props.chosenMoveSteps);
+    this.props.makeMove(this.props.gameId, this.props.game.gameState, this.props.chosenMoveSteps);
   }
 
   @autobind
@@ -110,21 +108,21 @@ export class PresentationGamePlay extends PureComponent {
       return;
     }
     const winningUser = gameWinner === 'playerA' ? this.props.host : this.props.opponent;
-    return `${winningUser.get('displayName')} wins!`;
+    return `${winningUser.displayName} wins!`;
   }
 }
 
 @firebaseConnect(['/games', '/users'])
 @connect(
   ({firebase, ui}, ownProps) => {
-    const game = firebase.getIn(['data', 'games', ownProps.params.id]);
+    const game = _.get(firebase.data, ['games', ownProps.params.id]);
     
     return {
       game,
       chosenMoveSteps: ui.get('chosenMoveSteps'),
-      host: game && firebase.getIn(['data', 'users', game.get('host')]),
-      opponent: game && firebase.getIn(['data', 'users', game.get('opponent')], null),
-      currentUser: firebase.get('profile')
+      host: game && _.get(firebase.data.users, game.host),
+      opponent: game && _.get(firebase.data.users, game.opponent, null),
+      currentUser: firebase.profile
     };
   },
   dispatch => bindActionCreators({

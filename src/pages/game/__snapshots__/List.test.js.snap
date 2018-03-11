@@ -1,10 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`GameList renders with games 1`] = `
 <div>
   <ul>
     <li>
       <a
         onClick={[Function]}
-        style={Object {}}>
+        style={Object {}}
+      >
         Hosted by 
         Display Name 1
       </a>
@@ -12,7 +15,8 @@ exports[`GameList renders with games 1`] = `
     <li>
       <a
         onClick={[Function]}
-        style={Object {}}>
+        style={Object {}}
+      >
         Hosted by 
         Display Name 2
       </a>
@@ -22,7 +26,8 @@ exports[`GameList renders with games 1`] = `
     className="btn btn-primary"
     disabled={false}
     onClick={undefined}
-    type="button">
+    type="button"
+  >
     New
   </button>
 </div>
@@ -35,7 +40,8 @@ exports[`GameList renders with no games 1`] = `
     className="btn btn-primary"
     disabled={false}
     onClick={undefined}
-    type="button">
+    type="button"
+  >
     New
   </button>
 </div>

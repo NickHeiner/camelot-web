@@ -1,9 +1,8 @@
-import {fromJS} from 'immutable';
 import ReactShallowRenderer from 'react-test-renderer/shallow';
 import camelotEngine from 'camelot-engine';
 const {getBoardSpace} = camelotEngine().query();
 
-export const getDummyCurrentUser = () => fromJS({
+export const getDummyCurrentUser = () => ({
   photoURL: 'photoURL',
   displayName: 'Display Name'
 });

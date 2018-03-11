@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Sidebar renders 1`] = `
 <div>
   <div
@@ -18,7 +20,8 @@ exports[`Sidebar renders 1`] = `
         "width": "100%",
         "zIndex": 1000,
       }
-    } />
+    }
+  />
   <div
     className="bm-menu-wrap"
     id=""
@@ -36,7 +39,8 @@ exports[`Sidebar renders 1`] = `
         "width": "300px",
         "zIndex": 1100,
       }
-    }>
+    }
+  >
     <div
       className="bm-menu"
       style={
@@ -45,14 +49,16 @@ exports[`Sidebar renders 1`] = `
           "height": "100%",
           "overflow": "auto",
         }
-      }>
+      }
+    >
       <nav
         className="bm-item-list"
         style={
           Object {
             "height": "100%",
           }
-        }>
+        }
+      >
         <div
           className="user-bar"
           style={
@@ -60,14 +66,16 @@ exports[`Sidebar renders 1`] = `
               "display": "block",
               "outline": "none",
             }
-          }>
+          }
+        >
           <span>
             Display Name
           </span>
           <img
             alt="avatar for Display Name"
             className="profile-picture"
-            src="photoURL" />
+            src="photoURL"
+          />
         </div>
         <button
           className="btn btn-primary"
@@ -79,13 +87,15 @@ exports[`Sidebar renders 1`] = `
               "outline": "none",
             }
           }
-          type="button">
+          type="button"
+        >
           Sign Out
         </button>
       </nav>
     </div>
     <div
-      style={Object {}}>
+      style={Object {}}
+    >
       <div
         className="bm-cross-button"
         style={
@@ -96,7 +106,8 @@ exports[`Sidebar renders 1`] = `
             "top": 8,
             "width": 24,
           }
-        }>
+        }
+      >
         <span
           style={
             Object {
@@ -104,7 +115,8 @@ exports[`Sidebar renders 1`] = `
               "right": "14px",
               "top": "6px",
             }
-          }>
+          }
+        >
           <span
             className="bm-cross"
             style={
@@ -114,7 +126,8 @@ exports[`Sidebar renders 1`] = `
                 "transform": "rotate(45deg)",
                 "width": 3,
               }
-            } />
+            }
+          />
           <span
             className="bm-cross"
             style={
@@ -124,7 +137,8 @@ exports[`Sidebar renders 1`] = `
                 "transform": "rotate(-45deg)",
                 "width": 3,
               }
-            } />
+            }
+          />
         </span>
         <button
           onClick={[Function]}
@@ -143,21 +157,24 @@ exports[`Sidebar renders 1`] = `
               "top": 0,
               "width": "100%",
             }
-          }>
+          }
+        >
           Close Menu
         </button>
       </div>
     </div>
   </div>
   <div
-    style={Object {}}>
+    style={Object {}}
+  >
     <div
       className="bm-burger-button"
       style={
         Object {
           "zIndex": 1000,
         }
-      }>
+      }
+    >
       <span>
         <span
           className="bm-burger-bars"
@@ -170,7 +187,8 @@ exports[`Sidebar renders 1`] = `
               "right": 0,
               "top": "0%",
             }
-          } />
+          }
+        />
         <span
           className="bm-burger-bars"
           style={
@@ -182,7 +200,8 @@ exports[`Sidebar renders 1`] = `
               "right": 0,
               "top": "40%",
             }
-          } />
+          }
+        />
         <span
           className="bm-burger-bars"
           style={
@@ -194,7 +213,8 @@ exports[`Sidebar renders 1`] = `
               "right": 0,
               "top": "80%",
             }
-          } />
+          }
+        />
       </span>
       <button
         onClick={[Function]}
@@ -214,7 +234,8 @@ exports[`Sidebar renders 1`] = `
             "top": 0,
             "width": "100%",
           }
-        }>
+        }
+      >
         Open Menu
       </button>
     </div>

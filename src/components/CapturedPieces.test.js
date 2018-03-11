@@ -19,30 +19,32 @@ describe('CapturedPieces', () => {
     describe('no captured pieces', () => {
       it('host is captured', () => {
         expect(reactTestRenderer.create(
-                    <CapturedPieces gameState={gameState} whosePiecesWereCaptured="host" />
+                    <CapturedPieces gameState={gameState.toJS()} whosePiecesWereCaptured="host" />
                 )).toMatchSnapshot();
       });
       it('opponent is captured', () => {
         expect(reactTestRenderer.create(
-                    <CapturedPieces gameState={gameState} whosePiecesWereCaptured="opponent" />
+                    <CapturedPieces gameState={gameState.toJS()} whosePiecesWereCaptured="opponent" />
                 )).toMatchSnapshot();
       });
     });
 
     describe('captured pieces', () => {
       it('host is captured', () => {
-        gameState.setIn(['capturedPieces', 'playerA', 'knight'], 1);
-        gameState.setIn(['capturedPieces', 'playerA', 'pawn'], 3);
+        const withCaptures = gameState
+          .setIn(['capturedPieces', 'playerA', 'knight'], 1)
+          .setIn(['capturedPieces', 'playerA', 'pawn'], 3);
         expect(reactTestRenderer.create(
-                    <CapturedPieces gameState={gameState} whosePiecesWereCaptured="host" />
-                )).toMatchSnapshot();
+          <CapturedPieces gameState={withCaptures.toJS()} whosePiecesWereCaptured="host" />
+        )).toMatchSnapshot();
       });
       it('opponent is captured', () => {
-        gameState.setIn(['capturedPieces', 'playerB', 'knight'], 4);
-        gameState.setIn(['capturedPieces', 'playerB', 'pawn'], 2);
+        const withCaptures = gameState
+          .setIn(['capturedPieces', 'playerB', 'knight'], 4)
+          .setIn(['capturedPieces', 'playerB', 'pawn'], 2);
         expect(reactTestRenderer.create(
-                    <CapturedPieces gameState={gameState} whosePiecesWereCaptured="opponent" />
-                )).toMatchSnapshot();
+          <CapturedPieces gameState={withCaptures.toJS()} whosePiecesWereCaptured="opponent" />
+        )).toMatchSnapshot();
       });
     });
   });

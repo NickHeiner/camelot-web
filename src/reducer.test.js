@@ -6,7 +6,7 @@ import {fromJS} from 'immutable';
 
 describe('reducer', () => {
   describe('unrecognized action', () => {
-    it('is the identity function for an unrecognized action', () => {
+    it.only('is the identity function for an unrecognized action', () => {
       expect(reducer(dataPostInitialLoad, {type: 'unrecognized'})).toEqual(dataPostInitialLoad);
     });
   });

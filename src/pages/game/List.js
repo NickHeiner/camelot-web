@@ -14,14 +14,11 @@ export class PresentationGameList extends PureComponent {
                 {
                     this.props.games &&
                     this.props.users && 
-                        this.props.games
-                        .map(((game, key) => 
+                        _.map(this.props.games, (game, key) => 
                             <li key={key}><Link to={`play/${key}`}>
-                                Hosted by {this.props.users.getIn([game.get('host'), 'displayName'])}
+                                Hosted by {this.props.users[game.host].displayName}
                             </Link></li>
-                        ))
-                        .toList()
-                        .toJS()
+                        )
                 }
             </ul>
             <Button bsStyle="primary" onClick={this.props.createNewGame}>New</Button>
@@ -31,9 +28,9 @@ export class PresentationGameList extends PureComponent {
 @firebaseConnect(['/games', '/users'])
 @connect(
     ({firebase}) => ({
-      games: firebase.getIn(['data', 'games']),
-      users: firebase.getIn(['data', 'users']),
-      currentUserUid: firebase.getIn(['profile', 'uid'])
+      games: firebase.data.games,
+      users: firebase.data.users,
+      currentUserUid: firebase.profile.uid
     })
 )
 class GameListContainer extends PureComponent {

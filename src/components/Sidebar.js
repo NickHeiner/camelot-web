@@ -16,7 +16,7 @@ export class SidebarPresentation extends PureComponent {
     return (
             <SlideMenu>
                 <div className="user-bar">
-                    <span>{currentUser.get('displayName')}</span>
+                    <span>{currentUser.displayName}</span>
                     <Avatar currentUser={currentUser} />
                 </div>
                 <Button bsStyle="primary" onClick={this.signOut}>Sign Out</Button>

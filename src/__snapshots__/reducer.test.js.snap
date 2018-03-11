@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`reducer BOARD_SPACE_CLICK handles clicking on a space that is owned by the other player 1`] = `
 Object {
   "firebase": Object {

@@ -1,21 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Avatar has a current user active 1`] = `
 <img
   alt="avatar for Display Name"
   className="profile-picture active"
-  src="photoURL" />
+  src="photoURL"
+/>
 `;
 
 exports[`Avatar has a current user inactive 1`] = `
 <img
   alt="avatar for Display Name"
   className="profile-picture"
-  src="photoURL" />
+  src="photoURL"
+/>
 `;
 
 exports[`Avatar renders with no user 1`] = `
 <span
   aria-label="No one"
-  className="profile-picture unknown">
+  className="profile-picture unknown"
+>
   ?
 </span>
 `;

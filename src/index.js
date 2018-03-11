@@ -10,6 +10,7 @@ import {Provider} from 'react-redux';
 import {createStore, compose} from 'redux';
 import reducer from './reducer';
 import {reactReduxFirebase} from 'react-redux-firebase';
+import firebase from 'firebase';
 import {syncHistoryWithStore} from 'react-router-redux';
 import gameListJson from '../offline-data/game-play';
 import _ from 'lodash';
@@ -22,10 +23,12 @@ const firebaseConfig = {
   messagingSenderId: '644309983634'
 };
 
+firebase.initializeApp(firebaseConfig);
+
 // TODO what is the difference between `auth` and `profile` that react-redux-firebase sets up?
 // Do we want to use composeEnhancers instead of compose here?
 const createStoreWithFirebase = compose(
-  reactReduxFirebase(firebaseConfig, {userProfile: 'users'}),
+  reactReduxFirebase(firebase, {userProfile: 'users'}),
 )(createStore);
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -32,7 +32,7 @@
     "gzip-size": "3.0.0",
     "html-webpack-plugin": "2.24.0",
     "http-proxy-middleware": "0.17.2",
-    "jest": "17.0.2",
+    "jest": "^22.4.2",
     "json-loader": "0.5.4",
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
@@ -57,25 +57,28 @@
     "classnames": "^2.2.5",
     "firebase": "^3.6.9",
     "immutability-helper": "^2.3.1",
+    "immutable": "^3.8.2",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
-    "react": "^15.4.2",
+    "react": "^16",
     "react-bootstrap": "^0.31.0",
     "react-burger-menu": "^2.1.4",
-    "react-dom": "^15.4.2",
+    "react-dom": "^16.2.0",
     "react-redux": "^5.0.5",
-    "react-redux-firebase": "1.4.5",
+    "react-redux-firebase": "^2.0.5",
     "react-router": "^3.0.2",
     "react-router-redux": "^4.0.8",
-    "react-test-renderer": "^15.6.1",
+    "react-test-renderer": "^16.2.0",
     "redux": "^3.7.1"
   },
   "scripts": {
     "lint": "eslint src fixtures --cache --max-warnings 0",
-    "lint:fix": "npm run lint -- --fix",
+    "lint:fix": "yarn run lint -- --fix",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "npm run lint && node scripts/test.js --env=jsdom"
+    "jest": "node scripts/test.js --env=jsdom",
+    "update-snapshot": "yarn run jest --updateSnapshot",
+    "test": "yarn run lint && yarn run jest"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -85,7 +88,7 @@
       "<rootDir>/config/polyfills.js"
     ],
     "testPathIgnorePatterns": [
-      "<rootDir>[/\\\\](build|docs|node_modules)[/\\\\]"
+      "<rootDir>[/\\\\](build|docs|node_modules|scripts)[/\\\\]"
     ],
     "testEnvironment": "node",
     "testURL": "http://localhost",

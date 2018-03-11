@@ -3,13 +3,13 @@ import React, {PureComponent} from 'react';
 
 export default class CapturedPieces extends PureComponent {
   render() {
-        // Is this really necessary or is it an artifact of some other bad practice?
-    if (!this.props.gameState) {
+    const {gameState} = this.props;
+    // Is this really necessary or is it an artifact of some other bad practice?
+    if (!gameState) {
       return null;
     }
 
     const whichPlayer = this.props.whosePiecesWereCaptured === 'host' ? 'playerA' : 'playerB';
-    const gameState = this.props.gameState.toJS();
     return <div className="captured">
             <div className="piece-count-pair">
                 <Glyphicon glyph="tower" className={this.props.whosePiecesWereCaptured} /> 
