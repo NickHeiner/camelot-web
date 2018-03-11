@@ -6,7 +6,8 @@ import _ from 'lodash';
 import {setOffline} from '../actions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-
+import {css} from 'glamor';
+import {pageHeaderMarginTop} from '../styles';
 @connect(
   ({firebase}) => ({currentUser: firebase.profile}),
   dispatch => bindActionCreators({
@@ -28,10 +29,21 @@ class Frame extends PureComponent {
       body = <p>Loading...</p>;
     }
 
+    const styles = css({
+      textAlign: 'center',
+      '& > .page-header': {
+        marginTop: pageHeaderMarginTop,
+        '& > h1': {
+          marginTop: '-6px',
+          marginBottom: '0px'
+        }
+      }
+    });
+
     return (
       <div>
         {currentUser && <Sidebar currentUser={currentUser} />}
-        <main className="App">
+        <main {...styles}>
           <PageHeader>Camelot {this.props.offline && '– Offline Dev Mode'}</PageHeader>
           {body}
         </main>

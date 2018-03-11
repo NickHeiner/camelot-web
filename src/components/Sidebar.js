@@ -6,6 +6,7 @@ import {browserHistory} from 'react-router';
 import {slide as SlideMenu} from 'react-burger-menu';
 import {firebaseConnect} from 'react-redux-firebase';
 import Avatar from './Avatar';
+import {css} from 'glamor';
 
 export class SidebarPresentation extends PureComponent {
   static propTypes = {
@@ -13,9 +14,14 @@ export class SidebarPresentation extends PureComponent {
   }
   render() {
     const currentUser = this.props.currentUser;
+    const styles = css({
+      display: 'flex',
+      justifyContent: 'space-between',
+      marginBottom: '10px'
+    });
     return (
             <SlideMenu>
-                <div className="user-bar">
+                <div {...styles}>
                     <span>{currentUser.displayName}</span>
                     <Avatar currentUser={currentUser} />
                 </div>

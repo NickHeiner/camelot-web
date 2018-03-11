@@ -20,17 +20,18 @@ describe('GamePlay', () => {
       player: 'playerA'
     });
 
-    const game = fromJS({
+    const game = {
       gameState: gameStateWithWinner
-    });
+    };
 
-    const host = fromJS({
+    const host = {
       uid: 'host-uid'
-    });
+    };
 
-    const opponent = fromJS({
-      uid: 'host-uid'
-    });
+    const opponent = {
+      uid: 'host-uid',
+      displayName: 'Other Player'
+    };
 
     const chosenMoveSteps = fromJS([]);
 

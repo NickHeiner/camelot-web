@@ -60,7 +60,7 @@ exports[`Sidebar renders 1`] = `
         }
       >
         <div
-          className="user-bar"
+          data-css-17wteam=""
           style={
             Object {
               "display": "block",
