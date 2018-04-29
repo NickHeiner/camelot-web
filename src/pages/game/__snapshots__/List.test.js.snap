@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`GameList renders with games 1`] = `
-<div>
+Array [
   <ul>
     <li>
       <a
@@ -21,7 +21,7 @@ exports[`GameList renders with games 1`] = `
         Display Name 2
       </a>
     </li>
-  </ul>
+  </ul>,
   <button
     className="btn btn-primary"
     disabled={false}
@@ -29,13 +29,13 @@ exports[`GameList renders with games 1`] = `
     type="button"
   >
     New
-  </button>
-</div>
+  </button>,
+]
 `;
 
 exports[`GameList renders with no games 1`] = `
-<div>
-  <ul />
+Array [
+  <ul />,
   <button
     className="btn btn-primary"
     disabled={false}
@@ -43,6 +43,17 @@ exports[`GameList renders with no games 1`] = `
     type="button"
   >
     New
-  </button>
-</div>
+  </button>,
+]
+`;
+
+exports[`GameList renders with no user 1`] = `
+<button
+  className="btn btn-primary"
+  disabled={false}
+  onClick={[Function]}
+  type="button"
+>
+  Sign In
+</button>
 `;

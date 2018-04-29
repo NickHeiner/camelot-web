@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react';
-import SignIn from '../pages/SignIn';
 import Sidebar from './Sidebar';
 import {PageHeader} from 'react-bootstrap';
 import _ from 'lodash';
@@ -17,18 +16,6 @@ import {pageHeaderMarginTop} from '../styles';
 class Frame extends PureComponent {
   render() {
     const {currentUser} = this.props;
-    
-    let body;
-    if (currentUser) {
-      // TODO is this heinous?
-      this.props.children.props.params.currentUser = currentUser;
-      body = this.props.children;
-    } else if (currentUser === null) {
-      body = <SignIn />;
-    } else {
-      body = <p>Loading...</p>;
-    }
-
     const styles = css({
       textAlign: 'center',
       '& > .page-header': {
@@ -40,15 +27,13 @@ class Frame extends PureComponent {
       }
     });
 
-    return (
-      <div>
-        {currentUser && <Sidebar currentUser={currentUser} />}
-        <main {...styles}>
-          <PageHeader>Camelot {this.props.offline && '– Offline Dev Mode'}</PageHeader>
-          {body}
-        </main>
-      </div>
-    );
+    return <React.Fragment>
+      {!currentUser.isEmpty && <Sidebar currentUser={currentUser} />}
+      <main {...styles}>
+        <PageHeader>Camelot {this.props.offline && '– Offline Dev Mode'}</PageHeader>
+        {this.props.children}
+      </main>
+    </React.Fragment>;
   }
 }
 

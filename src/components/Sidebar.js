@@ -25,7 +25,7 @@ export class SidebarPresentation extends PureComponent {
                     <span>{currentUser.displayName}</span>
                     <Avatar currentUser={currentUser} />
                 </div>
-                <Button bsStyle="primary" onClick={this.signOut}>Sign Out</Button>
+                <Button bsStyle="primary" onClick={this.props.onSignOutClick}>Sign Out</Button>
             </SlideMenu>
     );
   }
@@ -38,10 +38,10 @@ class Sidebar extends PureComponent {
   }
 
   render() {
-    return <SidebarPresentation onClick={this.signOut} currentUser={this.props.currentUser} />;
+    return <SidebarPresentation onSignOutClick={this.signOut} currentUser={this.props.currentUser} />;
   }
 
-    @autobind
+  @autobind
   signOut() {
     this.props.firebase.logout().then(() => browserHistory.push('/'));
   }

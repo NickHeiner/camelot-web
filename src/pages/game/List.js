@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+import SignIn from '../SignIn';
 import {Button} from 'react-bootstrap';
 import autobind from 'autobind-decorator';
 import _ from 'lodash';
@@ -8,8 +9,9 @@ import {firebaseConnect} from 'react-redux-firebase';
 import {connect} from 'react-redux';
 
 export class PresentationGameList extends PureComponent {
-  render = () =>
-        <div>
+  render = () => 
+    this.props.currentUser.isEmpty ? <SignIn /> 
+        : <React.Fragment>
             <ul>
                 {
                     this.props.games &&
@@ -22,7 +24,7 @@ export class PresentationGameList extends PureComponent {
                 }
             </ul>
             <Button bsStyle="primary" onClick={this.props.createNewGame}>New</Button>
-        </div>;
+        </React.Fragment>;
 }
 
 @firebaseConnect(['/games', '/users'])
@@ -30,19 +32,20 @@ export class PresentationGameList extends PureComponent {
     ({firebase}) => ({
       games: firebase.data.games,
       users: firebase.data.users,
-      currentUserUid: firebase.profile.uid
+      currentUser: firebase.profile
     })
 )
 class GameListContainer extends PureComponent {
-    @autobind
+  @autobind
   createNewGame() {
     this.props.firebase.push('/games', {
-      host: this.props.currentUserUid,
+      host: this.props.currentUser.uid,
       gameState: camelotEngine().createEmptyGame()
     });
   }
 
   render = () => <PresentationGameList 
+        currentUser={this.props.currentUser}
         createNewGame={this.createNewGame} 
         games={this.props.games} 
         users={this.props.users} />

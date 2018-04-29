@@ -5,7 +5,12 @@ import reactTestRenderer from 'react-test-renderer';
 describe('GameList', () => {
   it('renders with no games', () => {
     expect(reactTestRenderer.create(
-            <PresentationGameList />
+            <PresentationGameList currentUser={{isEmpty: false}} />
+        )).toMatchSnapshot();
+  });
+  it('renders with no user', () => {
+    expect(reactTestRenderer.create(
+            <PresentationGameList currentUser={{isEmpty: true}} />
         )).toMatchSnapshot();
   });
   it('renders with games', () => {
@@ -26,7 +31,7 @@ describe('GameList', () => {
       }
     };
     expect(reactTestRenderer.create(
-            <PresentationGameList games={games} users={users} />
+            <PresentationGameList games={games} users={users} currentUser={{isEmpty: false}} />
         )).toMatchSnapshot();
   });
 });

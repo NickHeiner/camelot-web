@@ -39,14 +39,14 @@ export class PresentationGamePlay extends PureComponent {
         }
       }
 
-      const gameState = this.props.game.gameState;
+      const {gameState} = this.props.game;
       let activeUser = null;
       let isCurrentUserActive = false;
       let currentUserPlayer = null;
       let userHasValidMove = false;
       let gameWinner = null;
       if (gameState) {
-        activeUser = gameState.turnCount % 2 === 0 ? 'host' : 'opponent';
+        activeUser = gameState.turnCount % 2 ? 'opponent' : 'host';
 
         isCurrentUserActive = currentUserUid === this.props[activeUser].uid;
 
