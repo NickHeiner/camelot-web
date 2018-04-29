@@ -973,7 +973,7 @@ exports[`GamePlay renders with a game that has a winner 1`] = `
       }
     }
     isCurrentUserActive={true}
-    message="Other Player wins!"
+    message="opponent-name wins!"
     possibleMove={Immutable.List []}
   />
   <div
@@ -2940,8 +2940,8 @@ exports[`GamePlay renders with a game that has a winner 1`] = `
     <Avatar
       currentUser={
         Object {
-          "displayName": "Other Player",
-          "uid": "host-uid",
+          "displayName": "opponent-name",
+          "uid": "opponent-uid",
         }
       }
       isActive={false}

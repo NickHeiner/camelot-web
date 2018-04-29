@@ -29,8 +29,8 @@ describe('GamePlay', () => {
     };
 
     const opponent = {
-      uid: 'host-uid',
-      displayName: 'Other Player'
+      uid: 'opponent-uid',
+      displayName: 'opponent-name'
     };
 
     const chosenMoveSteps = fromJS([]);
