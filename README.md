@@ -2,7 +2,6 @@ This project is my hobby space. I also take license to do wildly inappropriate t
 
 ## TODO
 * Analytics
-* Appropriate cursor for interactive board spaces
 * Progressive Web App
 * Keyboard shortcuts
 * Animations

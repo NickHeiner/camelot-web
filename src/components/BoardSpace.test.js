@@ -32,7 +32,7 @@ describe('BoardSpace', () => {
       );
   });
 
-  it('when the user has chosen the first step of a move', () => {
+  it('when the user has chosen the first step of a move, and the board space is a possible next move', () => {
     const gameState = camelotEngine().createEmptyGame();
 
     const chosenCol = 6;
@@ -40,6 +40,22 @@ describe('BoardSpace', () => {
     const boardSpace = <BoardSpace 
       row={chosenRow + 1} 
       col={chosenCol} 
+      gameState={gameState}
+      chosenMoveSteps={fromJS([{row: chosenRow, col: chosenCol}])}
+      currentUserPlayer="playerA"
+      isCurrentUserActive={false} />;
+
+    expect(reactTestRenderer.create(boardSpace)).toMatchSnapshot();
+  });
+  
+  it('when the user has chosen the first step of a move, and the board space is a different starting piece', () => {
+    const gameState = camelotEngine().createEmptyGame();
+
+    const chosenCol = 6;
+    const chosenRow = 6;
+    const boardSpace = <BoardSpace 
+      row={chosenRow} 
+      col={chosenCol - 1} 
       gameState={gameState}
       chosenMoveSteps={fromJS([{row: chosenRow, col: chosenCol}])}
       currentUserPlayer="playerA"

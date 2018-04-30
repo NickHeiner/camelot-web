@@ -1556,9 +1556,26 @@ exports[`BoardSpace board position classnames renders (row=16, col=11) correctly
 />
 `;
 
-exports[`BoardSpace when the user has chosen the first step of a move 1`] = `
+exports[`BoardSpace when the user has chosen the first step of a move, and the board space is a different starting piece 1`] = `
+<div
+  className="board-space actual highlight pawn host"
+  onClick={[Function]}
+>
+  <span
+    className="glyphicon glyphicon-pawn"
+  />
+</div>
+`;
+
+exports[`BoardSpace when the user has chosen the first step of a move, and the board space is a possible next move 1`] = `
+.css-0,
+[data-css-0] {
+  cursor: pointer;
+}
+
 <div
   className="board-space actual highlight host possible-valid-move"
+  data-css-0=""
   onClick={[Function]}
 >
   <span

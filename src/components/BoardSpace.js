@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import classnames from 'classnames';
+import {css} from 'glamor';
 import {Glyphicon} from 'react-bootstrap';
 import {fromJS} from 'immutable';
 import {isValidMove, getBoardSpace, isGoal, getPairs, getCoordsBetween} from '../utils/camelot-engine';
@@ -41,6 +42,11 @@ export class BoardSpace extends PureComponent {
         'last-col': col === camelotConstants.BOARD_WIDTH - 1 || noRightBoardSpace
       };
 
+    const styleRules = [];
+    const setPointerCursorStyle = () => styleRules.push({
+      cursor: 'pointer'
+    });
+
     let pieceIcon;
 
     const possibleValidMove = this.props.chosenMoveSteps.size && 
@@ -50,17 +56,28 @@ export class BoardSpace extends PureComponent {
         this.props.currentUserPlayer
       );
 
+    if (possibleValidMove) {
+      setPointerCursorStyle();
+    }
+
     if (boardSpace) {
       let glyph;
       const originalMoveBoardSpace = this.findBoardSpace(this.props.chosenMoveSteps.get(0));
       if (boardSpace.piece) {
+
+        const pieceIsMovable = 
+          this.props.isCurrentUserActive && this.props.currentUserPlayer === boardSpace.piece.player;
+
         _.merge(spaceClassNames, {
           [boardSpace.piece.type]: true,
           host: boardSpace.piece.player === 'playerA',
           opponent: boardSpace.piece.player === 'playerB',
-          'current-player': this.props.isCurrentUserActive && 
-            this.props.currentUserPlayer === boardSpace.piece.player
+          'current-player': pieceIsMovable
         });
+
+        if (pieceIsMovable) {
+          setPointerCursorStyle();
+        }
 
         let spacesBetweenMoves = [];
         const multipleMoveStepsExist = this.props.chosenMoveSteps.size > 1;
@@ -104,13 +121,12 @@ export class BoardSpace extends PureComponent {
       });
     }
 
-    return (
-      <div 
-        onClick={() => this.onBoardSpaceClick(boardSpace, possibleValidMove)}
-        className={classnames(spaceClassNames)}>
-        {pieceIcon}
-      </div>
-    );    
+    return <div 
+      {...css(styleRules)}
+      onClick={() => this.onBoardSpaceClick(boardSpace, possibleValidMove)}
+      className={classnames(spaceClassNames)}>
+      {pieceIcon}
+    </div>;
   }
 }
 
