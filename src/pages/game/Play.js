@@ -77,11 +77,13 @@ export class PresentationGamePlay extends PureComponent {
               <Avatar currentUser={this.props.host} isActive={activeUser === 'host'} />
               <CapturedPieces whosePiecesWereCaptured="opponent" gameState={gameState} />
               {
+                !gameWinner && (
                   isCurrentUserActive
                       ? <Button bsStyle="primary" 
                           disabled={!userHasValidMove} 
                           onClick={this.makeMove}>Make Move</Button>
                       : <p>{activeUserName}'s turn</p>
+                )
               }
               <CapturedPieces whosePiecesWereCaptured="host" gameState={gameState} />
               <Avatar currentUser={this.props.opponent} isActive={activeUser === 'opponent'} />

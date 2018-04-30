@@ -7808,16 +7808,6 @@ exports[`GamePlay renders with a game that has a winner 1`] = `
       }
       whosePiecesWereCaptured="opponent"
     />
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      disabled={true}
-      onClick={[Function]}
-    >
-      Make Move
-    </Button>
     <CapturedPieces
       gameState={
         Object {

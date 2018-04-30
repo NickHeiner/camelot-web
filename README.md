@@ -4,3 +4,6 @@ This project is my hobby space. I also take license to do wildly inappropriate t
 * Analytics
 * Appropriate cursor for interactive board spaces
 * Progressive Web App
+* Keyboard shortcuts
+* Animations
+* Easier way to tell what the sequence of moves is
