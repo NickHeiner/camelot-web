@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import {Modal} from 'react-bootstrap';
+import Arrow from './Arrow';
 import camelotEngine from 'camelot-engine';
 import _ from 'lodash';
 import './Board.less';
@@ -43,6 +44,7 @@ class Board extends PureComponent {
                   </Modal>
               }
               {boardPieces}
+              <Arrow width={100} height={30} />
           </div>
       </div>
     );
