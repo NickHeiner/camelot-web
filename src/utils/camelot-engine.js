@@ -1,4 +1,4 @@
-import {Iterable, fromJS} from 'immutable';
+import {Iterable} from 'immutable';
 // This is a bit hacky but w/e.
 import pairwise from 'camelot-engine/lib/util/pairwise';
 import camelotEngine from 'camelot-engine';
@@ -20,10 +20,10 @@ export const getBoardSpace = (...args) =>
   query.getBoardSpace(...args.map(ensureJS));
 
 export const applyMoves = (gameState, chosenMoves) => 
-  fromJS(camelotEngine().update().applyMoves(
-    gameState.toJS(), 
+  camelotEngine().update().applyMoves(
+    gameState, 
     chosenMoves.toJS()
-  ));
+  );
 
 export const isGoal = (gameState, ...rest) =>
   query.isGoal(ensureJS(gameState), ...rest);

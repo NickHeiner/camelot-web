@@ -13,7 +13,7 @@ export const boardSpaceClick = (boardSpace, gameId) => ({
 export const makeMove = (gameId, gameState, chosenMoveSteps) => {
   const firebase = getFirebase();
   const newGameState = applyMoves(gameState, chosenMoveSteps);
-  firebase.set(`games/${gameId}/gameState`, newGameState.toJS());
+  firebase.set(`games/${gameId}/gameState`, newGameState);
   return {
     type: Constants.MAKE_MOVE,
     payload: {
