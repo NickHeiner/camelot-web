@@ -2,7 +2,7 @@ import reducer from './reducer';
 import * as Constants from './constants';
 import dataPostInitialLoad from '../fixtures/data-post-initial-load';
 import update from 'immutability-helper';
-import {fromJS, List} from 'immutable';
+import {fromJS} from 'immutable';
 
 const expectStateToMatchSnapshot = state => expect(
   update(state, {
@@ -40,7 +40,7 @@ describe('reducer', () => {
       expect(nextState.ui.get('chosenMoveSteps')).toEqual(fromJS([{col: 3, row: 6}]));
     });
 
-    it.only('handles the first destination board space in a move chain', () => {
+    it('handles the first destination board space in a move chain', () => {
       const nextState = applyAllActions(dataPostInitialLoad, [
         {
           type: Constants.BOARD_SPACE_CLICK,
