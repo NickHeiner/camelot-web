@@ -47,8 +47,10 @@ export class PresentationGamePlay extends PureComponent {
     let currentUserPlayer = null;
     let userHasValidMove = false;
     let gameWinner = null;
+    let activeUserName;
     if (gameState) {
       activeUser = gameState.turnCount % 2 ? 'opponent' : 'host';
+      activeUserName = this.props[activeUser].displayName;
 
       isCurrentUserActive = currentUserUid === this.props[activeUser].uid;
 
@@ -79,7 +81,7 @@ export class PresentationGamePlay extends PureComponent {
                       ? <Button bsStyle="primary" 
                           disabled={!userHasValidMove} 
                           onClick={this.makeMove}>Make Move</Button>
-                      : <p>{this.props.opponent.displayName}'s turn</p>
+                      : <p>{activeUserName}'s turn</p>
               }
               <CapturedPieces whosePiecesWereCaptured="host" gameState={gameState} />
               <Avatar currentUser={this.props.opponent} isActive={activeUser === 'opponent'} />
