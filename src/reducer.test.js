@@ -73,6 +73,42 @@ describe('reducer', () => {
       ]));
     });
 
+    it('handles the resetting the moving piece by clicking a new source board space', () => {
+      const nextState = applyAllActions(dataPostInitialLoad, [
+        {
+          type: Constants.BOARD_SPACE_CLICK,
+          payload: {
+            gameId: '-KnrZP2chDv_4frmGLqQ',
+            boardSpace: {
+              col: 3,
+              row: 6,
+              piece: {
+                player: 'playerA',
+                type: 'knight'
+              }
+            }
+          }
+        },
+        {
+          type: Constants.BOARD_SPACE_CLICK,
+          payload: {
+            gameId: '-KnrZP2chDv_4frmGLqQ',
+            boardSpace: {
+              col: 4,
+              row: 6,
+              piece: {
+                player: 'playerA',
+                type: 'pawn'
+              }
+            }
+          }
+        }
+      ]);
+      expect(nextState.ui.get('chosenMoveSteps')).toEqual(fromJS([
+        {col: 4, row: 6}
+      ]));
+    });
+
     it('handles clicking on a space that is owned by the other player', () => {
       const nextState = reducer(dataPostInitialLoad, {
         type: Constants.BOARD_SPACE_CLICK,

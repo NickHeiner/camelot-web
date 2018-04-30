@@ -20,8 +20,9 @@ const reducer = (state = defaultState, action, restOfState) => {
       const boardCoords = _.pick(action.payload.boardSpace, 'row', 'col');
       const currentUserPlayerName = getCurrentUserPlayerName(restOfState, action.payload.gameId);
 
-      if (action.payload.boardSpace.piece && currentUserPlayerName !== action.payload.boardSpace.piece.player) {
-        return state;
+      if (action.payload.boardSpace.piece) {
+        return currentUserPlayerName !== action.payload.boardSpace.piece.player
+          ? state : state.set('chosenMoveSteps', fromJS([boardCoords]));
       }
 
       if (!chosenMoveSteps.size) {
