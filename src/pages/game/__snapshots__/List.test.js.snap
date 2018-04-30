@@ -47,13 +47,4 @@ Array [
 ]
 `;
 
-exports[`GameList renders with no user 1`] = `
-<button
-  className="btn btn-primary"
-  disabled={false}
-  onClick={[Function]}
-  type="button"
->
-  Sign In
-</button>
-`;
+exports[`GameList renders with no user 1`] = `null`;

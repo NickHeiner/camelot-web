@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react';
-import SignIn from '../SignIn';
 import {Button} from 'react-bootstrap';
 import autobind from 'autobind-decorator';
 import _ from 'lodash';
@@ -10,8 +9,8 @@ import {connect} from 'react-redux';
 
 export class PresentationGameList extends PureComponent {
   render = () => 
-    this.props.currentUser.isEmpty ? <SignIn /> 
-        : <React.Fragment>
+    !this.props.currentUser.isEmpty &&
+        <React.Fragment>
             <ul>
                 {
                     this.props.games &&

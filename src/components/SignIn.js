@@ -6,7 +6,7 @@ import {getFirebase} from 'react-redux-firebase';
 class SignIn extends PureComponent {
   render = () => <Button bsStyle="primary" onClick={this.signIn}>Sign In</Button>;
 
-    @autobind
+  @autobind
   signIn() {
     getFirebase().login({provider: 'Google'});
   }

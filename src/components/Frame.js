@@ -6,7 +6,9 @@ import {setOffline} from '../actions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {css} from 'glamor';
+import SignIn from './SignIn';
 import {pageHeaderMarginTop} from '../styles';
+
 @connect(
   ({firebase}) => ({currentUser: firebase.profile}),
   dispatch => bindActionCreators({
@@ -30,7 +32,10 @@ class Frame extends PureComponent {
     return <React.Fragment>
       {!currentUser.isEmpty && <Sidebar currentUser={currentUser} />}
       <main {...styles}>
-        <PageHeader>Camelot {this.props.offline && '– Offline Dev Mode'}</PageHeader>
+        <PageHeader>
+          Camelot {this.props.offline && '– Offline Dev Mode'} 
+          {currentUser.isLoaded && currentUser.isEmpty && <SignIn />}
+        </PageHeader>
         {this.props.children}
       </main>
     </React.Fragment>;
