@@ -2,17 +2,27 @@ import reducer from './reducer';
 import * as Constants from './constants';
 import dataPostInitialLoad from '../fixtures/data-post-initial-load';
 import update from 'immutability-helper';
-import {fromJS} from 'immutable';
+import {fromJS, List} from 'immutable';
+
+const expectStateToMatchSnapshot = state => expect(
+  update(state, {
+    firebase: {
+      $unset: ['listeners', 'errors', 'ordered', 'timestamps']
+    }
+  })).toMatchSnapshot();
+
+const applyAllActions = (initialState, actions) => 
+  actions.reduce((state, action) => reducer(state, action), initialState);
 
 describe('reducer', () => {
   describe('unrecognized action', () => {
-    it.only('is the identity function for an unrecognized action', () => {
+    it('is the identity function for an unrecognized action', () => {
       expect(reducer(dataPostInitialLoad, {type: 'unrecognized'})).toEqual(dataPostInitialLoad);
     });
   });
 
   describe(Constants.BOARD_SPACE_CLICK, () => {
-    it('handles the first board space in a move chain', () => {
+    it('handles the source board space in a move chain', () => {
       const nextState = reducer(dataPostInitialLoad, {
         type: Constants.BOARD_SPACE_CLICK,
         payload: {
@@ -27,7 +37,40 @@ describe('reducer', () => {
           }
         }
       });
-      expect(nextState).toMatchSnapshot();
+      expect(nextState.ui.get('chosenMoveSteps')).toEqual(fromJS([{col: 3, row: 6}]));
+    });
+
+    it.only('handles the first destination board space in a move chain', () => {
+      const nextState = applyAllActions(dataPostInitialLoad, [
+        {
+          type: Constants.BOARD_SPACE_CLICK,
+          payload: {
+            gameId: '-KnrZP2chDv_4frmGLqQ',
+            boardSpace: {
+              col: 3,
+              row: 6,
+              piece: {
+                player: 'playerA',
+                type: 'knight'
+              }
+            }
+          }
+        },
+        {
+          type: Constants.BOARD_SPACE_CLICK,
+          payload: {
+            gameId: '-KnrZP2chDv_4frmGLqQ',
+            boardSpace: {
+              col: 3,
+              row: 7
+            }
+          }
+        }
+      ]);
+      expect(nextState.ui.get('chosenMoveSteps')).toEqual(fromJS([
+        {col: 3, row: 6},
+        {col: 3, row: 7}
+      ]));
     });
 
     it('handles clicking on a space that is owned by the other player', () => {
@@ -45,7 +88,7 @@ describe('reducer', () => {
           }
         }
       });
-      expect(nextState).toMatchSnapshot();
+      expectStateToMatchSnapshot(nextState);
     });
   });
 
@@ -67,7 +110,7 @@ describe('reducer', () => {
           gameId: '-KnrZP2chDv_4frmGLqQ'
         }
       });
-      expect(nextState).toMatchSnapshot();
+      expectStateToMatchSnapshot(nextState);
     });
   });
 });

@@ -30,7 +30,7 @@ const reducer = (state = defaultState, action, restOfState) => {
 
       const stepsWithThisMoveAdded = chosenMoveSteps.push(fromJS(boardCoords));
       const possibleValidMove = isValidMove(
-        getCurrentGame(restOfState, action.payload.gameId).get('gameState'),
+        getCurrentGame(restOfState, action.payload.gameId).gameState,
         stepsWithThisMoveAdded, 
         currentUserPlayerName
       );

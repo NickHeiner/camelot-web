@@ -1,11 +1,10 @@
-import {fromJS} from 'immutable';
 import * as ReducerUtils from './reducer-utils';
 
 describe('ReducerUtils', () => {
   describe('getCurrentGame', () => {
     it('gets the current game', () => {
       const state = {
-        firebase: fromJS({
+        firebase: {
           // eslint-disable-next-line id-blacklist
           data: {
             games: {
@@ -13,7 +12,7 @@ describe('ReducerUtils', () => {
               otherGameId: 'wrong game'
             }
           }
-        })
+        }
       };
 
       expect(ReducerUtils.getCurrentGame(state, 'gameId')).toEqual('correct game');
@@ -23,7 +22,7 @@ describe('ReducerUtils', () => {
   describe('getCurrentUserPlayerName', () => {
     it('handles the current user not being in the game', () => {
       const state = {
-        firebase: fromJS({
+        firebase: {
           profile: {
             uid: 'currentPlayerUid'
           },
@@ -45,7 +44,7 @@ describe('ReducerUtils', () => {
               }
             }
           }
-        })
+        }
       };
 
       expect(ReducerUtils.getCurrentUserPlayerName(state, 'gameId')).toBeNull();
@@ -53,7 +52,7 @@ describe('ReducerUtils', () => {
 
     it('handles the current user being the host', () => {
       const state = {
-        firebase: fromJS({
+        firebase: {
           profile: {
             uid: 'currentPlayerUid'
           },
@@ -75,7 +74,7 @@ describe('ReducerUtils', () => {
               }
             }
           }
-        })
+        }
       };
 
       expect(ReducerUtils.getCurrentUserPlayerName(state, 'gameId')).toEqual('playerA');
@@ -83,7 +82,7 @@ describe('ReducerUtils', () => {
 
     it('handles the current user being the opponent', () => {
       const state = {
-        firebase: fromJS({
+        firebase: {
           profile: {
             uid: 'currentPlayerUid'
           },
@@ -105,7 +104,7 @@ describe('ReducerUtils', () => {
               }
             }
           }
-        })
+        }
       };
 
       expect(ReducerUtils.getCurrentUserPlayerName(state, 'gameId')).toEqual('playerB');
