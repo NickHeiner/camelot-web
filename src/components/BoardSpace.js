@@ -8,19 +8,32 @@ import _ from 'lodash';
 import camelotEngine from 'camelot-engine';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {withContentRect} from 'react-measure';
 import {boardSpaceClick} from '../actions';
 import MoveArrow from './MoveArrow';
 
 const camelotConstants = camelotEngine().constants();
 
-export class BoardSpace extends PureComponent {
-  constructor() {
-    super();
-    this.state = {ref: null};
+class MeasurableBoardSpace extends PureComponent {
+  onBoardSpaceClick = () => this.props.handleBoardSpaceClick(this.props.boardSpace, this.props.possibleValidMove);
+
+  render() {
+    const {measureRef, contentRect, styleRules, moveArrowProps, spaceClassNames, pieceIcon} = this.props;
+
+    return <div 
+      ref={measureRef}
+      {...css(styleRules)}
+      onClick={this.onBoardSpaceClick}
+      className={classnames(spaceClassNames)}>
+      {pieceIcon}
+      {moveArrowProps && <MoveArrow {...moveArrowProps} boardSpaceContentRect={contentRect} />}
+    </div>;
   }
+}
 
-  getRef = ref => this.setState(state => ({ref}));
+const MeasuredBoardSpace = withContentRect('bounds')(MeasurableBoardSpace);
 
+export class BoardSpace extends PureComponent {
   findBoardSpace = (...args) => getBoardSpace(this.props.gameState, ...args)
   
   getBoardSpace = () => this.findBoardSpace(_.pick(this.props, 'row', 'col'));
@@ -68,7 +81,7 @@ export class BoardSpace extends PureComponent {
       setPointerCursorStyle();
     }
 
-    let moveArrow = null;
+    let moveArrowProps = null;
 
     if (boardSpace) {
       let glyph;
@@ -77,11 +90,11 @@ export class BoardSpace extends PureComponent {
       const movePairs = getPairs(this.props.chosenMoveSteps);
       const pairThatStartsWithThisSpace = _.find(movePairs, ([first]) => _.isEqual(first, {row, col}));
       if (pairThatStartsWithThisSpace) {
+        moveArrowProps = {
+          srcCoords: pairThatStartsWithThisSpace[0],
+          destCoords: pairThatStartsWithThisSpace[1]
+        }
         styleRules.push({position: 'relative'});
-        moveArrow = <MoveArrow 
-          boardSpaceRef={this.state.ref}
-          srcCoords={pairThatStartsWithThisSpace[0]} 
-          destCoords={pairThatStartsWithThisSpace[1]} />;
       }
 
       if (boardSpace.piece) {
@@ -140,31 +153,21 @@ export class BoardSpace extends PureComponent {
       });
     }
 
-    return <div 
-      ref={this.getRef}
-      {...css(styleRules)}
-      onClick={() => this.onBoardSpaceClick(boardSpace, possibleValidMove)}
-      className={classnames(spaceClassNames)}>
-      {pieceIcon}
-      {moveArrow}
-    </div>;
+    const measuredBoardSpaceProps = {
+      handleBoardSpaceClick: this.onBoardSpaceClick,
+      styleRules, moveArrowProps, spaceClassNames, pieceIcon
+    }
+
+    return moveArrowProps ? <MeasuredBoardSpace {...measuredBoardSpaceProps} /> 
+      : <MeasurableBoardSpace {...measuredBoardSpaceProps} />;
   }
 }
 
-@connect(
+export default connect(
   ({ui}) => ({
     chosenMoveSteps: ui.get('chosenMoveSteps')
   }),
   dispatch => bindActionCreators({
     boardSpaceClick
   }, dispatch)
-)
-class ConnectedBoardSpace extends React.PureComponent {
-  render() {
-    return <BoardSpace
-      {...this.props}
-    />;
-  }
-}
-
-export default ConnectedBoardSpace;
+)(BoardSpace);
