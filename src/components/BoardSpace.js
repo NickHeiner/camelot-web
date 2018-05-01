@@ -68,8 +68,12 @@ export class BoardSpace extends PureComponent {
       const originalMoveBoardSpace = this.findBoardSpace(this.props.chosenMoveSteps.get(0));
 
       const movePairs = getPairs(this.props.chosenMoveSteps);
-      if (_(movePairs).map(_.first).some({row, col})) {
-        moveArrow = <MoveArrow />;
+      const pairThatStartsWithThisSpace = _.find(movePairs, ([first]) => _.isEqual(first, {row, col}));
+      if (pairThatStartsWithThisSpace) {
+        styleRules.push({position: 'relative'});
+        moveArrow = <MoveArrow 
+          srcCoords={pairThatStartsWithThisSpace[0]} 
+          destCoords={pairThatStartsWithThisSpace[1]} />;
       }
 
       if (boardSpace.piece) {

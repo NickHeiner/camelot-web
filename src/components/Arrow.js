@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Arrow = ({width, height}) => <svg 
-  width={width} height={height} 
+const Arrow = ({width, height, style}) => <svg 
+  width={width} height={height} {...style}
   viewBox="0.0 0.0 709.7165354330708 100.0" fill="none" stroke="none" 
   strokeLinecap="square" strokeMiterlimit="10">
 
