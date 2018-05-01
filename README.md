@@ -6,3 +6,4 @@ This project is my hobby space. I also take license to do wildly inappropriate t
 * Keyboard shortcuts
 * Animations
 * Easier way to tell what the sequence of moves is
+* Figure out how some files became 4-space indents and others became 2-space indents and fix it, lol.
