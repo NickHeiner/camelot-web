@@ -28,12 +28,20 @@ export const getRotationAngle = (srcCoords, destCoords) => {
 
 class MoveArrow extends PureComponent {
   render = () => {
+    const {srcCoords, destCoords, boardSpaceRef} = this.props;
+
+    if (!boardSpaceRef) {
+      return null;
+    }
+
     const style = css({
       position: 'absolute',
-      transform: getRotationAngle(this.props.srcCoords, this.props.destCoords),
+      // transform: getRotationAngle(srcCoords, destCoords),
       zIndex: 1
     });
-    return <Arrow width={100} height={30} style={style} />
+
+    // The arrow length calculation may not be correct if the arrow is going to be diagonal.
+    return <Arrow width={boardSpaceRef.getBoundingClientRect().width * 2} height={30} style={style} />;
   };
 }
 

@@ -14,6 +14,13 @@ import MoveArrow from './MoveArrow';
 const camelotConstants = camelotEngine().constants();
 
 export class BoardSpace extends PureComponent {
+  constructor() {
+    super();
+    this.state = {ref: null};
+  }
+
+  getRef = ref => this.setState(state => ({ref}));
+
   findBoardSpace = (...args) => getBoardSpace(this.props.gameState, ...args)
   
   getBoardSpace = () => this.findBoardSpace(_.pick(this.props, 'row', 'col'));
@@ -54,7 +61,7 @@ export class BoardSpace extends PureComponent {
       isValidMove(
         this.props.gameState, 
         this.props.chosenMoveSteps.push(fromJS({row, col})), 
-        this.props.currentUserPlayer
+        this.props.currentUserPlayer || 'playerA' // TODO this is just for test purposes to match the faked chosenMoveSteps
       );
 
     if (possibleValidMove) {
@@ -72,6 +79,7 @@ export class BoardSpace extends PureComponent {
       if (pairThatStartsWithThisSpace) {
         styleRules.push({position: 'relative'});
         moveArrow = <MoveArrow 
+          boardSpaceRef={this.state.ref}
           srcCoords={pairThatStartsWithThisSpace[0]} 
           destCoords={pairThatStartsWithThisSpace[1]} />;
       }
@@ -133,6 +141,7 @@ export class BoardSpace extends PureComponent {
     }
 
     return <div 
+      ref={this.getRef}
       {...css(styleRules)}
       onClick={() => this.onBoardSpaceClick(boardSpace, possibleValidMove)}
       className={classnames(spaceClassNames)}>

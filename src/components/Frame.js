@@ -33,6 +33,7 @@ class Frame extends PureComponent {
       {!currentUser.isEmpty && <Sidebar currentUser={currentUser} />}
       <main {...styles}>
         <PageHeader>
+          <a href="/play/-KeUX6Bcy1Ty9iaAAoR_">test</a>
           Camelot {this.props.offline && '– Offline Dev Mode'} 
           {currentUser.isLoaded && currentUser.isEmpty && <SignIn />}
         </PageHeader>
