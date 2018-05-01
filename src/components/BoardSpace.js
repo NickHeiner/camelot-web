@@ -167,8 +167,6 @@ export class BoardSpace extends PureComponent {
   }
 }
 
-const ConnectedBoardSpace = props => <BoardSpace {...props} />;
-
 export default connect(
   ({ui}) => ({
     chosenMoveSteps: ui.get('chosenMoveSteps')
@@ -176,4 +174,4 @@ export default connect(
   dispatch => bindActionCreators({
     boardSpaceClick
   }, dispatch)
-)(ConnectedBoardSpace);
+)(BoardSpace);
