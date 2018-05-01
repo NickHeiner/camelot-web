@@ -87,14 +87,18 @@ export class BoardSpace extends PureComponent {
       let glyph;
       const originalMoveBoardSpace = this.findBoardSpace(this.props.chosenMoveSteps.get(0));
 
-      const movePairs = getPairs(this.props.chosenMoveSteps);
-      const pairThatStartsWithThisSpace = _.find(movePairs, ([first]) => _.isEqual(first, {row, col}));
-      if (pairThatStartsWithThisSpace) {
-        moveArrowProps = {
-          srcCoords: pairThatStartsWithThisSpace[0],
-          destCoords: pairThatStartsWithThisSpace[1]
+      const multipleMoveStepsExist = this.props.chosenMoveSteps.size > 1;
+
+      if (multipleMoveStepsExist) {
+        const movePairs = getPairs(this.props.chosenMoveSteps);
+        const pairThatStartsWithThisSpace = _.find(movePairs, ([first]) => _.isEqual(first, {row, col}));
+        if (pairThatStartsWithThisSpace) {
+          moveArrowProps = {
+            srcCoords: pairThatStartsWithThisSpace[0],
+            destCoords: pairThatStartsWithThisSpace[1]
+          };
+          styleRules.push({position: 'relative'});
         }
-        styleRules.push({position: 'relative'});
       }
 
       if (boardSpace.piece) {
@@ -114,8 +118,8 @@ export class BoardSpace extends PureComponent {
         }
 
         let spacesBetweenMoves = [];
-        const multipleMoveStepsExist = this.props.chosenMoveSteps.size > 1;
         if (multipleMoveStepsExist) {
+          const movePairs = getPairs(this.props.chosenMoveSteps);
           spacesBetweenMoves = movePairs.map(movePair => getCoordsBetween(...movePair));
         }
 
@@ -156,12 +160,14 @@ export class BoardSpace extends PureComponent {
     const measuredBoardSpaceProps = {
       handleBoardSpaceClick: this.onBoardSpaceClick,
       styleRules, moveArrowProps, spaceClassNames, pieceIcon
-    }
+    };
 
     return moveArrowProps ? <MeasuredBoardSpace {...measuredBoardSpaceProps} /> 
       : <MeasurableBoardSpace {...measuredBoardSpaceProps} />;
   }
 }
+
+const ConnectedBoardSpace = props => <BoardSpace {...props} />;
 
 export default connect(
   ({ui}) => ({
@@ -170,4 +176,4 @@ export default connect(
   dispatch => bindActionCreators({
     boardSpaceClick
   }, dispatch)
-)(BoardSpace);
+)(ConnectedBoardSpace);

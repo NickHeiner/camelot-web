@@ -22,10 +22,7 @@ const getRotationDegrees = (srcCoords, destCoords) => {
   /* eslint-enable no-magic-numbers */
 };
 
-export const getRotationAngle = (srcCoords, destCoords) => {
-  
-  return `rotate(${getRotationDegrees()}deg)`;
-};
+export const getRotationAngle = (srcCoords, destCoords) => `rotate(${getRotationDegrees()}deg)`;
 
 class MoveArrow extends PureComponent {
   render = () => {
