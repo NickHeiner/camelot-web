@@ -9,6 +9,7 @@ import camelotEngine from 'camelot-engine';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {boardSpaceClick} from '../actions';
+import MoveArrow from './MoveArrow';
 
 const camelotConstants = camelotEngine().constants();
 
@@ -60,9 +61,17 @@ export class BoardSpace extends PureComponent {
       setPointerCursorStyle();
     }
 
+    let moveArrow = null;
+
     if (boardSpace) {
       let glyph;
       const originalMoveBoardSpace = this.findBoardSpace(this.props.chosenMoveSteps.get(0));
+
+      const movePairs = getPairs(this.props.chosenMoveSteps);
+      if (_(movePairs).map(_.first).some({row, col})) {
+        moveArrow = <MoveArrow />;
+      }
+
       if (boardSpace.piece) {
 
         const pieceIsMovable = 
@@ -82,8 +91,6 @@ export class BoardSpace extends PureComponent {
         let spacesBetweenMoves = [];
         const multipleMoveStepsExist = this.props.chosenMoveSteps.size > 1;
         if (multipleMoveStepsExist) {
-          const movePairs = getPairs(this.props.chosenMoveSteps);
-
           spacesBetweenMoves = movePairs.map(movePair => getCoordsBetween(...movePair));
         }
 
@@ -126,6 +133,7 @@ export class BoardSpace extends PureComponent {
       onClick={() => this.onBoardSpaceClick(boardSpace, possibleValidMove)}
       className={classnames(spaceClassNames)}>
       {pieceIcon}
+      {moveArrow}
     </div>;
   }
 }
