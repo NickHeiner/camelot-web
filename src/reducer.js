@@ -9,7 +9,28 @@ import {routerReducer} from 'react-router-redux';
 import update from 'immutability-helper';
 
 const defaultState = fromJS({
-  chosenMoveSteps: []
+  chosenMoveSteps: [
+    {
+      row: 5,
+      col: 2
+    },
+    {
+      row: 7,
+      col: 4
+    },
+    {
+      row: 9,
+      col: 4
+    },
+    {
+      row: 9,
+      col: 2
+    },
+    {
+      row: 11,
+      col: 4
+    }
+  ]
 });
 
 const reducer = (state = defaultState, action, restOfState) => {
